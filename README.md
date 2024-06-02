@@ -1,4 +1,4 @@
-# BlueBreeze Pro iOS
+# BlueBreeze iOS
 
 
 
