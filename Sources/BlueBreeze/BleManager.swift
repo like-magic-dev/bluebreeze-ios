@@ -2,8 +2,8 @@ import Foundation
 import CoreBluetooth
 import Combine
 
-class BleManager: NSObject {
-    override init() {
+public class BleManager: NSObject {
+    public override init() {
         super.init()
         
         centralManager = CBCentralManager(
@@ -16,13 +16,13 @@ class BleManager: NSObject {
         
     // MARK: - Devices
     
-    let devices = CurrentValueSubject<[UUID: BleDevice], Never>([:])
+    public let devices = CurrentValueSubject<[UUID: BleDevice], Never>([:])
 
     // MARK: - Scanning
     
-    let isScanning = CurrentValueSubject<Bool, Never>(false)
+    public let isScanning = CurrentValueSubject<Bool, Never>(false)
     
-    func scanningStart() {
+    public func scanningStart() {
         guard !isScanning.value else {
             return
         }
@@ -31,7 +31,7 @@ class BleManager: NSObject {
         isScanning.send(true)
     }
     
-    func scanningStop() {
+    public func scanningStop() {
         guard isScanning.value else {
             return
         }
@@ -80,7 +80,7 @@ extension BleManager: BleOperationQueue {
 }
 
 extension BleManager: CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state != .poweredOn {
             scanningStop()
         } else {
@@ -91,7 +91,7 @@ extension BleManager: CBCentralManagerDelegate {
         checkOperation()
     }
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         peripheral.delegate = self
                 
         var devices = self.devices.value
@@ -107,28 +107,28 @@ extension BleManager: CBCentralManagerDelegate {
         checkOperation()
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         devices.value[peripheral.identifier]?.centralManager(central, didConnect: peripheral)
         
         operationCurrent?.centralManager?(central, didConnect: peripheral)
         checkOperation()
     }
     
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         devices.value[peripheral.identifier]?.centralManager(central, didFailToConnect: peripheral, error: error)
 
         operationCurrent?.centralManager?(central, didFailToConnect: peripheral, error: error)
         checkOperation()
     }
     
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
         devices.value[peripheral.identifier]?.centralManager(central, didDisconnectPeripheral: peripheral, error: error)
 
         operationCurrent?.centralManager?(central, didDisconnectPeripheral: peripheral, error: error)
         checkOperation()
     }
     
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         devices.value[peripheral.identifier]?.centralManager(central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
 
         operationCurrent?.centralManager?(central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
@@ -137,35 +137,35 @@ extension BleManager: CBCentralManagerDelegate {
 }
 
 extension BleManager: CBPeripheralDelegate {
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didDiscoverServices: error)
 
         operationCurrent?.peripheral?(peripheral, didDiscoverServices: error)
         checkOperation()
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
 
         operationCurrent?.peripheral?(peripheral, didDiscoverCharacteristicsFor: service, error: error)
         checkOperation()
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
 
         operationCurrent?.peripheral?(peripheral, didUpdateValueFor: characteristic, error: error)
         checkOperation()
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didUpdateValueFor: descriptor, error: error)
         
         operationCurrent?.peripheral?(peripheral, didUpdateValueFor: descriptor, error: error)
         checkOperation()
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
         
         operationCurrent?.peripheral?(peripheral, didUpdateNotificationStateFor: characteristic, error: error)

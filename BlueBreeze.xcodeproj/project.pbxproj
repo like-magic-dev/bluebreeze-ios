@@ -3,35 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D29F39D22D05A0D700E7B2D8 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29F39CA2D05A0D700E7B2D8 /* BlueBreeze.framework */; };
-		D29F3A0A2D05A0F500E7B2D8 /* BleOperationDiscoverServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */; };
-		D29F3A0B2D05A0F500E7B2D8 /* BleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD42C832754006586B6 /* BleService.swift */; };
-		D29F3A0C2D05A0F500E7B2D8 /* BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BleError.swift */; };
-		D29F3A0D2D05A0F500E7B2D8 /* BleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */; };
-		D29F3A0E2D05A0F500E7B2D8 /* BleOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */; };
-		D29F3A0F2D05A0F500E7B2D8 /* BleCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BleCharacteristic.swift */; };
-		D29F3A102D05A0F500E7B2D8 /* BleOperationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */; };
-		D29F3A112D05A0F500E7B2D8 /* BleOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */; };
-		D29F3A122D05A0F500E7B2D8 /* BleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BleConstants.swift */; };
-		D29F3A132D05A0F500E7B2D8 /* BleOperationNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1282C76260600BDF3AE /* BleOperationNotifications.swift */; };
-		D29F3A142D05A0F500E7B2D8 /* BleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3B32C17A575004C83B5 /* BleDevice.swift */; };
-		D29F3A152D05A0F500E7B2D8 /* BleOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BleOperationRead.swift */; };
-		D29F3A162D05A0F500E7B2D8 /* BleOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */; };
-		D29F3A172D05A0F500E7B2D8 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */; };
-		D29F3A182D05A0F500E7B2D8 /* BleOperationWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E501682CA34F5D00602BB5 /* BleOperationWrite.swift */; };
-		D29F3A192D05A0F500E7B2D8 /* BleOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */; };
+		D26D3DC32D06402F002CE78D /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; };
+		D26D3DD32D064036002CE78D /* BleOperationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */; };
+		D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BleOperationRead.swift */; };
+		D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */; };
+		D26D3DD62D064036002CE78D /* BleOperationWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E501682CA34F5D00602BB5 /* BleOperationWrite.swift */; };
+		D26D3DD72D064036002CE78D /* BleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3B32C17A575004C83B5 /* BleDevice.swift */; };
+		D26D3DD82D064036002CE78D /* BleOperationNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1282C76260600BDF3AE /* BleOperationNotifications.swift */; };
+		D26D3DD92D064036002CE78D /* BleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BleConstants.swift */; };
+		D26D3DDA2D064036002CE78D /* BleOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */; };
+		D26D3DDB2D064036002CE78D /* BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BleError.swift */; };
+		D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */; };
+		D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */; };
+		D26D3DDE2D064036002CE78D /* BleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD42C832754006586B6 /* BleService.swift */; };
+		D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */; };
+		D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BleCharacteristic.swift */; };
+		D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */; };
+		D26D3DE22D064036002CE78D /* BleOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D29F39D32D05A0D700E7B2D8 /* PBXContainerItemProxy */ = {
+		D26D3DC42D06402F002CE78D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D22A7B5F2C0D0EA800C4B6CF /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D29F39C92D05A0D700E7B2D8;
+			remoteGlobalIDString = D26D3DBA2D06402F002CE78D;
 			remoteInfo = BlueBreeze;
 		};
 /* End PBXContainerItemProxy section */
@@ -44,10 +44,11 @@
 		D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDisconnect.swift; sourceTree = "<group>"; };
 		D255ACD42C832754006586B6 /* BleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleService.swift; sourceTree = "<group>"; };
 		D255ACD62C83275C006586B6 /* BleCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCharacteristic.swift; sourceTree = "<group>"; };
+		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D26D3DC22D06402F002CE78D /* BlueBreezeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBreezeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationQueue.swift; sourceTree = "<group>"; };
 		D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationImpl.swift; sourceTree = "<group>"; };
-		D29F39CA2D05A0D700E7B2D8 /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D29F39D12D05A0D700E7B2D8 /* BlueBreezeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBreezeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
 		D2D9B3B32C17A575004C83B5 /* BleDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleDevice.swift; sourceTree = "<group>"; };
 		D2E501682CA34F5D00602BB5 /* BleOperationWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationWrite.swift; sourceTree = "<group>"; };
@@ -58,19 +59,34 @@
 		D2FEF1282C76260600BDF3AE /* BleOperationNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleOperationNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D26D3DCA2D06402F002CE78D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				BlueBreeze.h,
+			);
+			target = D26D3DBA2D06402F002CE78D /* BlueBreeze */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D26D3DBC2D06402F002CE78D /* BlueBreeze */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D26D3DCA2D06402F002CE78D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BlueBreeze; sourceTree = "<group>"; };
+		D26D3DC62D06402F002CE78D /* BlueBreezeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		D29F39C72D05A0D700E7B2D8 /* Frameworks */ = {
+		D26D3DB82D06402F002CE78D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D29F39CE2D05A0D700E7B2D8 /* Frameworks */ = {
+		D26D3DBF2D06402F002CE78D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29F39D22D05A0D700E7B2D8 /* BlueBreeze.framework in Frameworks */,
+				D26D3DC32D06402F002CE78D /* BlueBreeze.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +98,9 @@
 			children = (
 				D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */,
 				D22A7B7B2C0D0EA900C4B6CF /* BlueBreezeTests */,
+				D26D3DB12D063EA6002CE78D /* Package.swift */,
+				D26D3DBC2D06402F002CE78D /* BlueBreeze */,
+				D26D3DC62D06402F002CE78D /* BlueBreezeTests */,
 				D22A7B682C0D0EA800C4B6CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,8 +108,8 @@
 		D22A7B682C0D0EA800C4B6CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D29F39CA2D05A0D700E7B2D8 /* BlueBreeze.framework */,
-				D29F39D12D05A0D700E7B2D8 /* BlueBreezeTests.xctest */,
+				D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */,
+				D26D3DC22D06402F002CE78D /* BlueBreezeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,7 +135,8 @@
 				D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */,
 				D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */,
 			);
-			path = BlueBreeze;
+			name = BlueBreeze;
+			path = Sources/BlueBreeze;
 			sourceTree = "<group>";
 		};
 		D2FEF1212C71F7FB00BDF3AE /* Operations */ = {
@@ -137,7 +157,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D29F39C52D05A0D700E7B2D8 /* Headers */ = {
+		D26D3DB62D06402F002CE78D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -147,44 +167,50 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D29F39C92D05A0D700E7B2D8 /* BlueBreeze */ = {
+		D26D3DBA2D06402F002CE78D /* BlueBreeze */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D29F39E02D05A0D700E7B2D8 /* Build configuration list for PBXNativeTarget "BlueBreeze" */;
+			buildConfigurationList = D26D3DCB2D06402F002CE78D /* Build configuration list for PBXNativeTarget "BlueBreeze" */;
 			buildPhases = (
-				D29F39C52D05A0D700E7B2D8 /* Headers */,
-				D29F39C62D05A0D700E7B2D8 /* Sources */,
-				D29F39C72D05A0D700E7B2D8 /* Frameworks */,
-				D29F39C82D05A0D700E7B2D8 /* Resources */,
+				D26D3DB62D06402F002CE78D /* Headers */,
+				D26D3DB72D06402F002CE78D /* Sources */,
+				D26D3DB82D06402F002CE78D /* Frameworks */,
+				D26D3DB92D06402F002CE78D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D26D3DBC2D06402F002CE78D /* BlueBreeze */,
 			);
 			name = BlueBreeze;
 			packageProductDependencies = (
 			);
 			productName = BlueBreeze;
-			productReference = D29F39CA2D05A0D700E7B2D8 /* BlueBreeze.framework */;
+			productReference = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D29F39D02D05A0D700E7B2D8 /* BlueBreezeTests */ = {
+		D26D3DC12D06402F002CE78D /* BlueBreezeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D29F39E42D05A0D700E7B2D8 /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */;
+			buildConfigurationList = D26D3DCE2D06402F002CE78D /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */;
 			buildPhases = (
-				D29F39CD2D05A0D700E7B2D8 /* Sources */,
-				D29F39CE2D05A0D700E7B2D8 /* Frameworks */,
-				D29F39CF2D05A0D700E7B2D8 /* Resources */,
+				D26D3DBE2D06402F002CE78D /* Sources */,
+				D26D3DBF2D06402F002CE78D /* Frameworks */,
+				D26D3DC02D06402F002CE78D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D29F39D42D05A0D700E7B2D8 /* PBXTargetDependency */,
+				D26D3DC52D06402F002CE78D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D26D3DC62D06402F002CE78D /* BlueBreezeTests */,
 			);
 			name = BlueBreezeTests;
 			packageProductDependencies = (
 			);
 			productName = BlueBreezeTests;
-			productReference = D29F39D12D05A0D700E7B2D8 /* BlueBreezeTests.xctest */;
+			productReference = D26D3DC22D06402F002CE78D /* BlueBreezeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -197,12 +223,11 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					D29F39C92D05A0D700E7B2D8 = {
+					D26D3DBA2D06402F002CE78D = {
 						CreatedOnToolsVersion = 16.0;
 					};
-					D29F39D02D05A0D700E7B2D8 = {
+					D26D3DC12D06402F002CE78D = {
 						CreatedOnToolsVersion = 16.0;
-						TestTargetID = D22A7B662C0D0EA800C4B6CF;
 					};
 				};
 			};
@@ -219,21 +244,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D29F39C92D05A0D700E7B2D8 /* BlueBreeze */,
-				D29F39D02D05A0D700E7B2D8 /* BlueBreezeTests */,
+				D26D3DBA2D06402F002CE78D /* BlueBreeze */,
+				D26D3DC12D06402F002CE78D /* BlueBreezeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D29F39C82D05A0D700E7B2D8 /* Resources */ = {
+		D26D3DB92D06402F002CE78D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D29F39CF2D05A0D700E7B2D8 /* Resources */ = {
+		D26D3DC02D06402F002CE78D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -243,30 +268,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D29F39C62D05A0D700E7B2D8 /* Sources */ = {
+		D26D3DB72D06402F002CE78D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D29F3A0A2D05A0F500E7B2D8 /* BleOperationDiscoverServices.swift in Sources */,
-				D29F3A0B2D05A0F500E7B2D8 /* BleService.swift in Sources */,
-				D29F3A0C2D05A0F500E7B2D8 /* BleError.swift in Sources */,
-				D29F3A0D2D05A0F500E7B2D8 /* BleOperation.swift in Sources */,
-				D29F3A0E2D05A0F500E7B2D8 /* BleOperationDisconnect.swift in Sources */,
-				D29F3A0F2D05A0F500E7B2D8 /* BleCharacteristic.swift in Sources */,
-				D29F3A102D05A0F500E7B2D8 /* BleOperationImpl.swift in Sources */,
-				D29F3A112D05A0F500E7B2D8 /* BleOperationRequestMTU.swift in Sources */,
-				D29F3A122D05A0F500E7B2D8 /* BleConstants.swift in Sources */,
-				D29F3A132D05A0F500E7B2D8 /* BleOperationNotifications.swift in Sources */,
-				D29F3A142D05A0F500E7B2D8 /* BleDevice.swift in Sources */,
-				D29F3A152D05A0F500E7B2D8 /* BleOperationRead.swift in Sources */,
-				D29F3A162D05A0F500E7B2D8 /* BleOperationConnect.swift in Sources */,
-				D29F3A172D05A0F500E7B2D8 /* BleManager.swift in Sources */,
-				D29F3A182D05A0F500E7B2D8 /* BleOperationWrite.swift in Sources */,
-				D29F3A192D05A0F500E7B2D8 /* BleOperationQueue.swift in Sources */,
+				D26D3DD32D064036002CE78D /* BleOperationImpl.swift in Sources */,
+				D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */,
+				D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */,
+				D26D3DD62D064036002CE78D /* BleOperationWrite.swift in Sources */,
+				D26D3DD72D064036002CE78D /* BleDevice.swift in Sources */,
+				D26D3DD82D064036002CE78D /* BleOperationNotifications.swift in Sources */,
+				D26D3DD92D064036002CE78D /* BleConstants.swift in Sources */,
+				D26D3DDA2D064036002CE78D /* BleOperationQueue.swift in Sources */,
+				D26D3DDB2D064036002CE78D /* BleError.swift in Sources */,
+				D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */,
+				D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */,
+				D26D3DDE2D064036002CE78D /* BleService.swift in Sources */,
+				D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */,
+				D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */,
+				D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */,
+				D26D3DE22D064036002CE78D /* BleOperationConnect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D29F39CD2D05A0D700E7B2D8 /* Sources */ = {
+		D26D3DBE2D06402F002CE78D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -276,10 +301,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D29F39D42D05A0D700E7B2D8 /* PBXTargetDependency */ = {
+		D26D3DC52D06402F002CE78D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D29F39C92D05A0D700E7B2D8 /* BlueBreeze */;
-			targetProxy = D29F39D32D05A0D700E7B2D8 /* PBXContainerItemProxy */;
+			target = D26D3DBA2D06402F002CE78D /* BlueBreeze */;
+			targetProxy = D26D3DC42D06402F002CE78D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -400,9 +425,10 @@
 			};
 			name = Release;
 		};
-		D29F39E12D05A0D700E7B2D8 /* Debug */ = {
+		D26D3DCC2D06402F002CE78D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -415,31 +441,38 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreeze;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				XROS_DEPLOYMENT_TARGET = 1.3;
 			};
 			name = Debug;
 		};
-		D29F39E22D05A0D700E7B2D8 /* Release */ = {
+		D26D3DCD2D06402F002CE78D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -452,65 +485,75 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreeze;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				XROS_DEPLOYMENT_TARGET = 1.3;
 			};
 			name = Release;
 		};
-		D29F39E52D05A0D700E7B2D8 /* Debug */ = {
+		D26D3DCF2D06402F002CE78D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S5L8VVQQZ2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreezeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueBreeze Pro.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BlueBreeze Pro";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		D29F39E62D05A0D700E7B2D8 /* Release */ = {
+		D26D3DD02D06402F002CE78D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S5L8VVQQZ2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreezeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueBreeze Pro.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BlueBreeze Pro";
-				VALIDATE_PRODUCT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -526,20 +569,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D29F39E02D05A0D700E7B2D8 /* Build configuration list for PBXNativeTarget "BlueBreeze" */ = {
+		D26D3DCB2D06402F002CE78D /* Build configuration list for PBXNativeTarget "BlueBreeze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D29F39E12D05A0D700E7B2D8 /* Debug */,
-				D29F39E22D05A0D700E7B2D8 /* Release */,
+				D26D3DCC2D06402F002CE78D /* Debug */,
+				D26D3DCD2D06402F002CE78D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D29F39E42D05A0D700E7B2D8 /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */ = {
+		D26D3DCE2D06402F002CE78D /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D29F39E52D05A0D700E7B2D8 /* Debug */,
-				D29F39E62D05A0D700E7B2D8 /* Release */,
+				D26D3DCF2D06402F002CE78D /* Debug */,
+				D26D3DD02D06402F002CE78D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

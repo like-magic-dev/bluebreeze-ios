@@ -1,8 +1,8 @@
 import CoreBluetooth
 
-class BleConstants {
+public class BleConstants {
     // https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/uuids/service_uuids.yaml
-    static let knownServices: [CBUUID: String] = [
+    public static let knownServices: [CBUUID: String] = [
         CBUUID(string: "1800"): "GAP",
         CBUUID(string: "1801"): "GATT",
         CBUUID(string: "1802"): "Immediate Alert",
@@ -75,7 +75,7 @@ class BleConstants {
     ]
     
     // https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/uuids/characteristic_uuids.yaml
-    static let knownCharacteristics: [CBUUID: String] = [
+    public static let knownCharacteristics: [CBUUID: String] = [
         CBUUID(string: "2A00"): "Device Name",
         CBUUID(string: "2A01"): "Appearance",
         CBUUID(string: "2A02"): "Peripheral Privacy Flag",

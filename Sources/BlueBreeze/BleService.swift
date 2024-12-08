@@ -1,7 +1,7 @@
 import CoreBluetooth
 import Combine
 
-class BleService: NSObject, CBPeripheralDelegate, Identifiable {
+public class BleService: NSObject, CBPeripheralDelegate, Identifiable {
     init(peripheral: CBPeripheral, service: CBService, operationQueue: BleOperationQueue) {
         self.peripheral = peripheral
         self.service = service
@@ -13,11 +13,11 @@ class BleService: NSObject, CBPeripheralDelegate, Identifiable {
     
     weak var operationQueue: BleOperationQueue?
     
-    let characteristics = CurrentValueSubject<[BleCharacteristic], Never>([])
+    public let characteristics = CurrentValueSubject<[BleCharacteristic], Never>([])
     
     // MARK: - Computed properties
     
-    var id: CBUUID {
+    public var id: CBUUID {
         get {
             return service.uuid
         }
@@ -25,7 +25,7 @@ class BleService: NSObject, CBPeripheralDelegate, Identifiable {
 
     // MARK: - Core Bluetooth protocols
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         guard service.uuid == self.id else {
             assert(false, "Parent class called wrong service's callback")
             return

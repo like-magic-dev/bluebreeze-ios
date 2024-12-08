@@ -1,12 +1,12 @@
 import CoreBluetooth
 import Combine
 
-enum BleDeviceConnectionStatus {
+public enum BleDeviceConnectionStatus {
     case disconnected
     case connected
 }
 
-class BleDevice: NSObject {
+public class BleDevice: NSObject {
     init(operationQueue: BleOperationQueue, peripheral: CBPeripheral) {
         self.operationQueue = operationQueue
         self.peripheral = peripheral
@@ -15,41 +15,41 @@ class BleDevice: NSObject {
     let operationQueue: BleOperationQueue
     let peripheral: CBPeripheral
     
-    var id: UUID {
+    public var id: UUID {
         get {
             return peripheral.identifier
         }
     }
     
-    var name: String {
+    public var name: String {
         get {
             return peripheral.name ?? ""
         }
     }
     
-    var rssi: Int = 0
+    public var rssi: Int = 0
     
-    var advertisementData: [String : Any] = [:]
+    public var advertisementData: [String : Any] = [:]
     
-    var isConnectable: Bool {
+    public var isConnectable: Bool {
         get {
             return advertisementData[CBAdvertisementDataIsConnectable] as? Bool ?? false
         }
     }
     
-    var advertisement: Data {
+    public var advertisement: Data {
         get {
             return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data ?? Data()
         }
     }
     
-    var manufacturerId: Int? {
+    public var manufacturerId: Int? {
         get {
             return (advertisement.count > 2) ? (Int(advertisement[1]) << 8) | Int(advertisement[0]) : nil
         }
     }
     
-    var manufacturer: String? {
+    public var manufacturer: String? {
         get {
             if let manufacturerId {
                 return BleConstants.manufacturers[manufacturerId]
@@ -59,25 +59,25 @@ class BleDevice: NSObject {
         }
     }
     
-    var advertisedServices: [CBUUID] {
+    public var advertisedServices: [CBUUID] {
         get {
             return advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
         }
     }
     
-    let services = CurrentValueSubject<[BleService], Never>([])
+    public let services = CurrentValueSubject<[BleService], Never>([])
     
     // MARK: - Connection status
     
-    let connectionStatus = CurrentValueSubject<BleDeviceConnectionStatus, Never>(.disconnected)
+    public let connectionStatus = CurrentValueSubject<BleDeviceConnectionStatus, Never>(.disconnected)
     
     // MARK: - MTU
     
-    let mtu = CurrentValueSubject<Int, Never>(Int.defaultMtu)
+    public let mtu = CurrentValueSubject<Int, Never>(Int.defaultMtu)
     
     // MARK: - Operations
     
-    func connect() async {
+    public func connect() async {
         do {
             try await operationQueue.enqueueOperation(BleOperationConnect(peripheral: peripheral))
             self.connectionStatus.send(.connected)
@@ -86,16 +86,16 @@ class BleDevice: NSObject {
         }
     }
     
-    func disconnect() async {
+    public func disconnect() async {
         try? await operationQueue.enqueueOperation(BleOperationDisconnect(peripheral: peripheral))
         self.connectionStatus.send(.disconnected)
     }
     
-    func discoverServices() async {
+    public func discoverServices() async {
         try? await operationQueue.enqueueOperation(BleOperationDiscoverServices(peripheral: peripheral))
     }
     
-    func requestMTU(_ mtu: Int) async {
+    public func requestMTU(_ mtu: Int) async {
         if let mtu = try? await operationQueue.enqueueOperation(BleOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
             self.mtu.send(mtu)
         }
@@ -103,30 +103,30 @@ class BleDevice: NSObject {
 }
 
 extension BleDevice: CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) { }
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) { }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         peripheral.discoverServices(nil)
     }
     
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         self.services.send([])
         self.connectionStatus.send(.disconnected)
     }
     
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
         self.services.send([])
         self.connectionStatus.send(.disconnected)
     }
     
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         self.services.send([])
         self.connectionStatus.send(.disconnected)
     }
 }
 
 extension BleDevice: CBPeripheralDelegate {
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         peripheral.services?.forEach({ service in
             if !self.services.value.contains(where: { $0.id == service.uuid }) {
                 var services = self.services.value
@@ -142,17 +142,17 @@ extension BleDevice: CBPeripheralDelegate {
         })
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         self.getServiceWithUUID(service.uuid)?.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         self.getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) { }
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) { }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         self.getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
     }
 }
