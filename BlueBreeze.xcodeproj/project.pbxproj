@@ -59,18 +59,8 @@
 		D2FEF1282C76260600BDF3AE /* BleOperationNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleOperationNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		D26D3DCA2D06402F002CE78D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			publicHeaders = (
-				BlueBreeze.h,
-			);
-			target = D26D3DBA2D06402F002CE78D /* BlueBreeze */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D26D3DBC2D06402F002CE78D /* BlueBreeze */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D26D3DCA2D06402F002CE78D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BlueBreeze; sourceTree = "<group>"; };
+		D26D3DBC2D06402F002CE78D /* BlueBreeze */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreeze; sourceTree = "<group>"; };
 		D26D3DC62D06402F002CE78D /* BlueBreezeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -135,8 +125,7 @@
 				D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */,
 				D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */,
 			);
-			name = BlueBreeze;
-			path = Sources/BlueBreeze;
+			path = BlueBreeze;
 			sourceTree = "<group>";
 		};
 		D2FEF1212C71F7FB00BDF3AE /* Operations */ = {

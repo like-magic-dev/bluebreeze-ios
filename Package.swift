@@ -12,7 +12,8 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "BlueBreeze"
+            name: "BlueBreeze",
+            path: "BlueBreeze"
         ),
         .testTarget(
             name: "BlueBreezeTests",
