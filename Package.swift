@@ -5,7 +5,7 @@ let package = Package(
     name: "BlueBreeze",
     platforms: [
         .macOS(.v10_15),
-        .iOS(.v12)
+        .iOS(.v13)
     ],
     products: [
         .library(name: "BlueBreeze", targets: ["BlueBreeze"]),
