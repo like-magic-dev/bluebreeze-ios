@@ -1,5 +1,5 @@
 //
-//  BlueBreezeTestApp.swift
+//  BlueBreezeExample.swift
 //  BlueBreezeTest
 //
 //  Created by Alessandro Mulloni on 17.12.24.
@@ -8,10 +8,13 @@
 import SwiftUI
 
 @main
-struct BlueBreezeTestApp: App {
+struct BlueBreezeExample: App {
+    let viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
+        .environmentObject(viewModel)
     }
 }

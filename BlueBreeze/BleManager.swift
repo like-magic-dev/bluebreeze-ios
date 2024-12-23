@@ -5,15 +5,34 @@ import Combine
 public class BleManager: NSObject {
     public override init() {
         super.init()
-        
-        centralManager = CBCentralManager(
-            delegate: self,
-            queue: DispatchQueue(label: "BleOperationQueue", qos: .userInteractive)
-        )
+        authorizationStatus.value = getAuthorization()
     }
     
-    var centralManager: CBCentralManager!
-        
+    // MARK: - Central manager instance, initialized on first access
+    
+    lazy var centralManager = CBCentralManager(
+        delegate: self,
+        queue: DispatchQueue(label: "BleOperationQueue", qos: .userInteractive)
+    )
+    
+    // MARK: - Permissions
+
+    private func getAuthorization() -> BleAuthorization {
+        if #available(iOS 13.1, *) {
+            return CBManager.authorization.bleAuthorization
+        } else {
+            // Causes an immediate permissions popup
+            return centralManager.authorization.bleAuthorization
+        }
+    }
+    
+    public let authorizationStatus = CurrentValueSubject<BleAuthorization, Never>(.unknown)
+
+    public func authorizationRequest() {
+        // Creating the object causes a popup request also on iOS 13.1+
+        authorizationStatus.value = centralManager.authorization.bleAuthorization
+    }
+    
     // MARK: - Devices
     
     public let devices = CurrentValueSubject<[UUID: BleDevice], Never>([:])
@@ -80,7 +99,9 @@ extension BleManager: BleOperationQueue {
 }
 
 extension BleManager: CBCentralManagerDelegate {
-    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {        
+        authorizationStatus.value = getAuthorization()
+
         if central.state != .poweredOn {
             scanningStop()
         } else {

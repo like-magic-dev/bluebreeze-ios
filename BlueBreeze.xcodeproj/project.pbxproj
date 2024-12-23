@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D26353CA2D11D6200055B1A9 /* BlueBreezeTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeTestApp.swift */; };
-		D26353CB2D11D6200055B1A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C82D11D6200055B1A9 /* ContentView.swift */; };
+		D22CD8932D19A4D700C58977 /* BleAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BleAuthorization.swift */; };
+		D22CD8952D19AA1C00C58977 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* PermissionsView.swift */; };
+		D22CD8972D19AA4800C58977 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* DevicesView.swift */; };
+		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
+		D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C82D11D6200055B1A9 /* HomeView.swift */; };
 		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
 		D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C62D11D6200055B1A9 /* Assets.xcassets */; };
+		D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; };
+		D26353DB2D11D7790055B1A9 /* BlueBreeze.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D26353E22D11D8DD0055B1A9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353E12D11D8DB0055B1A9 /* ViewModel.swift */; };
 		D26D3DD32D064036002CE78D /* BleOperationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */; };
 		D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BleOperationRead.swift */; };
 		D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */; };
@@ -29,18 +35,46 @@
 		D26D3DE22D064036002CE78D /* BleOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D26353DC2D11D7790055B1A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22A7B5F2C0D0EA800C4B6CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D26D3DBA2D06402F002CE78D;
+			remoteInfo = BlueBreeze;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D26353DE2D11D7790055B1A9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D26353DB2D11D7790055B1A9 /* BlueBreeze.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D22CD8922D19A4D700C58977 /* BleAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAuthorization.swift; sourceTree = "<group>"; };
+		D22CD8942D19AA1900C58977 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
+		D22CD8962D19AA4600C58977 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationConnect.swift; sourceTree = "<group>"; };
 		D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDiscoverServices.swift; sourceTree = "<group>"; };
 		D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationRequestMTU.swift; sourceTree = "<group>"; };
 		D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDisconnect.swift; sourceTree = "<group>"; };
 		D255ACD42C832754006586B6 /* BleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleService.swift; sourceTree = "<group>"; };
 		D255ACD62C83275C006586B6 /* BleCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCharacteristic.swift; sourceTree = "<group>"; };
-		D263539A2D11D5AE0055B1A9 /* BlueBreezeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D26353C62D11D6200055B1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D26353C72D11D6200055B1A9 /* BlueBreezeTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBreezeTestApp.swift; sourceTree = "<group>"; };
-		D26353C82D11D6200055B1A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBreezeExample.swift; sourceTree = "<group>"; };
+		D26353C82D11D6200055B1A9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D26353E12D11D8DB0055B1A9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationQueue.swift; sourceTree = "<group>"; };
@@ -60,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,8 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */,
-				D26353C92D11D6200055B1A9 /* BlueBreezeTest */,
+				D26353C92D11D6200055B1A9 /* BlueBreezeExample */,
 				D26D3DB12D063EA6002CE78D /* Package.swift */,
+				D26353D12D11D7140055B1A9 /* Frameworks */,
 				D22A7B682C0D0EA800C4B6CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */,
-				D263539A2D11D5AE0055B1A9 /* BlueBreezeTest.app */,
+				D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,21 +136,32 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D26353C92D11D6200055B1A9 /* BlueBreezeTest */ = {
+		D26353C92D11D6200055B1A9 /* BlueBreezeExample */ = {
 			isa = PBXGroup;
 			children = (
 				D26353C52D11D6200055B1A9 /* Preview Content */,
 				D26353C62D11D6200055B1A9 /* Assets.xcassets */,
-				D26353C72D11D6200055B1A9 /* BlueBreezeTestApp.swift */,
-				D26353C82D11D6200055B1A9 /* ContentView.swift */,
+				D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */,
+				D22CD8962D19AA4600C58977 /* DevicesView.swift */,
+				D26353C82D11D6200055B1A9 /* HomeView.swift */,
+				D22CD8942D19AA1900C58977 /* PermissionsView.swift */,
+				D26353E12D11D8DB0055B1A9 /* ViewModel.swift */,
 			);
-			path = BlueBreezeTest;
+			path = BlueBreezeExample;
+			sourceTree = "<group>";
+		};
+		D26353D12D11D7140055B1A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */ = {
 			isa = PBXGroup;
 			children = (
 				D2FEF1212C71F7FB00BDF3AE /* Operations */,
+				D22CD8922D19A4D700C58977 /* BleAuthorization.swift */,
 				D255ACD62C83275C006586B6 /* BleCharacteristic.swift */,
 				D2FEF1152C6F50CA00BDF3AE /* BleConstants.swift */,
 				D2D9B3B32C17A575004C83B5 /* BleDevice.swift */,
@@ -155,23 +202,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D26353992D11D5AE0055B1A9 /* BlueBreezeTest */ = {
+		D26353992D11D5AE0055B1A9 /* BlueBreezeExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D26353C12D11D5B00055B1A9 /* Build configuration list for PBXNativeTarget "BlueBreezeTest" */;
+			buildConfigurationList = D26353C12D11D5B00055B1A9 /* Build configuration list for PBXNativeTarget "BlueBreezeExample" */;
 			buildPhases = (
 				D26353962D11D5AE0055B1A9 /* Sources */,
 				D26353972D11D5AE0055B1A9 /* Frameworks */,
 				D26353982D11D5AE0055B1A9 /* Resources */,
+				D26353DE2D11D7790055B1A9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D26353DD2D11D7790055B1A9 /* PBXTargetDependency */,
 			);
-			name = BlueBreezeTest;
+			name = BlueBreezeExample;
 			packageProductDependencies = (
 			);
 			productName = BlueBreezeTest;
-			productReference = D263539A2D11D5AE0055B1A9 /* BlueBreezeTest.app */;
+			productReference = D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D26D3DBA2D06402F002CE78D /* BlueBreeze */ = {
@@ -221,12 +270,14 @@
 				Base,
 			);
 			mainGroup = D22A7B5E2C0D0EA800C4B6CF;
+			packageReferences = (
+			);
 			productRefGroup = D22A7B682C0D0EA800C4B6CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				D26D3DBA2D06402F002CE78D /* BlueBreeze */,
-				D26353992D11D5AE0055B1A9 /* BlueBreezeTest */,
+				D26353992D11D5AE0055B1A9 /* BlueBreezeExample */,
 			);
 		};
 /* End PBXProject section */
@@ -255,8 +306,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26353CA2D11D6200055B1A9 /* BlueBreezeTestApp.swift in Sources */,
-				D26353CB2D11D6200055B1A9 /* ContentView.swift in Sources */,
+				D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */,
+				D22CD8972D19AA4800C58977 /* DevicesView.swift in Sources */,
+				D26353E22D11D8DD0055B1A9 /* ViewModel.swift in Sources */,
+				D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */,
+				D22CD8952D19AA1C00C58977 /* PermissionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +321,7 @@
 				D26D3DD32D064036002CE78D /* BleOperationImpl.swift in Sources */,
 				D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */,
 				D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */,
+				D22CD8932D19A4D700C58977 /* BleAuthorization.swift in Sources */,
 				D26D3DD62D064036002CE78D /* BleOperationWrite.swift in Sources */,
 				D26D3DD72D064036002CE78D /* BleDevice.swift in Sources */,
 				D26D3DD82D064036002CE78D /* BleOperationNotifications.swift in Sources */,
@@ -284,6 +339,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D26353DD2D11D7790055B1A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D26D3DBA2D06402F002CE78D /* BlueBreeze */;
+			targetProxy = D26353DC2D11D7790055B1A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D22A7B8A2C0D0EA900C4B6CF /* Debug */ = {
@@ -409,10 +472,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeTest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeExample/Preview Content\"";
 				DEVELOPMENT_TEAM = S5L8VVQQZ2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "You need to grant permission to test BlueBreeze";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -440,10 +504,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeTest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeExample/Preview Content\"";
 				DEVELOPMENT_TEAM = S5L8VVQQZ2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "You need to grant permission to test BlueBreeze";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -481,7 +546,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -525,7 +590,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -565,7 +630,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D26353C12D11D5B00055B1A9 /* Build configuration list for PBXNativeTarget "BlueBreezeTest" */ = {
+		D26353C12D11D5B00055B1A9 /* Build configuration list for PBXNativeTarget "BlueBreezeExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D26353BB2D11D5B00055B1A9 /* Debug */,
