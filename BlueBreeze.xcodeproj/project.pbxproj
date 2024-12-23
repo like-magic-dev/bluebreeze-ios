@@ -9,14 +9,16 @@
 /* Begin PBXBuildFile section */
 		D22CD8932D19A4D700C58977 /* BleAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BleAuthorization.swift */; };
 		D22CD8952D19AA1C00C58977 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* PermissionsView.swift */; };
-		D22CD8972D19AA4800C58977 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* DevicesView.swift */; };
+		D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* ScanningView.swift */; };
+		D22CD8992D19B00D00C58977 /* OfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8982D19B00D00C58977 /* OfflineView.swift */; };
+		D22CD89B2D19D46700C58977 /* BleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89A2D19D39C00C58977 /* BleState.swift */; };
 		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
 		D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C82D11D6200055B1A9 /* HomeView.swift */; };
 		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
 		D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C62D11D6200055B1A9 /* Assets.xcassets */; };
 		D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; };
 		D26353DB2D11D7790055B1A9 /* BlueBreeze.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D26353E22D11D8DD0055B1A9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353E12D11D8DB0055B1A9 /* ViewModel.swift */; };
+		D26353E22D11D8DD0055B1A9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353E12D11D8DB0055B1A9 /* HomeViewModel.swift */; };
 		D26D3DD32D064036002CE78D /* BleOperationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */; };
 		D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BleOperationRead.swift */; };
 		D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */; };
@@ -62,7 +64,9 @@
 /* Begin PBXFileReference section */
 		D22CD8922D19A4D700C58977 /* BleAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAuthorization.swift; sourceTree = "<group>"; };
 		D22CD8942D19AA1900C58977 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
-		D22CD8962D19AA4600C58977 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
+		D22CD8962D19AA4600C58977 /* ScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningView.swift; sourceTree = "<group>"; };
+		D22CD8982D19B00D00C58977 /* OfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineView.swift; sourceTree = "<group>"; };
+		D22CD89A2D19D39C00C58977 /* BleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleState.swift; sourceTree = "<group>"; };
 		D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationConnect.swift; sourceTree = "<group>"; };
 		D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDiscoverServices.swift; sourceTree = "<group>"; };
 		D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationRequestMTU.swift; sourceTree = "<group>"; };
@@ -74,7 +78,7 @@
 		D26353C62D11D6200055B1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBreezeExample.swift; sourceTree = "<group>"; };
 		D26353C82D11D6200055B1A9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		D26353E12D11D8DB0055B1A9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		D26353E12D11D8DB0055B1A9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationQueue.swift; sourceTree = "<group>"; };
@@ -142,10 +146,11 @@
 				D26353C52D11D6200055B1A9 /* Preview Content */,
 				D26353C62D11D6200055B1A9 /* Assets.xcassets */,
 				D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */,
-				D22CD8962D19AA4600C58977 /* DevicesView.swift */,
+				D22CD8962D19AA4600C58977 /* ScanningView.swift */,
 				D26353C82D11D6200055B1A9 /* HomeView.swift */,
+				D26353E12D11D8DB0055B1A9 /* HomeViewModel.swift */,
+				D22CD8982D19B00D00C58977 /* OfflineView.swift */,
 				D22CD8942D19AA1900C58977 /* PermissionsView.swift */,
-				D26353E12D11D8DB0055B1A9 /* ViewModel.swift */,
 			);
 			path = BlueBreezeExample;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				D2FEF11D2C70AE1700BDF3AE /* BleError.swift */,
 				D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */,
 				D255ACD42C832754006586B6 /* BleService.swift */,
+				D22CD89A2D19D39C00C58977 /* BleState.swift */,
 				D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */,
 				D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */,
 			);
@@ -307,8 +313,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */,
-				D22CD8972D19AA4800C58977 /* DevicesView.swift in Sources */,
-				D26353E22D11D8DD0055B1A9 /* ViewModel.swift in Sources */,
+				D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */,
+				D26353E22D11D8DD0055B1A9 /* HomeViewModel.swift in Sources */,
+				D22CD8992D19B00D00C58977 /* OfflineView.swift in Sources */,
 				D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */,
 				D22CD8952D19AA1C00C58977 /* PermissionsView.swift in Sources */,
 			);
@@ -329,6 +336,7 @@
 				D26D3DDA2D064036002CE78D /* BleOperationQueue.swift in Sources */,
 				D26D3DDB2D064036002CE78D /* BleError.swift in Sources */,
 				D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */,
+				D22CD89B2D19D46700C58977 /* BleState.swift in Sources */,
 				D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */,
 				D26D3DDE2D064036002CE78D /* BleService.swift in Sources */,
 				D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */,
@@ -546,7 +554,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -590,7 +598,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",

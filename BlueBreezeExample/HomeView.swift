@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
-        if viewModel.authorizationStatus == .authorized {
-            DevicesView()
-        } else {
+        if viewModel.authorizationStatus != .authorized {
             PermissionsView()
+        } else if viewModel.state != .poweredOn {
+            OfflineView()
+        } else {
+            ScanningView()
         }
     }
 }

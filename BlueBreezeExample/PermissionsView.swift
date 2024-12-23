@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PermissionsView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         VStack {

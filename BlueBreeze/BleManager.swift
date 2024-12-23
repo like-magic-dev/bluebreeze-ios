@@ -5,7 +5,12 @@ import Combine
 public class BleManager: NSObject {
     public override init() {
         super.init()
-        authorizationStatus.value = getAuthorization()
+        
+        authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
+        
+        if authorizationStatus.value == .authorized {
+            state.value = centralManager.state.bleState
+        }
     }
     
     // MARK: - Central manager instance, initialized on first access
@@ -17,22 +22,17 @@ public class BleManager: NSObject {
     
     // MARK: - Permissions
 
-    private func getAuthorization() -> BleAuthorization {
-        if #available(iOS 13.1, *) {
-            return CBManager.authorization.bleAuthorization
-        } else {
-            // Causes an immediate permissions popup
-            return centralManager.authorization.bleAuthorization
-        }
-    }
-    
     public let authorizationStatus = CurrentValueSubject<BleAuthorization, Never>(.unknown)
 
     public func authorizationRequest() {
-        // Creating the object causes a popup request also on iOS 13.1+
-        authorizationStatus.value = centralManager.authorization.bleAuthorization
+        // Creating the object causes a popup request on iOS 13.1+
+        _ = centralManager
     }
     
+    // MARK: - Online
+    
+    public let state = CurrentValueSubject<BleState, Never>(.unknown)
+
     // MARK: - Devices
     
     public let devices = CurrentValueSubject<[UUID: BleDevice], Never>([:])
@@ -45,7 +45,7 @@ public class BleManager: NSObject {
         guard !isScanning.value else {
             return
         }
-                
+
         centralManager.scanForPeripherals(withServices: nil)
         isScanning.send(true)
     }
@@ -54,7 +54,7 @@ public class BleManager: NSObject {
         guard isScanning.value else {
             return
         }
-        
+
         centralManager.stopScan()
         isScanning.send(false)
     }
@@ -99,13 +99,12 @@ extension BleManager: BleOperationQueue {
 }
 
 extension BleManager: CBCentralManagerDelegate {
-    public func centralManagerDidUpdateState(_ central: CBCentralManager) {        
-        authorizationStatus.value = getAuthorization()
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
+        state.value = central.state.bleState
 
-        if central.state != .poweredOn {
-            scanningStop()
-        } else {
-            scanningStart()
+        if isScanning.value && central.state == .poweredOn {
+            centralManager.scanForPeripherals(withServices: nil)
         }
         
         operationCurrent?.centralManagerDidUpdateState(central)

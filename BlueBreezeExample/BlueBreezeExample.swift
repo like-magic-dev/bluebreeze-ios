@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct BlueBreezeExample: App {
-    let viewModel = ViewModel()
+    let viewModel = HomeViewModel()
     
     var body: some Scene {
         WindowGroup {
