@@ -6,7 +6,8 @@ struct ScanningView: View {
     var body: some View {
         List(viewModel.devices) { device in
             NavigationLink {
-                
+                DeviceView()
+                    .environmentObject(DeviceViewModel(device: device))
             } label: {
                 HStack {
                     Text(device.name)
@@ -33,6 +34,9 @@ struct ScanningView: View {
         }
         .onAppear {
             viewModel.startScanning()
+        }
+        .onDisappear {
+            viewModel.stopScanning()
         }
     }
 }
