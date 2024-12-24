@@ -41,7 +41,7 @@ public class BleService: NSObject, CBPeripheralDelegate, Identifiable {
                         operationQueue: self.operationQueue
                     )
                 )
-                self.characteristics.send(characteristics)
+                self.characteristics.value = characteristics
             }
         })
     }

@@ -47,7 +47,7 @@ public class BleManager: NSObject {
         }
 
         centralManager.scanForPeripherals(withServices: nil)
-        isScanning.send(true)
+        isScanning.value = true
     }
     
     public func scanningStop() {
@@ -56,7 +56,7 @@ public class BleManager: NSObject {
         }
 
         centralManager.stopScan()
-        isScanning.send(false)
+        isScanning.value = false
     }
     
     // MARK: - Operation queue
@@ -121,7 +121,7 @@ extension BleManager: CBCentralManagerDelegate {
         device.rssi = RSSI.intValue
         
         devices[peripheral.identifier] = device
-        self.devices.send(devices)
+        self.devices.value = devices
         
         operationCurrent?.centralManager?(central, didDiscover: peripheral, advertisementData: advertisementData, rssi: RSSI)
         checkOperation()

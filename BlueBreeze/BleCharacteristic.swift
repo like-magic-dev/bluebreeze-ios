@@ -91,7 +91,7 @@ extension BleCharacteristic: CBPeripheralDelegate {
         }
         
         if let value = characteristic.value {
-            self.data.send(value)
+            self.data.value = value
         }
     }
     
@@ -101,6 +101,6 @@ extension BleCharacteristic: CBPeripheralDelegate {
             return
         }
         
-        self.isNotifying.send(characteristic.isNotifying)
+        self.isNotifying.value = characteristic.isNotifying
     }
 }

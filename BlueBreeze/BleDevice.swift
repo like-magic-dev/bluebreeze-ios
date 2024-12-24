@@ -81,15 +81,15 @@ public class BleDevice: NSObject {
     public func connect() async {
         do {
             try await operationQueue.enqueueOperation(BleOperationConnect(peripheral: peripheral))
-            self.connectionStatus.send(.connected)
+            self.connectionStatus.value = .connected
         } catch {
-            self.connectionStatus.send(.disconnected)
+            self.connectionStatus.value = .disconnected
         }
     }
     
     public func disconnect() async {
         try? await operationQueue.enqueueOperation(BleOperationDisconnect(peripheral: peripheral))
-        self.connectionStatus.send(.disconnected)
+        self.connectionStatus.value = .disconnected
     }
     
     public func discoverServices() async {
@@ -98,7 +98,7 @@ public class BleDevice: NSObject {
     
     public func requestMTU(_ mtu: Int) async {
         if let mtu = try? await operationQueue.enqueueOperation(BleOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
-            self.mtu.send(mtu)
+            self.mtu.value = mtu
         }
     }
 }
@@ -111,18 +111,18 @@ extension BleDevice: CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
-        self.services.send([])
-        self.connectionStatus.send(.disconnected)
+        self.services.value = []
+        self.connectionStatus.value = .disconnected
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
-        self.services.send([])
-        self.connectionStatus.send(.disconnected)
+        self.services.value = []
+        self.connectionStatus.value = .disconnected
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
-        self.services.send([])
-        self.connectionStatus.send(.disconnected)
+        self.services.value = []
+        self.connectionStatus.value = .disconnected
     }
 }
 
@@ -138,7 +138,7 @@ extension BleDevice: CBPeripheralDelegate {
                         operationQueue: self.operationQueue
                     )
                 )
-                self.services.send(services)
+                self.services.value = services
             }
         })
     }
