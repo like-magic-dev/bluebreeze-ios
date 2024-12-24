@@ -16,6 +16,6 @@ struct PermissionsView: View {
                 Text("Please grant authorization in the settings")
             }
         }
-        .padding()
+        .navigationTitle("BLE Authorization")
     }
 }

@@ -4,25 +4,35 @@ struct ScanningView: View {
     @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
-        VStack {
+        List(viewModel.devices) { device in
+            NavigationLink {
+                
+            } label: {
+                HStack {
+                    Text(device.name)
+                    Spacer()
+                    Text("\(device.rssi)")
+                }
+            }
+        }
+        .navigationTitle("BLE Scanning")
+        .toolbar {
             if viewModel.isScanning {
                 Button {
                     viewModel.stopScanning()
                 } label: {
-                    Text("Stop scanning")
+                    Image(systemName: "stop.fill")
                 }
             } else {
                 Button {
                     viewModel.startScanning()
                 } label: {
-                    Text("Start scanning")
+                    Image(systemName: "play.fill")
                 }
             }
-            
-            List(viewModel.devices) { device in
-                Text(device.name)
-            }
         }
-        .padding()
+        .onAppear {
+            viewModel.startScanning()
+        }
     }
 }

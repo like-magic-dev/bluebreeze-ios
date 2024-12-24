@@ -7,6 +7,6 @@ struct OfflineView: View {
         VStack {
             Text("Bluetooth offline")
         }
-        .padding()
+        .navigationTitle("BLE Status")
     }
 }

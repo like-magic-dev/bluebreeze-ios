@@ -11,12 +11,14 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
-        if viewModel.authorizationStatus != .authorized {
-            PermissionsView()
-        } else if viewModel.state != .poweredOn {
-            OfflineView()
-        } else {
-            ScanningView()
+        NavigationStack {
+            if viewModel.authorizationStatus != .authorized {
+                PermissionsView()
+            } else if viewModel.state != .poweredOn {
+                OfflineView()
+            } else {
+                ScanningView()
+            }
         }
     }
 }
