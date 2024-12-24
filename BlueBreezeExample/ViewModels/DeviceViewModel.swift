@@ -5,6 +5,11 @@ import BlueBreeze
 class DeviceViewModel: ObservableObject {
     init(device: BleDevice) {
         self.device = device
+        
+        device.connectionStatus
+            .receive(on: DispatchQueue.main)
+            .sink { self.connectionStatus = $0 }
+            .store(in: &dispatchBag)
     }
 
     // Dispatch bag for all cancellables
@@ -19,5 +24,36 @@ class DeviceViewModel: ObservableObject {
     
     var name: String {
         device.name
+    }
+    
+    // Connection
+    
+    @Published var connectionStatus: BleDeviceConnectionStatus = .disconnected
+    @Published var executingConnection: Bool = false
+    
+    func connect() async {
+        DispatchQueue.main.async {
+            self.executingConnection = true
+        }
+        
+        await device.connect()
+        await device.discoverServices()
+        await device.requestMTU(512)
+        
+        DispatchQueue.main.async {
+            self.executingConnection = false
+        }
+    }
+    
+    func disconnect() async {
+        DispatchQueue.main.async {
+            self.executingConnection = true
+        }
+        
+        await device.disconnect()
+        
+        DispatchQueue.main.async {
+            self.executingConnection = false
+        }
     }
 }
