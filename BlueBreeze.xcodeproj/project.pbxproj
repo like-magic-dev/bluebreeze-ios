@@ -14,6 +14,7 @@
 		D22CD89B2D19D46700C58977 /* BleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89A2D19D39C00C58977 /* BleState.swift */; };
 		D22CD89F2D1A9A2800C58977 /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89E2D1A9A2400C58977 /* DeviceViewModel.swift */; };
 		D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */; };
+		D22CD8A52D1AFB0600C58977 /* Extensions+CBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A42D1AFB0200C58977 /* Extensions+CBUUID.swift */; };
 		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
 		D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C82D11D6200055B1A9 /* HomeView.swift */; };
 		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		D22CD89A2D19D39C00C58977 /* BleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleState.swift; sourceTree = "<group>"; };
 		D22CD89E2D1A9A2400C58977 /* DeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewModel.swift; sourceTree = "<group>"; };
 		D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
+		D22CD8A42D1AFB0200C58977 /* Extensions+CBUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+CBUUID.swift"; sourceTree = "<group>"; };
 		D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationConnect.swift; sourceTree = "<group>"; };
 		D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDiscoverServices.swift; sourceTree = "<group>"; };
 		D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationRequestMTU.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				D22CD89A2D19D39C00C58977 /* BleState.swift */,
 				D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */,
 				D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */,
+				D22CD8A42D1AFB0200C58977 /* Extensions+CBUUID.swift */,
 			);
 			path = BlueBreeze;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */,
 				D22CD89B2D19D46700C58977 /* BleState.swift in Sources */,
 				D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */,
+				D22CD8A52D1AFB0600C58977 /* Extensions+CBUUID.swift in Sources */,
 				D26D3DDE2D064036002CE78D /* BleService.swift in Sources */,
 				D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */,
 				D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */,

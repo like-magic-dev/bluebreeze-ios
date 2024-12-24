@@ -59,9 +59,10 @@ public class BleDevice: NSObject {
         }
     }
     
-    public var advertisedServices: [CBUUID] {
+    public var advertisedServices: [UUID] {
         get {
-            return advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
+            let uuids = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
+            return uuids.map { $0.uuid }
         }
     }
     
@@ -143,17 +144,17 @@ extension BleDevice: CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
-        self.getServiceWithUUID(service.uuid)?.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
+        getServiceWithUUID(service.uuid)?.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
-        self.getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
+        getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) { }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
-        self.getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
+        getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
     }
 }
 

@@ -17,9 +17,9 @@ public class BleService: NSObject, CBPeripheralDelegate, Identifiable {
     
     // MARK: - Computed properties
     
-    public var id: CBUUID {
+    public var id: UUID {
         get {
-            return service.uuid
+            return service.uuid.uuid
         }
     }
 
