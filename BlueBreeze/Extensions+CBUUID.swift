@@ -10,10 +10,11 @@ import CoreBluetooth
 extension CBUUID {
     var uuid: UUID {
         get {
-            return self.data.withUnsafeBytes {
-                (pointer: UnsafeRawBufferPointer) -> UUID in
-                let uuid = pointer.load(as: uuid_t.self)
-                return UUID(uuid: uuid)
+            let uuidString = self.uuidString
+            if uuidString.count == 4 {
+                return UUID(shortString: uuidString)
+            } else {
+                return UUID(uuidString: self.uuidString)!
             }
         }
     }

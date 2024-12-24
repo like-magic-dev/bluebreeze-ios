@@ -33,7 +33,6 @@
 		D26D3DDB2D064036002CE78D /* BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BleError.swift */; };
 		D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */; };
 		D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */; };
-		D26D3DDE2D064036002CE78D /* BleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD42C832754006586B6 /* BleService.swift */; };
 		D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */; };
 		D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BleCharacteristic.swift */; };
 		D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */; };
@@ -77,7 +76,6 @@
 		D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDiscoverServices.swift; sourceTree = "<group>"; };
 		D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationRequestMTU.swift; sourceTree = "<group>"; };
 		D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDisconnect.swift; sourceTree = "<group>"; };
-		D255ACD42C832754006586B6 /* BleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleService.swift; sourceTree = "<group>"; };
 		D255ACD62C83275C006586B6 /* BleCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCharacteristic.swift; sourceTree = "<group>"; };
 		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 				D2D9B3B32C17A575004C83B5 /* BleDevice.swift */,
 				D2FEF11D2C70AE1700BDF3AE /* BleError.swift */,
 				D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */,
-				D255ACD42C832754006586B6 /* BleService.swift */,
 				D22CD89A2D19D39C00C58977 /* BleState.swift */,
 				D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */,
 				D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */,
@@ -366,7 +363,6 @@
 				D22CD89B2D19D46700C58977 /* BleState.swift in Sources */,
 				D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */,
 				D22CD8A52D1AFB0600C58977 /* Extensions+CBUUID.swift in Sources */,
-				D26D3DDE2D064036002CE78D /* BleService.swift in Sources */,
 				D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */,
 				D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */,
 				D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */,

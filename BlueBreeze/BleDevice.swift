@@ -66,7 +66,7 @@ public class BleDevice: NSObject {
         }
     }
     
-    public let services = CurrentValueSubject<[BleService], Never>([])
+    public let services = CurrentValueSubject<[UUID: [BleCharacteristic]], Never>([:])
     
     // MARK: - Connection status
     
@@ -111,17 +111,17 @@ extension BleDevice: CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
-        self.services.value = []
+        self.services.value = [:]
         self.connectionStatus.value = .disconnected
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
-        self.services.value = []
+        self.services.value = [:]
         self.connectionStatus.value = .disconnected
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
-        self.services.value = []
+        self.services.value = [:]
         self.connectionStatus.value = .disconnected
     }
 }
@@ -129,22 +129,32 @@ extension BleDevice: CBCentralManagerDelegate {
 extension BleDevice: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         peripheral.services?.forEach({ service in
-            if !self.services.value.contains(where: { $0.id == service.uuid }) {
+            if self.services.value[service.uuid.uuid] == nil {
                 var services = self.services.value
-                services.append(
-                    BleService(
-                        peripheral: peripheral,
-                        service: service,
-                        operationQueue: self.operationQueue
-                    )
-                )
+                services[service.uuid.uuid] = []
                 self.services.value = services
             }
         })
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
-        getServiceWithUUID(service.uuid)?.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
+        var characteristics = self.services.value[service.uuid.uuid] ?? []
+        
+        service.characteristics?.forEach({ characteristic in
+            if !characteristics.contains(where: { $0.id == characteristic.uuid }) {
+                characteristics.append(
+                    BleCharacteristic(
+                        peripheral: peripheral,
+                        characteristic: characteristic,
+                        operationQueue: self.operationQueue
+                    )
+                )
+            }
+        })
+
+        var services = self.services.value
+        services[service.uuid.uuid] = characteristics
+        self.services.value = services
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
@@ -161,19 +171,9 @@ extension BleDevice: CBPeripheralDelegate {
 extension BleDevice: Identifiable { }
 
 extension BleDevice {
-    func getServiceWithUUID(_ uuid: CBUUID) -> BleService? {
-        for service in services.value {
-            if service.id == uuid {
-                return service
-            }
-        }
-        
-        return nil
-    }
-    
     func getCharacteristicWithUUID(_ uuid: CBUUID) -> BleCharacteristic? {
-        for service in services.value {
-            for characteristic in service.characteristics.value {
+        for characteristics in services.value.values {
+            for characteristic in characteristics {
                 if characteristic.id == uuid {
                     return characteristic
                 }
