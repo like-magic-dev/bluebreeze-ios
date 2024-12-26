@@ -17,7 +17,6 @@
 		D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A62D1D650F00C58977 /* BBUUID.swift */; };
 		D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */; };
 		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
-		D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C82D11D6200055B1A9 /* HomeView.swift */; };
 		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
 		D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C62D11D6200055B1A9 /* Assets.xcassets */; };
 		D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; };
@@ -83,7 +82,6 @@
 		D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D26353C62D11D6200055B1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBreezeExample.swift; sourceTree = "<group>"; };
-		D26353C82D11D6200055B1A9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D26353E12D11D8DB0055B1A9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +141,6 @@
 			children = (
 				D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */,
 				D22CD8962D19AA4600C58977 /* ScanningView.swift */,
-				D26353C82D11D6200055B1A9 /* HomeView.swift */,
 				D22CD8982D19B00D00C58977 /* OfflineView.swift */,
 				D22CD8942D19AA1900C58977 /* PermissionsView.swift */,
 			);
@@ -341,7 +338,6 @@
 				D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */,
 				D26353E22D11D8DD0055B1A9 /* HomeViewModel.swift in Sources */,
 				D22CD8992D19B00D00C58977 /* OfflineView.swift in Sources */,
-				D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */,
 				D22CD89F2D1A9A2800C58977 /* DeviceViewModel.swift in Sources */,
 				D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */,
 				D22CD8952D19AA1C00C58977 /* PermissionsView.swift in Sources */,

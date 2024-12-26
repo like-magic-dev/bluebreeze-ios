@@ -9,11 +9,19 @@ import SwiftUI
 
 @main
 struct BlueBreezeExample: App {
-    let viewModel = HomeViewModel()
+    @ObservedObject var viewModel = HomeViewModel()
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationStack {
+                if viewModel.authorizationStatus != .authorized {
+                    PermissionsView()
+                } else if viewModel.state != .poweredOn {
+                    OfflineView()
+                } else {
+                    ScanningView()
+                }
+            }
         }
         .environmentObject(viewModel)
     }
