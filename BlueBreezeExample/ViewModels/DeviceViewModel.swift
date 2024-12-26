@@ -10,6 +10,11 @@ class DeviceViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { self.connectionStatus = $0 }
             .store(in: &dispatchBag)
+        
+        device.services
+            .receive(on: DispatchQueue.main)
+            .sink { self.services = $0 }
+            .store(in: &dispatchBag)
     }
 
     // Dispatch bag for all cancellables
@@ -56,4 +61,8 @@ class DeviceViewModel: ObservableObject {
             self.executingConnection = false
         }
     }
+    
+    // Characteristics
+    
+    @Published var services: [UUID: [BleCharacteristic]] = [:]
 }

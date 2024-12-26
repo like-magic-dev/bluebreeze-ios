@@ -4,18 +4,18 @@ struct DeviceView: View {
     @EnvironmentObject var deviceViewModel: DeviceViewModel
 
     var body: some View {
-//        List(viewModel.devices) { device in
-//            NavigationLink {
-//                
-//            } label: {
-//                HStack {
-//                    Text(device.name)
-//                    Spacer()
-//                    Text("\(device.rssi)")
-//                }
-//            }
-//        }
-        Text(deviceViewModel.name)
+        List {
+            ForEach(deviceViewModel.services.sorted(by: {
+                $0.key.uuidString < $1.key.uuidString
+            }), id: \.key) { key, value in
+                Section(header: Text(key.uuidString)) {
+                    ForEach(value) {
+                        Text($0.id.uuidString)
+                    }
+                }
+            }
+        }
+        .listStyle(.grouped)
         .navigationTitle(deviceViewModel.name)
         .toolbar {
             if deviceViewModel.executingConnection {
