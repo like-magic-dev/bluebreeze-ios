@@ -3,7 +3,7 @@ import Combine
 import BlueBreeze
 
 class DeviceViewModel: ObservableObject {
-    init(device: BleDevice) {
+    init(device: BBDevice) {
         self.device = device
         
         device.connectionStatus
@@ -23,7 +23,7 @@ class DeviceViewModel: ObservableObject {
     
     // BLE device
 
-    let device: BleDevice
+    let device: BBDevice
     
     // Properties
     
@@ -33,7 +33,7 @@ class DeviceViewModel: ObservableObject {
     
     // Connection
     
-    @Published var connectionStatus: BleDeviceConnectionStatus = .disconnected
+    @Published var connectionStatus: BBDeviceConnectionStatus = .disconnected
     @Published var executingConnection: Bool = false
     
     func connect() async {
@@ -64,5 +64,5 @@ class DeviceViewModel: ObservableObject {
     
     // Characteristics
     
-    @Published var services: [BBUUID: [BleCharacteristic]] = [:]
+    @Published var services: [BBUUID: [BBCharacteristic]] = [:]
 }

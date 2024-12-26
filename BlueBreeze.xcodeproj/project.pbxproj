@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D22CD8932D19A4D700C58977 /* BleAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BleAuthorization.swift */; };
+		D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BBAuthorization.swift */; };
 		D22CD8952D19AA1C00C58977 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* PermissionsView.swift */; };
 		D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* ScanningView.swift */; };
 		D22CD8992D19B00D00C58977 /* OfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8982D19B00D00C58977 /* OfflineView.swift */; };
-		D22CD89B2D19D46700C58977 /* BleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89A2D19D39C00C58977 /* BleState.swift */; };
+		D22CD89B2D19D46700C58977 /* BBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89A2D19D39C00C58977 /* BBState.swift */; };
 		D22CD89F2D1A9A2800C58977 /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89E2D1A9A2400C58977 /* DeviceViewModel.swift */; };
 		D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */; };
 		D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A62D1D650F00C58977 /* BBUUID.swift */; };
+		D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */; };
 		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
 		D26353CB2D11D6200055B1A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C82D11D6200055B1A9 /* HomeView.swift */; };
 		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
@@ -26,15 +27,15 @@
 		D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BleOperationRead.swift */; };
 		D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */; };
 		D26D3DD62D064036002CE78D /* BleOperationWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E501682CA34F5D00602BB5 /* BleOperationWrite.swift */; };
-		D26D3DD72D064036002CE78D /* BleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3B32C17A575004C83B5 /* BleDevice.swift */; };
+		D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3B32C17A575004C83B5 /* BBDevice.swift */; };
 		D26D3DD82D064036002CE78D /* BleOperationNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1282C76260600BDF3AE /* BleOperationNotifications.swift */; };
-		D26D3DD92D064036002CE78D /* BleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BleConstants.swift */; };
-		D26D3DDA2D064036002CE78D /* BleOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */; };
-		D26D3DDB2D064036002CE78D /* BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BleError.swift */; };
-		D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */; };
+		D26D3DD92D064036002CE78D /* BBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */; };
+		D26D3DDA2D064036002CE78D /* BBOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */; };
+		D26D3DDB2D064036002CE78D /* BBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BBError.swift */; };
+		D26D3DDC2D064036002CE78D /* BBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */; };
 		D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */; };
-		D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */; };
-		D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BleCharacteristic.swift */; };
+		D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */; };
+		D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BBCharacteristic.swift */; };
 		D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */; };
 		D26D3DE22D064036002CE78D /* BleOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */; };
 /* End PBXBuildFile section */
@@ -64,19 +65,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D22CD8922D19A4D700C58977 /* BleAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAuthorization.swift; sourceTree = "<group>"; };
+		D22CD8922D19A4D700C58977 /* BBAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAuthorization.swift; sourceTree = "<group>"; };
 		D22CD8942D19AA1900C58977 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		D22CD8962D19AA4600C58977 /* ScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningView.swift; sourceTree = "<group>"; };
 		D22CD8982D19B00D00C58977 /* OfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineView.swift; sourceTree = "<group>"; };
-		D22CD89A2D19D39C00C58977 /* BleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleState.swift; sourceTree = "<group>"; };
+		D22CD89A2D19D39C00C58977 /* BBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBState.swift; sourceTree = "<group>"; };
 		D22CD89E2D1A9A2400C58977 /* DeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewModel.swift; sourceTree = "<group>"; };
 		D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		D22CD8A62D1D650F00C58977 /* BBUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBUUID.swift; sourceTree = "<group>"; };
+		D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDeviceConnectionStatus.swift; sourceTree = "<group>"; };
 		D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationConnect.swift; sourceTree = "<group>"; };
 		D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDiscoverServices.swift; sourceTree = "<group>"; };
 		D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationRequestMTU.swift; sourceTree = "<group>"; };
 		D255ACD22C7F5DC7006586B6 /* BleOperationDisconnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDisconnect.swift; sourceTree = "<group>"; };
-		D255ACD62C83275C006586B6 /* BleCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleCharacteristic.swift; sourceTree = "<group>"; };
+		D255ACD62C83275C006586B6 /* BBCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristic.swift; sourceTree = "<group>"; };
 		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D26353C62D11D6200055B1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,14 +87,14 @@
 		D26353E12D11D8DB0055B1A9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationQueue.swift; sourceTree = "<group>"; };
+		D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationQueue.swift; sourceTree = "<group>"; };
 		D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationImpl.swift; sourceTree = "<group>"; };
-		D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
-		D2D9B3B32C17A575004C83B5 /* BleDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleDevice.swift; sourceTree = "<group>"; };
+		D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBManager.swift; sourceTree = "<group>"; };
+		D2D9B3B32C17A575004C83B5 /* BBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDevice.swift; sourceTree = "<group>"; };
 		D2E501682CA34F5D00602BB5 /* BleOperationWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationWrite.swift; sourceTree = "<group>"; };
-		D2FEF1152C6F50CA00BDF3AE /* BleConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleConstants.swift; sourceTree = "<group>"; };
-		D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperation.swift; sourceTree = "<group>"; };
-		D2FEF11D2C70AE1700BDF3AE /* BleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleError.swift; sourceTree = "<group>"; };
+		D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBConstants.swift; sourceTree = "<group>"; };
+		D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperation.swift; sourceTree = "<group>"; };
+		D2FEF11D2C70AE1700BDF3AE /* BBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBError.swift; sourceTree = "<group>"; };
 		D2FEF1222C71F81700BDF3AE /* BleOperationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleOperationRead.swift; sourceTree = "<group>"; };
 		D2FEF1282C76260600BDF3AE /* BleOperationNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleOperationNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,15 +190,16 @@
 			isa = PBXGroup;
 			children = (
 				D2FEF1212C71F7FB00BDF3AE /* Operations */,
-				D22CD8922D19A4D700C58977 /* BleAuthorization.swift */,
-				D255ACD62C83275C006586B6 /* BleCharacteristic.swift */,
-				D2FEF1152C6F50CA00BDF3AE /* BleConstants.swift */,
-				D2D9B3B32C17A575004C83B5 /* BleDevice.swift */,
-				D2FEF11D2C70AE1700BDF3AE /* BleError.swift */,
-				D2D9B3AF2C17A4DF004C83B5 /* BleManager.swift */,
-				D22CD89A2D19D39C00C58977 /* BleState.swift */,
-				D2FEF11B2C70ADEB00BDF3AE /* BleOperation.swift */,
-				D29F39C02D059CBF00E7B2D8 /* BleOperationQueue.swift */,
+				D22CD8922D19A4D700C58977 /* BBAuthorization.swift */,
+				D255ACD62C83275C006586B6 /* BBCharacteristic.swift */,
+				D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */,
+				D2D9B3B32C17A575004C83B5 /* BBDevice.swift */,
+				D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */,
+				D2FEF11D2C70AE1700BDF3AE /* BBError.swift */,
+				D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */,
+				D22CD89A2D19D39C00C58977 /* BBState.swift */,
+				D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */,
+				D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */,
 				D22CD8A62D1D650F00C58977 /* BBUUID.swift */,
 			);
 			path = BlueBreeze;
@@ -352,19 +355,20 @@
 				D26D3DD32D064036002CE78D /* BleOperationImpl.swift in Sources */,
 				D26D3DD42D064036002CE78D /* BleOperationRead.swift in Sources */,
 				D26D3DD52D064036002CE78D /* BleOperationDisconnect.swift in Sources */,
-				D22CD8932D19A4D700C58977 /* BleAuthorization.swift in Sources */,
+				D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */,
 				D26D3DD62D064036002CE78D /* BleOperationWrite.swift in Sources */,
-				D26D3DD72D064036002CE78D /* BleDevice.swift in Sources */,
+				D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */,
+				D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */,
 				D26D3DD82D064036002CE78D /* BleOperationNotifications.swift in Sources */,
-				D26D3DD92D064036002CE78D /* BleConstants.swift in Sources */,
-				D26D3DDA2D064036002CE78D /* BleOperationQueue.swift in Sources */,
-				D26D3DDB2D064036002CE78D /* BleError.swift in Sources */,
-				D26D3DDC2D064036002CE78D /* BleManager.swift in Sources */,
+				D26D3DD92D064036002CE78D /* BBConstants.swift in Sources */,
+				D26D3DDA2D064036002CE78D /* BBOperationQueue.swift in Sources */,
+				D26D3DDB2D064036002CE78D /* BBError.swift in Sources */,
+				D26D3DDC2D064036002CE78D /* BBManager.swift in Sources */,
 				D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */,
-				D22CD89B2D19D46700C58977 /* BleState.swift in Sources */,
+				D22CD89B2D19D46700C58977 /* BBState.swift in Sources */,
 				D26D3DDD2D064036002CE78D /* BleOperationDiscoverServices.swift in Sources */,
-				D26D3DDF2D064036002CE78D /* BleOperation.swift in Sources */,
-				D26D3DE02D064036002CE78D /* BleCharacteristic.swift in Sources */,
+				D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */,
+				D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */,
 				D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */,
 				D26D3DE22D064036002CE78D /* BleOperationConnect.swift in Sources */,
 			);

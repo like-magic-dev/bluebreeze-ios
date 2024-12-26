@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-public enum BleState {
+public enum BBState {
     case unknown
     case resetting
     case unsupported
@@ -10,7 +10,7 @@ public enum BleState {
 }
 
 extension CBManagerState {
-    var bleState: BleState {
+    var bbState: BBState {
         switch self {
         case .unknown: return .unknown
         case .resetting: return .resetting

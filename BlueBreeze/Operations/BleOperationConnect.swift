@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-class BleOperationConnect: BleOperationImpl<Void> {
+class BBOperationConnect: BBOperationImpl<Void> {
     override func execute(_ centralManager: CBCentralManager) {
         centralManager.connect(peripheral)
     }
@@ -10,6 +10,6 @@ class BleOperationConnect: BleOperationImpl<Void> {
     }
     
     override func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
-        completeError(BleError(message: error?.localizedDescription ?? ""))
+        completeError(BBError(message: error?.localizedDescription ?? ""))
     }
 }

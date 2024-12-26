@@ -2,14 +2,14 @@ import Foundation
 import CoreBluetooth
 import Combine
 
-public class BleManager: NSObject {
+public class BBManager: NSObject {
     public override init() {
         super.init()
         
         authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
         
         if authorizationStatus.value == .authorized {
-            state.value = centralManager.state.bleState
+            state.value = centralManager.state.bbState
         }
     }
     
@@ -17,12 +17,12 @@ public class BleManager: NSObject {
     
     lazy var centralManager = CBCentralManager(
         delegate: self,
-        queue: DispatchQueue(label: "BleOperationQueue", qos: .userInteractive)
+        queue: DispatchQueue(label: "BBOperationQueue", qos: .userInteractive)
     )
     
     // MARK: - Permissions
 
-    public let authorizationStatus = CurrentValueSubject<BleAuthorization, Never>(.unknown)
+    public let authorizationStatus = CurrentValueSubject<BBAuthorization, Never>(.unknown)
 
     public func authorizationRequest() {
         // Creating the object causes a popup request on iOS 13.1+
@@ -31,11 +31,11 @@ public class BleManager: NSObject {
     
     // MARK: - Online
     
-    public let state = CurrentValueSubject<BleState, Never>(.unknown)
+    public let state = CurrentValueSubject<BBState, Never>(.unknown)
 
     // MARK: - Devices
     
-    public let devices = CurrentValueSubject<[UUID: BleDevice], Never>([:])
+    public let devices = CurrentValueSubject<[UUID: BBDevice], Never>([:])
 
     // MARK: - Scanning
     
@@ -61,13 +61,13 @@ public class BleManager: NSObject {
     
     // MARK: - Operation queue
     
-    var operationCurrent: (any BleOperation)?
-    var operationQueue: [any BleOperation] = []
+    var operationCurrent: (any BBOperation)?
+    var operationQueue: [any BBOperation] = []
     var operationLock = NSLock()
 }
 
-extension BleManager: BleOperationQueue {
-    func enqueueOperation<RESULT, OP: BleOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT {
+extension BBManager: BBOperationQueue {
+    func enqueueOperation<RESULT, OP: BBOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT {
         return try await withCheckedThrowingContinuation { continuation in
             operation.continuation = continuation
             
@@ -98,10 +98,10 @@ extension BleManager: BleOperationQueue {
     }
 }
 
-extension BleManager: CBCentralManagerDelegate {
+extension BBManager: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
-        state.value = central.state.bleState
+        state.value = central.state.bbState
 
         if isScanning.value && central.state == .poweredOn {
             centralManager.scanForPeripherals(withServices: nil)
@@ -116,7 +116,7 @@ extension BleManager: CBCentralManagerDelegate {
                 
         var devices = self.devices.value
         
-        let device = devices[peripheral.identifier] ?? BleDevice(operationQueue: self, peripheral: peripheral)
+        let device = devices[peripheral.identifier] ?? BBDevice(operationQueue: self, peripheral: peripheral)
         device.advertisementData = advertisementData
         device.rssi = RSSI.intValue
         
@@ -156,7 +156,7 @@ extension BleManager: CBCentralManagerDelegate {
     }
 }
 
-extension BleManager: CBPeripheralDelegate {
+extension BBManager: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didDiscoverServices: error)
 

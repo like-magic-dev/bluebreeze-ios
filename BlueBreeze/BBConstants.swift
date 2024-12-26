@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-public class BleConstants {
+public class BBConstants {
     // https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/uuids/service_uuids.yaml
     public static let knownServices: [BBUUID: String] = [
         BBUUID(string: "1800"): "GAP",
@@ -2403,7 +2403,7 @@ public class BleConstants {
         1643: "DewertOkin GmbH",
         1642: "Brady Worldwide Inc.",
         1641: "Livanova USA, Inc.",
-        1640: "Bleb Technology srl",
+        1640: "BBb Technology srl",
         1639: "Spark Technology Labs Inc.",
         1638: "WTO Werkzeug-Einrichtungen GmbH",
         1637: "Pure International Limited",

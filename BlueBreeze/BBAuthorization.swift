@@ -1,13 +1,13 @@
 import CoreBluetooth
 
-public enum BleAuthorization {
+public enum BBAuthorization {
     case unknown
     case denied
     case authorized
 }
 
 extension CBManagerAuthorization {
-    var bleAuthorization: BleAuthorization {
+    var bleAuthorization: BBAuthorization {
         switch self {
         case .notDetermined: return .unknown
         case .restricted: return .denied

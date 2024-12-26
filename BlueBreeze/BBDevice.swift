@@ -1,18 +1,13 @@
 import CoreBluetooth
 import Combine
 
-public enum BleDeviceConnectionStatus {
-    case disconnected
-    case connected
-}
-
-public class BleDevice: NSObject {
-    init(operationQueue: BleOperationQueue, peripheral: CBPeripheral) {
+public class BBDevice: NSObject {
+    init(operationQueue: BBOperationQueue, peripheral: CBPeripheral) {
         self.operationQueue = operationQueue
         self.peripheral = peripheral
     }
     
-    let operationQueue: BleOperationQueue
+    let operationQueue: BBOperationQueue
     let peripheral: CBPeripheral
     
     public var id: UUID {
@@ -52,7 +47,7 @@ public class BleDevice: NSObject {
     public var manufacturer: String? {
         get {
             if let manufacturerId {
-                return BleConstants.manufacturers[manufacturerId]
+                return BBConstants.manufacturers[manufacturerId]
             }
             
             return nil
@@ -65,11 +60,11 @@ public class BleDevice: NSObject {
         }
     }
     
-    public let services = CurrentValueSubject<[BBUUID: [BleCharacteristic]], Never>([:])
+    public let services = CurrentValueSubject<[BBUUID: [BBCharacteristic]], Never>([:])
     
     // MARK: - Connection status
     
-    public let connectionStatus = CurrentValueSubject<BleDeviceConnectionStatus, Never>(.disconnected)
+    public let connectionStatus = CurrentValueSubject<BBDeviceConnectionStatus, Never>(.disconnected)
     
     // MARK: - MTU
     
@@ -79,7 +74,7 @@ public class BleDevice: NSObject {
     
     public func connect() async {
         do {
-            try await operationQueue.enqueueOperation(BleOperationConnect(peripheral: peripheral))
+            try await operationQueue.enqueueOperation(BBOperationConnect(peripheral: peripheral))
             self.connectionStatus.value = .connected
         } catch {
             self.connectionStatus.value = .disconnected
@@ -87,22 +82,22 @@ public class BleDevice: NSObject {
     }
     
     public func disconnect() async {
-        try? await operationQueue.enqueueOperation(BleOperationDisconnect(peripheral: peripheral))
+        try? await operationQueue.enqueueOperation(BBOperationDisconnect(peripheral: peripheral))
         self.connectionStatus.value = .disconnected
     }
     
     public func discoverServices() async {
-        try? await operationQueue.enqueueOperation(BleOperationDiscoverServices(peripheral: peripheral))
+        try? await operationQueue.enqueueOperation(BBOperationDiscoverServices(peripheral: peripheral))
     }
     
     public func requestMTU(_ mtu: Int) async {
-        if let mtu = try? await operationQueue.enqueueOperation(BleOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
+        if let mtu = try? await operationQueue.enqueueOperation(BBOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
             self.mtu.value = mtu
         }
     }
 }
 
-extension BleDevice: CBCentralManagerDelegate {
+extension BBDevice: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) { }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -125,7 +120,7 @@ extension BleDevice: CBCentralManagerDelegate {
     }
 }
 
-extension BleDevice: CBPeripheralDelegate {
+extension BBDevice: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         peripheral.services?.forEach({ service in
             if self.services.value[service.uuid] == nil {
@@ -142,7 +137,7 @@ extension BleDevice: CBPeripheralDelegate {
         service.characteristics?.forEach({ characteristic in
             if !characteristics.contains(where: { $0.id == characteristic.uuid }) {
                 characteristics.append(
-                    BleCharacteristic(
+                    BBCharacteristic(
                         peripheral: peripheral,
                         characteristic: characteristic,
                         operationQueue: self.operationQueue
@@ -167,10 +162,10 @@ extension BleDevice: CBPeripheralDelegate {
     }
 }
 
-extension BleDevice: Identifiable { }
+extension BBDevice: Identifiable { }
 
-extension BleDevice {
-    func getCharacteristicWithUUID(_ uuid: CBUUID) -> BleCharacteristic? {
+extension BBDevice {
+    func getCharacteristicWithUUID(_ uuid: CBUUID) -> BBCharacteristic? {
         for characteristics in services.value.values {
             for characteristic in characteristics {
                 if characteristic.id == uuid {

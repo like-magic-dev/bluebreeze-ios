@@ -39,11 +39,11 @@ class HomeViewModel: ObservableObject {
     
     // BLE manager
 
-    let bleManager = BleManager()
+    let bleManager = BBManager()
 
     // Authorization
     
-    @Published var authorizationStatus: BleAuthorization = .unknown
+    @Published var authorizationStatus: BBAuthorization = .unknown
     
     func authorize() {
         bleManager.authorizationRequest()
@@ -51,7 +51,7 @@ class HomeViewModel: ObservableObject {
     
     // Online
     
-    @Published var state: BleState = .unknown
+    @Published var state: BBState = .unknown
 
     // Scanning
     
@@ -67,5 +67,5 @@ class HomeViewModel: ObservableObject {
     
     // Devices
     
-    @Published var devices: [BleDevice] = []
+    @Published var devices: [BBDevice] = []
 }

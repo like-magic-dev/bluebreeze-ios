@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-class BleOperationNotifications: BleOperationImpl<Void> {
+class BBOperationNotifications: BBOperationImpl<Void> {
     let characteristic: CBCharacteristic
     let enabled: Bool
     
@@ -8,7 +8,7 @@ class BleOperationNotifications: BleOperationImpl<Void> {
         peripheral: CBPeripheral,
         characteristic: CBCharacteristic,
         enabled: Bool,
-        continuation: BleContinuation<Void>? = nil
+        continuation: BBContinuation<Void>? = nil
     ) {
         self.characteristic = characteristic
         self.enabled = enabled
