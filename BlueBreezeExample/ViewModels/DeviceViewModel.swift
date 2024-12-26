@@ -64,5 +64,5 @@ class DeviceViewModel: ObservableObject {
     
     // Characteristics
     
-    @Published var services: [UUID: [BleCharacteristic]] = [:]
+    @Published var services: [BBUUID: [BleCharacteristic]] = [:]
 }

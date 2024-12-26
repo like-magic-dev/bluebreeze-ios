@@ -59,14 +59,13 @@ public class BleDevice: NSObject {
         }
     }
     
-    public var advertisedServices: [UUID] {
+    public var advertisedServices: [BBUUID] {
         get {
-            let uuids = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
-            return uuids.map { $0.uuid }
+            return advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
         }
     }
     
-    public let services = CurrentValueSubject<[UUID: [BleCharacteristic]], Never>([:])
+    public let services = CurrentValueSubject<[BBUUID: [BleCharacteristic]], Never>([:])
     
     // MARK: - Connection status
     
@@ -129,16 +128,16 @@ extension BleDevice: CBCentralManagerDelegate {
 extension BleDevice: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         peripheral.services?.forEach({ service in
-            if self.services.value[service.uuid.uuid] == nil {
+            if self.services.value[service.uuid] == nil {
                 var services = self.services.value
-                services[service.uuid.uuid] = []
+                services[service.uuid] = []
                 self.services.value = services
             }
         })
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
-        var characteristics = self.services.value[service.uuid.uuid] ?? []
+        var characteristics = self.services.value[service.uuid] ?? []
         
         service.characteristics?.forEach({ characteristic in
             if !characteristics.contains(where: { $0.id == characteristic.uuid }) {
@@ -153,7 +152,7 @@ extension BleDevice: CBPeripheralDelegate {
         })
 
         var services = self.services.value
-        services[service.uuid.uuid] = characteristics
+        services[service.uuid] = characteristics
         self.services.value = services
     }
     

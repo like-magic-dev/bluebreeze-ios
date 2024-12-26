@@ -20,9 +20,9 @@ public class BleCharacteristic: NSObject, Identifiable {
     
     // MARK: - Computed properties
     
-    public var id: UUID {
+    public var id: BBUUID {
         get {
-            return characteristic.uuid.uuid
+            return characteristic.uuid
         }
     }
     
