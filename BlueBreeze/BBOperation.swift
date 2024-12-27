@@ -24,6 +24,10 @@ protocol BBOperation: CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: - Cancel the operation
     
     func cancel()
+    
+    // MARK: - Time out
+    
+    var timeOut: TimeInterval { get }
 }
 
 /// Operation protocol extension that manages completion callbacks

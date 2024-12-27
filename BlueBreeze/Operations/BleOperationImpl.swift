@@ -29,6 +29,12 @@ class BBOperationImpl<T>: NSObject, BBOperation {
     func cancel() {
         completeError(BBError(message: "Operation cancelled"))
     }
+    
+    // MARK: - Default time out
+    
+    var timeOut: TimeInterval {
+        return 5
+    }
 
     // MARK: Central manager and peripheral callbacks
     
