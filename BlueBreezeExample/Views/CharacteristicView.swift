@@ -27,7 +27,8 @@ class CharacteristicViewModel: ObservableObject {
     
     // Properties
     
-    var id: BBUUID { characteristic.id }
+    var id: String {
+        BBConstants.knownCharacteristics[characteristic.id]?.uppercased() ?? characteristic.id.uuidString }
     
     var canRead: Bool { characteristic.canRead }
     
@@ -70,7 +71,7 @@ struct CharacteristicView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(viewModel.id.uuidString).font(.caption)
+                Text(viewModel.id).font(.caption)
                 Text(viewModel.data.hexString)
             }
             Spacer()

@@ -79,7 +79,9 @@ struct DeviceView: View {
             ForEach(viewModel.services.sorted(by: {
                 $0.key.uuidString < $1.key.uuidString
             }), id: \.key) { key, value in
-                Section(header: Text(key.uuidString)) {
+                Section(
+                    header: Text(BBConstants.knownServices[key]?.uppercased() ?? key.uuidString)
+                ) {
                     ForEach(value) {
                         CharacteristicView(characteristic: $0)
                     }
