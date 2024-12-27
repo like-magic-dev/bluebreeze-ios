@@ -81,7 +81,7 @@ struct DeviceView: View {
             }), id: \.key) { key, value in
                 Section(header: Text(key.uuidString)) {
                     ForEach(value) {
-                        Text($0.id.uuidString)
+                        CharacteristicView(characteristic: $0)
                     }
                 }
             }

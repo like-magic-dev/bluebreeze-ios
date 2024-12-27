@@ -14,6 +14,7 @@
 		D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */; };
 		D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A62D1D650F00C58977 /* BBUUID.swift */; };
 		D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */; };
+		D22CD8BF2D1E9B3B00C58977 /* CharacteristicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */; };
 		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
 		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
 		D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C62D11D6200055B1A9 /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 		D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		D22CD8A62D1D650F00C58977 /* BBUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBUUID.swift; sourceTree = "<group>"; };
 		D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDeviceConnectionStatus.swift; sourceTree = "<group>"; };
+		D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
 		D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationConnect.swift; sourceTree = "<group>"; };
 		D255ACCE2C7F5921006586B6 /* BleOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationDiscoverServices.swift; sourceTree = "<group>"; };
 		D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationRequestMTU.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		D22CD89C2D1A99E200C58977 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */,
 				D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */,
 				D22CD8942D19AA1900C58977 /* HomeView.swift */,
 				D22CD8962D19AA4600C58977 /* ScanningView.swift */,
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */,
+				D22CD8BF2D1E9B3B00C58977 /* CharacteristicView.swift in Sources */,
 				D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */,
 				D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */,
 				D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */,
