@@ -44,20 +44,20 @@ class CharacteristicViewModel: ObservableObject {
     
     // Operations
     
-    func read() {
-        characteristic.read()
+    func read() async {
+        try? await characteristic.read()
     }
     
-    func write(data: Data) {
-        characteristic.write(data)
+    func write(data: Data) async {
+        try? await characteristic.write(data)
     }
     
-    func subscribe() {
-        characteristic.subscribe()
+    func subscribe() async {
+        try? await characteristic.subscribe()
     }
     
-    func unsubscribe() {
-        characteristic.unsubscribe()
+    func unsubscribe() async {
+        try? await characteristic.unsubscribe()
     }
 }
 
@@ -85,14 +85,18 @@ struct CharacteristicView: View {
             Spacer()
             if viewModel.canRead {
                 Button("Read") {
-                    viewModel.read()
+                    Task {
+                        await viewModel.read()
+                    }
                 }
                 .buttonStyle(.borderedProminent)
             }
             if viewModel.canWrite {
                 Button("Write") {
                     if let hexData = viewModel.data.hexData {
-                        viewModel.write(data: hexData)
+                        Task {
+                            await viewModel.write(data: hexData)
+                        }
                     }
                 }
                 .buttonStyle(.borderedProminent)
@@ -100,12 +104,16 @@ struct CharacteristicView: View {
             if viewModel.canNotify {
                 if viewModel.isNotifying {
                     Button("Unsubscribe") {
-                        viewModel.unsubscribe()
+                        Task {
+                            await viewModel.unsubscribe()
+                        }
                     }
                     .buttonStyle(.bordered)
                 } else {
                     Button("Subscribe") {
-                        viewModel.subscribe()
+                        Task {
+                            await viewModel.subscribe()
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                 }

@@ -52,32 +52,24 @@ public class BBCharacteristic: NSObject, Identifiable {
     
     // MARK: - Operations
     
-    public func read() {
-        Task {
-            let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
-            _ = try? await operationQueue?.enqueueOperation(operation)
-        }
+    public func read() async throws {
+        let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
+        _ = try await operationQueue?.enqueueOperation(operation)
     }
     
-    public func write(_ data: Data, withResponse: Bool = true) {
-        Task {
-            let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
-            _ = try? await operationQueue?.enqueueOperation(operation)
-        }
+    public func write(_ data: Data, withResponse: Bool = true) async throws {
+        let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
+        _ = try? await operationQueue?.enqueueOperation(operation)
     }
     
-    public func subscribe() {
-        Task {
-            let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
-            _ = try? await operationQueue?.enqueueOperation(operation)
-        }
+    public func subscribe() async throws {
+        let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
+        _ = try? await operationQueue?.enqueueOperation(operation)
     }
     
-    public func unsubscribe() {
-        Task {
-            let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
-            _ = try? await operationQueue?.enqueueOperation(operation)
-        }
+    public func unsubscribe() async throws {
+        let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
+        _ = try? await operationQueue?.enqueueOperation(operation)
     }
 }
 

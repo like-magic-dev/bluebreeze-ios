@@ -41,9 +41,13 @@ class DeviceViewModel: ObservableObject {
             self.executingConnection = true
         }
         
-        await device.connect()
-        await device.discoverServices()
-        await device.requestMTU(512)
+        do {
+            try await device.connect()
+            try await device.discoverServices()
+            try await device.requestMTU(512)
+        } catch {
+            // Ignore error
+        }
         
         DispatchQueue.main.async {
             self.executingConnection = false
@@ -55,7 +59,11 @@ class DeviceViewModel: ObservableObject {
             self.executingConnection = true
         }
         
-        await device.disconnect()
+        do {
+            try await device.disconnect()
+        } catch {
+            // Ignore error
+        }
         
         DispatchQueue.main.async {
             self.executingConnection = false
