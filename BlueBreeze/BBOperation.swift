@@ -2,11 +2,11 @@ import CoreBluetooth
 
 /// Async continuation object that returns a result or an error
 
-typealias BleContinuation<RESULT> = CheckedContinuation<RESULT, Error>
+typealias BBContinuation<RESULT> = CheckedContinuation<RESULT, Error>
 
 /// Operation protocol
 
-protocol BleOperation: CBCentralManagerDelegate, CBPeripheralDelegate {
+protocol BBOperation: CBCentralManagerDelegate, CBPeripheralDelegate {
     associatedtype RESULT
 
     // MARK: - Peripheral associated with this operation
@@ -15,7 +15,7 @@ protocol BleOperation: CBCentralManagerDelegate, CBPeripheralDelegate {
     
     // MARK: - Object that handles the async result
     
-    var continuation: BleContinuation<RESULT>? { get set }
+    var continuation: BBContinuation<RESULT>? { get set }
     
     // MARK: - Execute the operation
     
@@ -24,11 +24,15 @@ protocol BleOperation: CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: - Cancel the operation
     
     func cancel()
+    
+    // MARK: - Time out
+    
+    var timeOut: TimeInterval { get }
 }
 
 /// Operation protocol extension that manages completion callbacks
 
-extension BleOperation {
+extension BBOperation {
     // MARK: - Complete the operation successfully with a result
     
     internal func completeSuccess(_ result: RESULT) {
@@ -39,7 +43,7 @@ extension BleOperation {
     // MARK: - Complete the operation with an error
     
     internal func completeError(_ error: Error?) {
-        continuation?.resume(throwing: error ?? BleError(message: "Unknown error"))
+        continuation?.resume(throwing: error ?? BBError.unknown)
         continuation = nil
     }
     

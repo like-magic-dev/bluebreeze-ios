@@ -1,12 +1,12 @@
 import CoreBluetooth
 
-class BleOperationRequestMTU: BleOperationImpl<Int> {
+class BBOperationRequestMTU: BBOperationImpl<Int> {
     let targetMtu: Int
 
     init(
         peripheral: CBPeripheral,
         targetMtu: Int,
-        continuation: BleContinuation<Int>? = nil
+        continuation: BBContinuation<Int>? = nil
     ) {
         self.targetMtu = targetMtu
         super.init(peripheral: peripheral, continuation: continuation)

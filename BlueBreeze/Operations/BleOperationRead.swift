@@ -1,12 +1,12 @@
 import CoreBluetooth
 
-class BleOperationRead: BleOperationImpl<Data?> {
+class BBOperationRead: BBOperationImpl<Data?> {
     let characteristic: CBCharacteristic
 
     init(
         peripheral: CBPeripheral,
         characteristic: CBCharacteristic,
-        continuation: BleContinuation<Data?>? = nil
+        continuation: BBContinuation<Data?>? = nil
     ) {
         self.characteristic = characteristic
         super.init(peripheral: peripheral, continuation: continuation)
