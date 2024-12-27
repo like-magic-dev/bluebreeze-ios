@@ -2,7 +2,7 @@ import Foundation
 import CoreBluetooth
 import Combine
 
-public class BBManager: NSObject {
+public class BBManager: NSObject, BBOperationQueue {
     public override init() {
         super.init()
         
@@ -15,10 +15,9 @@ public class BBManager: NSObject {
     
     // MARK: - Central manager instance, initialized on first access
     
-    lazy var centralManager = CBCentralManager(
-        delegate: self,
-        queue: DispatchQueue(label: "BBOperationQueue", qos: .userInteractive)
-    )
+    let centralManagerQueue = DispatchQueue(label: "BBOperationQueue", qos: .userInteractive)
+    
+    lazy var centralManager = CBCentralManager(delegate: self, queue: centralManagerQueue)
     
     // MARK: - Permissions
 
@@ -64,9 +63,7 @@ public class BBManager: NSObject {
     var operationCurrent: (any BBOperation)?
     var operationQueue: [any BBOperation] = []
     var operationLock = NSLock()
-}
 
-extension BBManager: BBOperationQueue {
     func enqueueOperation<RESULT, OP: BBOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT {
         return try await withCheckedThrowingContinuation { continuation in
             operation.continuation = continuation
@@ -93,6 +90,13 @@ extension BBManager: BBOperationQueue {
         
         if let operationCurrent = operationCurrent {
             operationCurrent.execute(self.centralManager)
+            
+            centralManagerQueue.asyncAfter(deadline: .now() + operationCurrent.timeOut) {
+                if !operationCurrent.isCompleted {
+                    operationCurrent.cancel()
+                }
+            }
+            
             self.checkOperation()
         }
     }
