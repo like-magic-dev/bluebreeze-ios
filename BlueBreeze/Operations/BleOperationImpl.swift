@@ -4,19 +4,19 @@ import CoreBluetooth
 /// in all other specialised operations, in particular some compulsory CoreBluetooth callbacks
 /// and the initialisation of peripheral and continuation
 
-class BleOperationImpl<T>: NSObject, BleOperation {
+class BBOperationImpl<T>: NSObject, BBOperation {
     typealias RESULT = T
         
     init(
         peripheral: CBPeripheral,
-        continuation: BleContinuation<T>? = nil
+        continuation: BBContinuation<T>? = nil
     ) {
         self.peripheral = peripheral
         self.continuation = continuation
     }
 
     let peripheral: CBPeripheral
-    var continuation: BleContinuation<T>?
+    var continuation: BBContinuation<T>?
     
     // MARK: - Execute the operation
 
@@ -27,7 +27,7 @@ class BleOperationImpl<T>: NSObject, BleOperation {
     // MARK: - Cancel the operation
     
     func cancel() {
-        completeError(BleError(message: "Operation cancelled"))
+        completeError(BBError(message: "Operation cancelled"))
     }
 
     // MARK: Central manager and peripheral callbacks

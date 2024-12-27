@@ -1,8 +1,8 @@
 import CoreBluetooth
 import Combine
 
-public class BleCharacteristic: NSObject, Identifiable {
-    init(peripheral: CBPeripheral, characteristic: CBCharacteristic, operationQueue: BleOperationQueue?) {
+public class BBCharacteristic: NSObject, Identifiable {
+    init(peripheral: CBPeripheral, characteristic: CBCharacteristic, operationQueue: BBOperationQueue?) {
         self.peripheral = peripheral
         self.characteristic = characteristic
         self.operationQueue = operationQueue
@@ -11,7 +11,7 @@ public class BleCharacteristic: NSObject, Identifiable {
     let peripheral: CBPeripheral
     let characteristic: CBCharacteristic
     
-    weak var operationQueue: BleOperationQueue?
+    weak var operationQueue: BBOperationQueue?
     
     // MARK: - Observable properties
     
@@ -20,7 +20,7 @@ public class BleCharacteristic: NSObject, Identifiable {
     
     // MARK: - Computed properties
     
-    public var id: CBUUID {
+    public var id: BBUUID {
         get {
             return characteristic.uuid
         }
@@ -54,28 +54,28 @@ public class BleCharacteristic: NSObject, Identifiable {
     
     public func read() {
         Task {
-            let operation = BleOperationRead(peripheral: peripheral, characteristic: characteristic)
+            let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
             _ = try? await operationQueue?.enqueueOperation(operation)
         }
     }
     
     public func write(_ data: Data, withResponse: Bool = true) {
         Task {
-            let operation = BleOperationRead(peripheral: peripheral, characteristic: characteristic)
+            let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
             _ = try? await operationQueue?.enqueueOperation(operation)
         }
     }
     
     public func subscribe() {
         Task {
-            let operation = BleOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
+            let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
             _ = try? await operationQueue?.enqueueOperation(operation)
         }
     }
     
     public func unsubscribe() {
         Task {
-            let operation = BleOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
+            let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
             _ = try? await operationQueue?.enqueueOperation(operation)
         }
     }
@@ -83,7 +83,7 @@ public class BleCharacteristic: NSObject, Identifiable {
 
 // MARK: - Core Bluetooth protocols
 
-extension BleCharacteristic: CBPeripheralDelegate {
+extension BBCharacteristic: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
@@ -91,7 +91,7 @@ extension BleCharacteristic: CBPeripheralDelegate {
         }
         
         if let value = characteristic.value {
-            self.data.send(value)
+            self.data.value = value
         }
     }
     
@@ -101,6 +101,6 @@ extension BleCharacteristic: CBPeripheralDelegate {
             return
         }
         
-        self.isNotifying.send(characteristic.isNotifying)
+        self.isNotifying.value = characteristic.isNotifying
     }
 }

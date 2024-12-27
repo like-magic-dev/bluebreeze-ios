@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-class BleOperationWrite: BleOperationImpl<Void> {
+class BBOperationWrite: BBOperationImpl<Void> {
     let characteristic: CBCharacteristic
     let data: Data
     let withResponse: Bool
@@ -10,7 +10,7 @@ class BleOperationWrite: BleOperationImpl<Void> {
         characteristic: CBCharacteristic,
         data: Data,
         withResponse: Bool,
-        continuation: BleContinuation<Void>? = nil
+        continuation: BBContinuation<Void>? = nil
     ) {
         self.characteristic = characteristic
         self.data = data

@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-class BleOperationDiscoverServices: BleOperationImpl<Void> {
+class BBOperationDiscoverServices: BBOperationImpl<Void> {
     override func execute(_ centralManager: CBCentralManager) {
         peripheral.discoverServices(nil)
     }
