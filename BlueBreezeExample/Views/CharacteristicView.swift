@@ -8,7 +8,7 @@ class CharacteristicViewModel: ObservableObject {
         
         characteristic.data
             .receive(on: DispatchQueue.main)
-            .sink { self.data = $0 }
+            .sink { self.data = $0.hexString }
             .store(in: &dispatchBag)
         
         characteristic.isNotifying
@@ -40,7 +40,7 @@ class CharacteristicViewModel: ObservableObject {
 
     // Data
     
-    @Published var data: Data = Data()
+    @Published var data: String = ""
     
     // Operations
     
@@ -63,6 +63,7 @@ class CharacteristicViewModel: ObservableObject {
 
 struct CharacteristicView: View {
     @StateObject var viewModel: CharacteristicViewModel
+    @State var validData: Bool = true
 
     init(characteristic: BBCharacteristic) {
         _viewModel = StateObject(wrappedValue: CharacteristicViewModel(characteristic: characteristic))
@@ -72,7 +73,14 @@ struct CharacteristicView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(viewModel.id).font(.caption)
-                Text(viewModel.data.hexString)
+                HStack {
+                    TextField("No value", text: $viewModel.data)
+                        .onReceive(Just(viewModel.data), perform: { value in
+                            validData = (value.hexData != nil)
+                        })
+                        .foregroundColor(validData ? Color(uiColor: .darkText) : .red)
+                        .disabled(!viewModel.canWrite)
+                }
             }
             Spacer()
             if viewModel.canRead {
@@ -83,7 +91,9 @@ struct CharacteristicView: View {
             }
             if viewModel.canWrite {
                 Button("Write") {
-                    
+                    if let hexData = viewModel.data.hexData {
+                        viewModel.write(data: hexData)
+                    }
                 }
                 .buttonStyle(.borderedProminent)
             }
@@ -110,4 +120,30 @@ extension Data {
 
 extension UInt8 {
     var hexString: String { String(format: "%02X", self) }
+}
+
+extension String {
+    var hexData: Data? {
+        guard self.count % 2 == 0 else {
+            return nil
+        }
+        
+        var data = Data()
+        
+        var index = self.startIndex
+        while index < self.endIndex {
+            let nextIndex = self.index(index, offsetBy: 2)
+            let hexSubstring = self[index..<nextIndex]
+            
+            if let byte = UInt8(hexSubstring, radix: 16) {
+                data.append(byte)
+            } else {
+                return nil
+            }
+            
+            index = nextIndex
+        }
+        
+        return data
+    }
 }
