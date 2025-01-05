@@ -30,11 +30,11 @@ class CharacteristicViewModel: ObservableObject {
     var id: String {
         BBConstants.knownCharacteristics[characteristic.id]?.uppercased() ?? characteristic.id.uuidString }
     
-    var canRead: Bool { characteristic.canRead }
+    var canRead: Bool { characteristic.properties.contains(.read) }
     
-    var canWrite: Bool { characteristic.canWrite || characteristic.canWriteWithoutResponse }
+    var canWrite: Bool { characteristic.properties.contains(.writeWithResponse) || characteristic.properties.contains(.writeWithoutResponse) }
 
-    var canNotify: Bool { characteristic.canNotify }
+    var canNotify: Bool { characteristic.properties.contains(.notify) }
     
     @Published var isNotifying: Bool = false
 
