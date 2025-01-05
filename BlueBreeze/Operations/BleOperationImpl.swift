@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 import CoreBluetooth
 
 /// This class implements the basic functionalities of an operation, it is useful to avoid code duplication
