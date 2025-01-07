@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name          = 'BlueBreeze'
-  spec.version       = '0.0.2'
+  spec.version       = '0.0.3'
   spec.license       = { :type => 'MIT' }
   spec.homepage      = 'https://github.com/like-magic-dev/bluebreeze-ios'
   spec.authors       = { 'Alessandro Mulloni' => 'ale@likemagic.dev' }
   spec.summary       = 'BlueBreeze iOS SDK - A modern Bluetooth LE library'
-  spec.source        = { :git => 'https://github.com/like-magic-dev/bluebreeze-ios.git', :tag => '0.0.2' }
+  spec.source        = { :git => 'https://github.com/like-magic-dev/bluebreeze-ios.git', :tag => '0.0.3' }
   spec.module_name   = 'BlueBreeze'
   spec.swift_version = '5.0'
 
