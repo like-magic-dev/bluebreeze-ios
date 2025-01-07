@@ -32,7 +32,7 @@ class DeviceViewModel: ObservableObject {
     
     // Properties
     
-    var name: String {
+    var name: String? {
         device.name
     }
     
@@ -102,7 +102,7 @@ struct DeviceView: View {
             }
         }
         .listStyle(.grouped)
-        .navigationTitle(viewModel.name)
+        .navigationTitle(viewModel.name ?? "Unknown device")
         .toolbar {
             if viewModel.executingConnection {
                 ProgressView()

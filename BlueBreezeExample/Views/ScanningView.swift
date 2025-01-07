@@ -58,7 +58,10 @@ struct ScanningView: View {
                 DeviceView(device: device)
             } label: {
                 HStack {
-                    Text(device.name)
+                    VStack(alignment: .leading) {
+                        Text(device.name ?? "-")
+                        Text(device.manufacturerName ?? "-").font(.caption)
+                    }
                     Spacer()
                     Text("\(device.rssi)")
                 }
