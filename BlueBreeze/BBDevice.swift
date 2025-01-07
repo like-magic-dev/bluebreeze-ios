@@ -40,19 +40,23 @@ public class BBDevice: NSObject, BBOperationQueue {
         }
     }
     
-    public var advertisement: Data {
+    public var manufacturerData: Data? {
         get {
-            return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data ?? Data()
+            return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
         }
     }
-    
+        
     public var manufacturerId: Int? {
         get {
-            return (advertisement.count > 2) ? (Int(advertisement[1]) << 8) | Int(advertisement[0]) : nil
+            guard let manufacturerData, manufacturerData.count > 2 else {
+                return nil
+            }
+
+            return (Int(manufacturerData[1]) << 8) | Int(manufacturerData[0])
         }
     }
     
-    public var manufacturer: String? {
+    public var manufacturerName: String? {
         get {
             if let manufacturerId {
                 return BBConstants.manufacturers[manufacturerId]
