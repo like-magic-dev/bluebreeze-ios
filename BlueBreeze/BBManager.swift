@@ -11,7 +11,11 @@ public class BBManager: NSObject {
     public override init() {
         super.init()
         
-        authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
+        if #available(iOS 13.1, *) {
+            authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
+        } else {
+            authorizationStatus.value = centralManager.authorization.bleAuthorization
+        }
         
         if authorizationStatus.value == .authorized {
             state.value = centralManager.state.bbState
@@ -45,12 +49,17 @@ public class BBManager: NSObject {
     
     public let isScanning = CurrentValueSubject<Bool, Never>(false)
     
-    public func scanningStart() {
+    public func scanningStart(serviceUuids: [BBUUID]? = nil) {
         guard !isScanning.value else {
             return
         }
 
-        centralManager.scanForPeripherals(withServices: nil)
+        centralManager.scanForPeripherals(
+            withServices: serviceUuids,
+            options: [
+                CBCentralManagerScanOptionAllowDuplicatesKey: true
+            ]
+        )
         isScanning.value = true
     }
     
@@ -66,7 +75,12 @@ public class BBManager: NSObject {
 
 extension BBManager: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
+        if #available(iOS 13.1, *) {
+            authorizationStatus.value = CBCentralManager.authorization.bleAuthorization
+        } else {
+            authorizationStatus.value = central.authorization.bleAuthorization
+        }
+        
         state.value = central.state.bbState
 
         if isScanning.value && central.state == .poweredOn {
