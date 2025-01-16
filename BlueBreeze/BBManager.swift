@@ -49,12 +49,17 @@ public class BBManager: NSObject {
     
     public let isScanning = CurrentValueSubject<Bool, Never>(false)
     
-    public func scanningStart() {
+    public func scanningStart(serviceUuids: [BBUUID]? = nil) {
         guard !isScanning.value else {
             return
         }
 
-        centralManager.scanForPeripherals(withServices: nil)
+        centralManager.scanForPeripherals(
+            withServices: serviceUuids,
+            options: [
+                CBCentralManagerScanOptionAllowDuplicatesKey: true
+            ]
+        )
         isScanning.value = true
     }
     
