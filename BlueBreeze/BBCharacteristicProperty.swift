@@ -3,6 +3,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for details.
 //
 
-import CoreBluetooth
-
-public typealias BBUUID = CBUUID
+public enum BBCharacteristicProperty {
+    case read
+    case writeWithResponse
+    case writeWithoutResponse
+    case notify
+}

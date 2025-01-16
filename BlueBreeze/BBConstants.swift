@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 import CoreBluetooth
 
 public class BBConstants {
@@ -529,7 +534,7 @@ public class BBConstants {
         BBUUID(string: "2C05"): "Percentage 8 Steps",
     ]
 
-    static let manufacturers: [Int: String] = [
+    public static let manufacturers: [Int: String] = [
         3515: "Nexis Link Technology Co., Ltd.",
         3514: "Veo Technologies ApS",
         3513: "CompanyDeep Ltd",

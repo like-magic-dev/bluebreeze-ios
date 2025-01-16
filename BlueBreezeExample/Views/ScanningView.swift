@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 import Combine
 import SwiftUI
 import BlueBreeze
@@ -53,7 +58,10 @@ struct ScanningView: View {
                 DeviceView(device: device)
             } label: {
                 HStack {
-                    Text(device.name)
+                    VStack(alignment: .leading) {
+                        Text(device.name ?? "-")
+                        Text(device.manufacturerName ?? "-").font(.caption)
+                    }
                     Spacer()
                     Text("\(device.rssi)")
                 }

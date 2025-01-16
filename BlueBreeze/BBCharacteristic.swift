@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 import CoreBluetooth
 import Combine
 
@@ -26,30 +31,25 @@ public class BBCharacteristic: NSObject, Identifiable {
         }
     }
     
-    public var canRead: Bool {
+    public var properties: Set<BBCharacteristicProperty> {
         get {
-            return characteristic.properties.contains(.read)
+            var result = Set<BBCharacteristicProperty>()
+            if characteristic.properties.contains(.read) {
+                result.insert(.read)
+            }
+            if characteristic.properties.contains(.write) {
+                result.insert(.writeWithResponse)
+            }
+            if characteristic.properties.contains(.writeWithoutResponse) {
+                result.insert(.writeWithoutResponse)
+            }
+            if characteristic.properties.contains(.notify) || characteristic.properties.contains(.indicate) {
+                result.insert(.notify)
+            }
+            return result
         }
     }
-    
-    public var canWrite: Bool {
-        get {
-            return characteristic.properties.contains(.write)
-        }
-    }
-    
-    public var canWriteWithoutResponse: Bool {
-        get {
-            return characteristic.properties.contains(.writeWithoutResponse)
-        }
-    }
-    
-    public var canNotify: Bool {
-        get {
-            return characteristic.properties.contains(.notify) || characteristic.properties.contains(.indicate)
-        }
-    }
-    
+
     // MARK: - Operations
     
     public func read() async throws {

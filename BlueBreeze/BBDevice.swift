@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 import CoreBluetooth
 import Combine
 
@@ -19,9 +24,9 @@ public class BBDevice: NSObject, BBOperationQueue {
         }
     }
     
-    public var name: String {
+    public var name: String? {
         get {
-            return peripheral.name ?? ""
+            return peripheral.name
         }
     }
     
@@ -35,19 +40,23 @@ public class BBDevice: NSObject, BBOperationQueue {
         }
     }
     
-    public var advertisement: Data {
+    public var manufacturerData: Data? {
         get {
-            return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data ?? Data()
+            return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
         }
     }
-    
+        
     public var manufacturerId: Int? {
         get {
-            return (advertisement.count > 2) ? (Int(advertisement[1]) << 8) | Int(advertisement[0]) : nil
+            guard let manufacturerData, manufacturerData.count > 2 else {
+                return nil
+            }
+
+            return (Int(manufacturerData[1]) << 8) | Int(manufacturerData[0])
         }
     }
     
-    public var manufacturer: String? {
+    public var manufacturerName: String? {
         get {
             if let manufacturerId {
                 return BBConstants.manufacturers[manufacturerId]

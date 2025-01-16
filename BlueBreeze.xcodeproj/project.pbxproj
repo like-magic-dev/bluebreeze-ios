@@ -35,6 +35,7 @@
 		D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BBCharacteristic.swift */; };
 		D26D3DE12D064036002CE78D /* BleOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BleOperationRequestMTU.swift */; };
 		D26D3DE22D064036002CE78D /* BleOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BleOperationConnect.swift */; };
+		D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBreezeExample.swift; sourceTree = "<group>"; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristicProperty.swift; sourceTree = "<group>"; };
 		D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationQueue.swift; sourceTree = "<group>"; };
 		D29F39C22D059D3500E7B2D8 /* BleOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleOperationImpl.swift; sourceTree = "<group>"; };
 		D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBManager.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				D2FEF1212C71F7FB00BDF3AE /* Operations */,
 				D22CD8922D19A4D700C58977 /* BBAuthorization.swift */,
+				D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */,
 				D255ACD62C83275C006586B6 /* BBCharacteristic.swift */,
 				D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */,
 				D2D9B3B32C17A575004C83B5 /* BBDevice.swift */,
@@ -338,6 +341,7 @@
 				D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */,
 				D26D3DD62D064036002CE78D /* BleOperationWrite.swift in Sources */,
 				D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */,
+				D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */,
 				D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */,
 				D26D3DD82D064036002CE78D /* BleOperationNotifications.swift in Sources */,
 				D26D3DD92D064036002CE78D /* BBConstants.swift in Sources */,

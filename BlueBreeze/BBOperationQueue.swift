@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 /// Protocol to enqueue an operation and transform it into an async-awaitable result
 
 protocol BBOperationQueue: AnyObject {

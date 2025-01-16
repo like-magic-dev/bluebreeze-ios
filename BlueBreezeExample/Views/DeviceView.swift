@@ -1,3 +1,8 @@
+//
+// Copyright (c) Like Magic e.U. and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for details.
+//
+
 import Combine
 import SwiftUI
 import BlueBreeze
@@ -27,7 +32,7 @@ class DeviceViewModel: ObservableObject {
     
     // Properties
     
-    var name: String {
+    var name: String? {
         device.name
     }
     
@@ -97,7 +102,7 @@ struct DeviceView: View {
             }
         }
         .listStyle(.grouped)
-        .navigationTitle(viewModel.name)
+        .navigationTitle(viewModel.name ?? "Unknown device")
         .toolbar {
             if viewModel.executingConnection {
                 ProgressView()
