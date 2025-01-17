@@ -86,7 +86,7 @@ public class BBDevice: NSObject, BBOperationQueue {
     
     public func connect() async throws {
         do {
-            try await enqueueOperation(BBOperationConnect(peripheral: peripheral))
+            try await operationEnqueue(BBOperationConnect(peripheral: peripheral))
             self.connectionStatus.value = .connected
         } catch let error {
             self.connectionStatus.value = .disconnected
@@ -95,16 +95,16 @@ public class BBDevice: NSObject, BBOperationQueue {
     }
     
     public func disconnect() async throws {
-        try await enqueueOperation(BBOperationDisconnect(peripheral: peripheral))
+        try await operationEnqueue(BBOperationDisconnect(peripheral: peripheral))
         self.connectionStatus.value = .disconnected
     }
     
     public func discoverServices() async throws {
-        try? await enqueueOperation(BBOperationDiscoverServices(peripheral: peripheral))
+        try? await operationEnqueue(BBOperationDiscoverServices(peripheral: peripheral))
     }
     
     public func requestMTU(_ mtu: Int) async throws {
-        if let mtu = try? await enqueueOperation(BBOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
+        if let mtu = try? await operationEnqueue(BBOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
             self.mtu.value = mtu
         }
     }
@@ -115,7 +115,7 @@ public class BBDevice: NSObject, BBOperationQueue {
     var operationQueue: [any BBOperation] = []
     var operationLock = NSLock()
 
-    func enqueueOperation<RESULT, OP: BBOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT {
+    func operationEnqueue<RESULT, OP: BBOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT {
         return try await withCheckedThrowingContinuation { continuation in
             operation.continuation = continuation
             
@@ -123,11 +123,11 @@ public class BBDevice: NSObject, BBOperationQueue {
             operationQueue.append(operation)
             operationLock.unlock()
             
-            checkOperation()
+            operationCheck()
         }
     }
     
-    private func checkOperation() {
+    private func operationCheck() {
         operationLock.lock()
         
         if let operationCurrent = operationCurrent, !operationCurrent.isCompleted {
@@ -148,7 +148,7 @@ public class BBDevice: NSObject, BBOperationQueue {
                 }
             }
             
-            self.checkOperation()
+            self.operationCheck()
         }
     }
 }
@@ -156,12 +156,12 @@ public class BBDevice: NSObject, BBOperationQueue {
 extension BBDevice: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         operationCurrent?.centralManagerDidUpdateState(central)
-        checkOperation()
+        operationCheck()
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         operationCurrent?.centralManager?(central, didConnect: peripheral)
-        checkOperation()
+        operationCheck()
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
@@ -169,7 +169,7 @@ extension BBDevice: CBCentralManagerDelegate {
         self.connectionStatus.value = .disconnected
         
         operationCurrent?.centralManager?(central, didFailToConnect: peripheral, error: error)
-        checkOperation()
+        operationCheck()
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
@@ -177,7 +177,7 @@ extension BBDevice: CBCentralManagerDelegate {
         self.connectionStatus.value = .disconnected
         
         operationCurrent?.centralManager?(central, didDisconnectPeripheral: peripheral, error: error)
-        checkOperation()
+        operationCheck()
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
@@ -185,7 +185,7 @@ extension BBDevice: CBCentralManagerDelegate {
         self.connectionStatus.value = .disconnected
         
         operationCurrent?.centralManager?(central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
-        checkOperation()
+        operationCheck()
     }
 }
 
@@ -200,7 +200,7 @@ extension BBDevice: CBPeripheralDelegate {
         })
         
         operationCurrent?.peripheral?(peripheral, didDiscoverServices: error)
-        checkOperation()
+        operationCheck()
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
@@ -223,26 +223,26 @@ extension BBDevice: CBPeripheralDelegate {
         self.services.value = services
         
         operationCurrent?.peripheral?(peripheral, didDiscoverCharacteristicsFor: service, error: error)
-        checkOperation()
+        operationCheck()
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
         
         operationCurrent?.peripheral?(peripheral, didUpdateValueFor: characteristic, error: error)
-        checkOperation()
+        operationCheck()
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
         operationCurrent?.peripheral?(peripheral, didUpdateValueFor: descriptor, error: error)
-        checkOperation()
+        operationCheck()
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
         
         operationCurrent?.peripheral?(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
-        checkOperation()
+        operationCheck()
     }
 }
 

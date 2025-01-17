@@ -7,5 +7,5 @@
 
 protocol BBOperationQueue: AnyObject {
     // MARK: - Enqueue an operation -- allows awaiting for the result asynchronously
-    func enqueueOperation<RESULT, OP: BBOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT
+    func operationEnqueue<RESULT, OP: BBOperation>(_ operation: OP) async throws -> RESULT where OP.RESULT == RESULT
 }

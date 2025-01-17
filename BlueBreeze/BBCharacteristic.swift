@@ -54,22 +54,22 @@ public class BBCharacteristic: NSObject, Identifiable {
     
     public func read() async throws {
         let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
-        _ = try await operationQueue?.enqueueOperation(operation)
+        _ = try await operationQueue?.operationEnqueue(operation)
     }
     
     public func write(_ data: Data, withResponse: Bool = true) async throws {
         let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
-        _ = try? await operationQueue?.enqueueOperation(operation)
+        _ = try? await operationQueue?.operationEnqueue(operation)
     }
     
     public func subscribe() async throws {
         let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
-        _ = try? await operationQueue?.enqueueOperation(operation)
+        _ = try? await operationQueue?.operationEnqueue(operation)
     }
     
     public func unsubscribe() async throws {
         let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
-        _ = try? await operationQueue?.enqueueOperation(operation)
+        _ = try? await operationQueue?.operationEnqueue(operation)
     }
 }
 
