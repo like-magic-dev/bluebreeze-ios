@@ -36,7 +36,7 @@ public class BBDevice: NSObject, BBOperationQueue {
     
     public var isConnectable: Bool {
         get {
-            return advertisementData[CBAdvertisementDataIsConnectable] as? Bool ?? false
+            return (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue ?? false
         }
     }
     
