@@ -11,14 +11,14 @@ class ScanningViewModel: ObservableObject {
     init(manager: BBManager) {
         self.manager = manager
         
-        manager.isScanning
+        manager.scanningEnabled
             .receive(on: DispatchQueue.main)
-            .sink { self.isScanning = $0 }
+            .sink { self.scanningEnabled = $0 }
             .store(in: &dispatchBag)
         
-        manager.devices
+        manager.scanningDevices
             .receive(on: DispatchQueue.main)
-            .sink { self.devices = $0.values.map { $0 } }
+            .sink { self.devices[$0.id] = $0 }
             .store(in: &dispatchBag)
     }
     
@@ -30,7 +30,7 @@ class ScanningViewModel: ObservableObject {
     
     // Scanning
     
-    @Published var isScanning: Bool = false
+    @Published var scanningEnabled: Bool = false
     
     func startScanning() {
         manager.scanningStart()
@@ -42,7 +42,7 @@ class ScanningViewModel: ObservableObject {
     
     // Devices
     
-    @Published var devices: [BBDevice] = []
+    @Published var devices: [UUID: BBDevice] = [:]
 }
 
 struct ScanningView: View {
@@ -53,7 +53,7 @@ struct ScanningView: View {
     }
     
     var body: some View {
-        List(viewModel.devices) { device in
+        List(viewModel.devices.sorted(by: { $0.key.uuidString > $1.key.uuidString }), id: \.key) { key, device in
             NavigationLink {
                 DeviceView(device: device)
             } label: {
@@ -61,6 +61,9 @@ struct ScanningView: View {
                     VStack(alignment: .leading) {
                         Text(device.name ?? "-")
                         Text(device.manufacturerName ?? "-").font(.caption)
+                        if !device.advertisedServices.isEmpty {
+                            Text(device.advertisedServices.map { $0.uuidString }.joined(separator: ", ")).font(.caption2)
+                        }
                     }
                     Spacer()
                     Text("\(device.rssi)")
@@ -69,7 +72,7 @@ struct ScanningView: View {
         }
         .navigationTitle("BLE Scanning")
         .toolbar {
-            if viewModel.isScanning {
+            if viewModel.scanningEnabled {
                 Button {
                     viewModel.stopScanning()
                 } label: {
