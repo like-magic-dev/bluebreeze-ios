@@ -49,7 +49,7 @@ public class BBManager: NSObject {
     
     public let scanningEnabled = CurrentValueSubject<Bool, Never>(false)
     
-    public let scanningDevices = PassthroughSubject<BBDevice, Never>()
+    public let scanningResults = PassthroughSubject<BBScanResult, Never>()
 
     public func scanningStart(serviceUuids: [BBUUID]? = nil) {
         guard !scanningEnabled.value else {
@@ -97,20 +97,19 @@ extension BBManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         peripheral.delegate = self
                 
-        var devices = self.devices.value
-        
-        let device = devices[peripheral.identifier] ?? BBDevice(
+        let device = devices.value[peripheral.identifier] ?? BBDevice(
             centralManager: centralManager,
             peripheral: peripheral
         )
         
-        device.advertisementData = advertisementData
-        device.rssi = RSSI.intValue
-        
-        self.scanningDevices.send(device)
+        if devices.value[peripheral.identifier] == nil {
+            var devices_ = self.devices.value
+            devices_[peripheral.identifier] = device
+            self.devices.value = devices_
+        }
 
-        devices[peripheral.identifier] = device        
-        self.devices.value = devices
+        let scanResult = BBScanResult(device: device, rssi: RSSI.intValue, advertisementData: advertisementData)
+        self.scanningResults.send(scanResult)
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

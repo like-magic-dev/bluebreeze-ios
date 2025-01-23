@@ -30,48 +30,6 @@ public class BBDevice: NSObject, BBOperationQueue {
         }
     }
     
-    public var rssi: Int = 0
-    
-    public var advertisementData: [String : Any] = [:]
-    
-    public var isConnectable: Bool {
-        get {
-            return (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue ?? false
-        }
-    }
-    
-    public var manufacturerData: Data? {
-        get {
-            return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
-        }
-    }
-        
-    public var manufacturerId: Int? {
-        get {
-            guard let manufacturerData, manufacturerData.count > 2 else {
-                return nil
-            }
-
-            return (Int(manufacturerData[1]) << 8) | Int(manufacturerData[0])
-        }
-    }
-    
-    public var manufacturerName: String? {
-        get {
-            if let manufacturerId {
-                return BBConstants.manufacturers[manufacturerId]
-            }
-            
-            return nil
-        }
-    }
-    
-    public var advertisedServices: [BBUUID] {
-        get {
-            return advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
-        }
-    }
-    
     public let services = CurrentValueSubject<[BBUUID: [BBCharacteristic]], Never>([:])
     
     // MARK: - Connection status

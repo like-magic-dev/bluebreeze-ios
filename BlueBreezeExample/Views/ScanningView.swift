@@ -16,9 +16,9 @@ class ScanningViewModel: ObservableObject {
             .sink { self.scanningEnabled = $0 }
             .store(in: &dispatchBag)
         
-        manager.scanningDevices
+        manager.scanningResults
             .receive(on: DispatchQueue.main)
-            .sink { self.devices[$0.id] = $0 }
+            .sink { self.scanResults[$0.id] = $0 }
             .store(in: &dispatchBag)
     }
     
@@ -32,6 +32,8 @@ class ScanningViewModel: ObservableObject {
     
     @Published var scanningEnabled: Bool = false
     
+    @Published var scanResults: [UUID: BBScanResult] = [:]
+
     func startScanning() {
         manager.scanningStart()
     }
@@ -39,10 +41,6 @@ class ScanningViewModel: ObservableObject {
     func stopScanning() {
         manager.scanningStop()
     }
-    
-    // Devices
-    
-    @Published var devices: [UUID: BBDevice] = [:]
 }
 
 struct ScanningView: View {
@@ -53,20 +51,20 @@ struct ScanningView: View {
     }
     
     var body: some View {
-        List(viewModel.devices.sorted(by: { $0.key.uuidString > $1.key.uuidString }), id: \.key) { key, device in
+        List(viewModel.scanResults.sorted(by: { $0.key.uuidString > $1.key.uuidString }), id: \.key) { key, scanResult in
             NavigationLink {
-                DeviceView(device: device)
+                DeviceView(device: scanResult.device)
             } label: {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(device.name ?? "-")
-                        Text(device.manufacturerName ?? "-").font(.caption)
-                        if !device.advertisedServices.isEmpty {
-                            Text(device.advertisedServices.map { $0.uuidString }.joined(separator: ", ")).font(.caption2)
+                        Text(scanResult.name ?? "-")
+                        Text(scanResult.manufacturerName ?? "-").font(.caption)
+                        if !scanResult.advertisedServices.isEmpty {
+                            Text(scanResult.advertisedServices.map { $0.uuidString }.joined(separator: ", ")).font(.caption2)
                         }
                     }
                     Spacer()
-                    Text("\(device.rssi)")
+                    Text("\(scanResult.rssi)")
                 }
             }
         }
