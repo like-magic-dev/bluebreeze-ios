@@ -87,6 +87,7 @@
 		D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationQueue.swift; sourceTree = "<group>"; };
 		D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationImpl.swift; sourceTree = "<group>"; };
 		D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBScanResult.swift; sourceTree = "<group>"; };
+		D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlueBreeze.podspec; sourceTree = "<group>"; };
 		D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBManager.swift; sourceTree = "<group>"; };
 		D2D9B3B32C17A575004C83B5 /* BBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDevice.swift; sourceTree = "<group>"; };
 		D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationWrite.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 			children = (
 				D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */,
 				D26353C92D11D6200055B1A9 /* BlueBreezeExample */,
+				D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */,
 				D26D3DB12D063EA6002CE78D /* Package.swift */,
 				D26353D12D11D7140055B1A9 /* Frameworks */,
 				D22A7B682C0D0EA800C4B6CF /* Products */,
