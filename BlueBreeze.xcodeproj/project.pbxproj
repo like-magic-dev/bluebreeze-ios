@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BBAuthorization.swift */; };
 		D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* HomeView.swift */; };
-		D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* ScanningView.swift */; };
+		D22CD8972D19AA4800C58977 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* ScanView.swift */; };
 		D22CD89B2D19D46700C58977 /* BBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89A2D19D39C00C58977 /* BBState.swift */; };
 		D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */; };
 		D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A62D1D650F00C58977 /* BBUUID.swift */; };
@@ -36,6 +36,7 @@
 		D26D3DE12D064036002CE78D /* BBOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BBOperationRequestMTU.swift */; };
 		D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */; };
 		D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */; };
+		D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +66,7 @@
 /* Begin PBXFileReference section */
 		D22CD8922D19A4D700C58977 /* BBAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAuthorization.swift; sourceTree = "<group>"; };
 		D22CD8942D19AA1900C58977 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		D22CD8962D19AA4600C58977 /* ScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningView.swift; sourceTree = "<group>"; };
+		D22CD8962D19AA4600C58977 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		D22CD89A2D19D39C00C58977 /* BBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBState.swift; sourceTree = "<group>"; };
 		D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		D22CD8A62D1D650F00C58977 /* BBUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBUUID.swift; sourceTree = "<group>"; };
@@ -85,6 +86,8 @@
 		D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristicProperty.swift; sourceTree = "<group>"; };
 		D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationQueue.swift; sourceTree = "<group>"; };
 		D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationImpl.swift; sourceTree = "<group>"; };
+		D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBScanResult.swift; sourceTree = "<group>"; };
+		D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlueBreeze.podspec; sourceTree = "<group>"; };
 		D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBManager.swift; sourceTree = "<group>"; };
 		D2D9B3B32C17A575004C83B5 /* BBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDevice.swift; sourceTree = "<group>"; };
 		D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationWrite.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 			children = (
 				D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */,
 				D26353C92D11D6200055B1A9 /* BlueBreezeExample */,
+				D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */,
 				D26D3DB12D063EA6002CE78D /* Package.swift */,
 				D26353D12D11D7140055B1A9 /* Frameworks */,
 				D22A7B682C0D0EA800C4B6CF /* Products */,
@@ -140,7 +144,7 @@
 				D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */,
 				D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */,
 				D22CD8942D19AA1900C58977 /* HomeView.swift */,
-				D22CD8962D19AA4600C58977 /* ScanningView.swift */,
+				D22CD8962D19AA4600C58977 /* ScanView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -180,6 +184,7 @@
 				D255ACD62C83275C006586B6 /* BBCharacteristic.swift */,
 				D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */,
 				D2D9B3B32C17A575004C83B5 /* BBDevice.swift */,
+				D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */,
 				D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */,
 				D2FEF11D2C70AE1700BDF3AE /* BBError.swift */,
 				D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */,
@@ -325,7 +330,7 @@
 			files = (
 				D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */,
 				D22CD8BF2D1E9B3B00C58977 /* CharacteristicView.swift in Sources */,
-				D22CD8972D19AA4800C58977 /* ScanningView.swift in Sources */,
+				D22CD8972D19AA4800C58977 /* ScanView.swift in Sources */,
 				D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */,
 				D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */,
 			);
@@ -339,6 +344,7 @@
 				D26D3DD42D064036002CE78D /* BBOperationRead.swift in Sources */,
 				D26D3DD52D064036002CE78D /* BBOperationDisconnect.swift in Sources */,
 				D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */,
+				D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */,
 				D26D3DD62D064036002CE78D /* BBOperationWrite.swift in Sources */,
 				D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */,
 				D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */,

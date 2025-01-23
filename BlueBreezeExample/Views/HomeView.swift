@@ -69,7 +69,7 @@ struct HomeView: View {
             }
             .navigationTitle("BLE Offline")
         } else {
-            ScanningView(manager: viewModel.manager)
+            ScanView(manager: viewModel.manager)
         }
     }
 }

@@ -45,14 +45,14 @@ public class BBManager: NSObject {
     
     public let devices = CurrentValueSubject<[UUID: BBDevice], Never>([:])
 
-    // MARK: - Scanning
+    // MARK: - Scan
     
-    public let scanningEnabled = CurrentValueSubject<Bool, Never>(false)
+    public let scanEnabled = CurrentValueSubject<Bool, Never>(false)
     
-    public let scanningDevices = PassthroughSubject<BBDevice, Never>()
+    public let scanResults = PassthroughSubject<BBScanResult, Never>()
 
-    public func scanningStart(serviceUuids: [BBUUID]? = nil) {
-        guard !scanningEnabled.value else {
+    public func scanStart(serviceUuids: [BBUUID]? = nil) {
+        guard !scanEnabled.value else {
             return
         }
 
@@ -62,16 +62,16 @@ public class BBManager: NSObject {
                 CBCentralManagerScanOptionAllowDuplicatesKey: true
             ]
         )
-        scanningEnabled.value = true
+        scanEnabled.value = true
     }
     
-    public func scanningStop() {
-        guard scanningEnabled.value else {
+    public func scanStop() {
+        guard scanEnabled.value else {
             return
         }
 
         centralManager.stopScan()
-        scanningEnabled.value = false
+        scanEnabled.value = false
     }
 }
 
@@ -85,7 +85,7 @@ extension BBManager: CBCentralManagerDelegate {
         
         state.value = central.state.bbState
 
-        if scanningEnabled.value && central.state == .poweredOn {
+        if scanEnabled.value && central.state == .poweredOn {
             centralManager.scanForPeripherals(withServices: nil)
         }
 
@@ -97,20 +97,19 @@ extension BBManager: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         peripheral.delegate = self
                 
-        var devices = self.devices.value
-        
-        let device = devices[peripheral.identifier] ?? BBDevice(
+        let device = devices.value[peripheral.identifier] ?? BBDevice(
             centralManager: centralManager,
             peripheral: peripheral
         )
         
-        device.advertisementData = advertisementData
-        device.rssi = RSSI.intValue
-        
-        self.scanningDevices.send(device)
+        if devices.value[peripheral.identifier] == nil {
+            var devices_ = self.devices.value
+            devices_[peripheral.identifier] = device
+            self.devices.value = devices_
+        }
 
-        devices[peripheral.identifier] = device        
-        self.devices.value = devices
+        let scanResult = BBScanResult(device: device, rssi: RSSI.intValue, advertisementData: advertisementData)
+        self.scanResults.send(scanResult)
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
