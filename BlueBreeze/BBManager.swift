@@ -45,14 +45,14 @@ public class BBManager: NSObject {
     
     public let devices = CurrentValueSubject<[UUID: BBDevice], Never>([:])
 
-    // MARK: - Scanning
+    // MARK: - Scan
     
-    public let scanningEnabled = CurrentValueSubject<Bool, Never>(false)
+    public let scanEnabled = CurrentValueSubject<Bool, Never>(false)
     
-    public let scanningResults = PassthroughSubject<BBScanResult, Never>()
+    public let scanResults = PassthroughSubject<BBScanResult, Never>()
 
-    public func scanningStart(serviceUuids: [BBUUID]? = nil) {
-        guard !scanningEnabled.value else {
+    public func scanStart(serviceUuids: [BBUUID]? = nil) {
+        guard !scanEnabled.value else {
             return
         }
 
@@ -62,16 +62,16 @@ public class BBManager: NSObject {
                 CBCentralManagerScanOptionAllowDuplicatesKey: true
             ]
         )
-        scanningEnabled.value = true
+        scanEnabled.value = true
     }
     
-    public func scanningStop() {
-        guard scanningEnabled.value else {
+    public func scanStop() {
+        guard scanEnabled.value else {
             return
         }
 
         centralManager.stopScan()
-        scanningEnabled.value = false
+        scanEnabled.value = false
     }
 }
 
@@ -85,7 +85,7 @@ extension BBManager: CBCentralManagerDelegate {
         
         state.value = central.state.bbState
 
-        if scanningEnabled.value && central.state == .poweredOn {
+        if scanEnabled.value && central.state == .poweredOn {
             centralManager.scanForPeripherals(withServices: nil)
         }
 
@@ -109,7 +109,7 @@ extension BBManager: CBCentralManagerDelegate {
         }
 
         let scanResult = BBScanResult(device: device, rssi: RSSI.intValue, advertisementData: advertisementData)
-        self.scanningResults.send(scanResult)
+        self.scanResults.send(scanResult)
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

@@ -7,16 +7,16 @@ import Combine
 import SwiftUI
 import BlueBreeze
 
-class ScanningViewModel: ObservableObject {
+class ScanViewModel: ObservableObject {
     init(manager: BBManager) {
         self.manager = manager
         
-        manager.scanningEnabled
+        manager.scanEnabled
             .receive(on: DispatchQueue.main)
-            .sink { self.scanningEnabled = $0 }
+            .sink { self.scanEnabled = $0 }
             .store(in: &dispatchBag)
         
-        manager.scanningResults
+        manager.scanResults
             .receive(on: DispatchQueue.main)
             .sink { self.scanResults[$0.id] = $0 }
             .store(in: &dispatchBag)
@@ -28,26 +28,26 @@ class ScanningViewModel: ObservableObject {
     
     var dispatchBag: Set<AnyCancellable> = []
     
-    // Scanning
+    // Scan
     
-    @Published var scanningEnabled: Bool = false
+    @Published var scanEnabled: Bool = false
     
     @Published var scanResults: [UUID: BBScanResult] = [:]
 
-    func startScanning() {
-        manager.scanningStart()
+    func scanStart() {
+        manager.scanStart()
     }
     
-    func stopScanning() {
-        manager.scanningStop()
+    func scanStop() {
+        manager.scanStop()
     }
 }
 
-struct ScanningView: View {
-    @StateObject var viewModel: ScanningViewModel
+struct ScanView: View {
+    @StateObject var viewModel: ScanViewModel
 
     init(manager: BBManager) {
-        _viewModel = StateObject(wrappedValue: ScanningViewModel(manager: manager))
+        _viewModel = StateObject(wrappedValue: ScanViewModel(manager: manager))
     }
     
     var body: some View {
@@ -68,27 +68,27 @@ struct ScanningView: View {
                 }
             }
         }
-        .navigationTitle("BLE Scanning")
+        .navigationTitle("BLE Scan")
         .toolbar {
-            if viewModel.scanningEnabled {
+            if viewModel.scanEnabled {
                 Button {
-                    viewModel.stopScanning()
+                    viewModel.scanStop()
                 } label: {
                     Image(systemName: "stop.fill")
                 }
             } else {
                 Button {
-                    viewModel.startScanning()
+                    viewModel.scanStart()
                 } label: {
                     Image(systemName: "play.fill")
                 }
             }
         }
         .onAppear {
-            viewModel.startScanning()
+            viewModel.scanStart()
         }
         .onDisappear {
-            viewModel.stopScanning()
+            viewModel.scanStop()
         }
     }
 }
