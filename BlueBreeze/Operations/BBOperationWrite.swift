@@ -25,6 +25,10 @@ class BBOperationWrite: BBOperationImpl<Void> {
     
     override func execute(_ centralManager: CBCentralManager) {
         peripheral.writeValue(data, for: characteristic, type: withResponse ? .withResponse : .withoutResponse)
+        
+        if !withResponse {
+            completeSuccess(())
+        }
     }
     
     override func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
