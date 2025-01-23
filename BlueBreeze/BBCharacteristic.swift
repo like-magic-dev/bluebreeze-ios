@@ -58,7 +58,7 @@ public class BBCharacteristic: NSObject, Identifiable {
     }
     
     public func write(_ data: Data, withResponse: Bool = true) async throws {
-        let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
+        let operation = BBOperationWrite(peripheral: peripheral, characteristic: characteristic, data: data, withResponse: withResponse)
         _ = try? await operationQueue?.operationEnqueue(operation)
     }
     
