@@ -13,7 +13,7 @@ class CharacteristicViewModel: ObservableObject {
         
         characteristic.data
             .receive(on: DispatchQueue.main)
-            .sink { self.data = $0.hexString }
+            .sink { self.data = $0 }
             .store(in: &dispatchBag)
         
         characteristic.isNotifying
@@ -45,7 +45,7 @@ class CharacteristicViewModel: ObservableObject {
 
     // Data
     
-    @Published var data: String = ""
+    @Published var data: Data = Data()
     
     // Operations
     
@@ -78,14 +78,7 @@ struct CharacteristicView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(viewModel.id).font(.caption)
-                HStack {
-                    TextField("No value", text: $viewModel.data)
-                        .onReceive(Just(viewModel.data), perform: { value in
-                            validData = (value.hexData != nil)
-                        })
-                        .foregroundColor(validData ? Color(uiColor: .darkText) : .red)
-                        .disabled(!viewModel.canWrite)
-                }
+                Text(viewModel.data.isEmpty ? "-" : viewModel.data.hexString)
             }
             Spacer()
             if viewModel.canRead {
