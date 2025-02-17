@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = 'BlueBreeze'
-  spec.version       = '0.0.10'
+  spec.version       = '0.0.11'
   spec.license       = { :type => 'MIT' }
   spec.homepage      = 'https://github.com/like-magic-dev/bluebreeze-ios'
   spec.authors       = { 'Alessandro Mulloni' => 'ale@likemagic.dev' }

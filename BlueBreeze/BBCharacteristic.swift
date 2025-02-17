@@ -52,9 +52,9 @@ public class BBCharacteristic: NSObject, Identifiable {
 
     // MARK: - Operations
     
-    public func read() async throws {
+    public func read() async throws -> Data? {
         let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
-        _ = try await operationQueue?.operationEnqueue(operation)
+        return try await operationQueue?.operationEnqueue(operation)
     }
     
     public func write(_ data: Data, withResponse: Bool = true) async throws {

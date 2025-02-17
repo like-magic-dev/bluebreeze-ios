@@ -13,7 +13,7 @@ class CharacteristicViewModel: ObservableObject {
         
         characteristic.data
             .receive(on: DispatchQueue.main)
-            .sink { self.data = $0.hexString }
+            .sink { self.data = $0 }
             .store(in: &dispatchBag)
         
         characteristic.isNotifying
@@ -45,16 +45,22 @@ class CharacteristicViewModel: ObservableObject {
 
     // Data
     
-    @Published var data: String = ""
+    @Published var data: Data = Data()
+    
+    // Write data
+    
+    @Published var writeString: String = ""
+    @Published var writePopup = false
     
     // Operations
     
-    func read() async {
-        try? await characteristic.read()
+    func read() async -> Data? {
+        return try? await characteristic.read()
     }
     
     func write(data: Data) async {
-        try? await characteristic.write(data)
+        let withResponse = characteristic.properties.contains(.writeWithResponse)
+        try? await characteristic.write(data, withResponse: withResponse)
     }
     
     func subscribe() async {
@@ -68,7 +74,6 @@ class CharacteristicViewModel: ObservableObject {
 
 struct CharacteristicView: View {
     @StateObject var viewModel: CharacteristicViewModel
-    @State var validData: Bool = true
 
     init(characteristic: BBCharacteristic) {
         _viewModel = StateObject(wrappedValue: CharacteristicViewModel(characteristic: characteristic))
@@ -78,14 +83,7 @@ struct CharacteristicView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(viewModel.id).font(.caption)
-                HStack {
-                    TextField("No value", text: $viewModel.data)
-                        .onReceive(Just(viewModel.data), perform: { value in
-                            validData = (value.hexData != nil)
-                        })
-                        .foregroundColor(validData ? Color(uiColor: .darkText) : .red)
-                        .disabled(!viewModel.canWrite)
-                }
+                Text(viewModel.data.isEmpty ? "-" : viewModel.data.hexString)
             }
             Spacer()
             if viewModel.canRead {
@@ -98,13 +96,38 @@ struct CharacteristicView: View {
             }
             if viewModel.canWrite {
                 Button("Write") {
-                    if let hexData = viewModel.data.hexData {
-                        Task {
-                            await viewModel.write(data: hexData)
-                        }
-                    }
+                    viewModel.writePopup = true
                 }
                 .buttonStyle(.borderedProminent)
+                .popover(
+                    isPresented: $viewModel.writePopup
+                ) {
+                    VStack(spacing: 16) {
+                        TextField("Enter data", text: $viewModel.writeString)
+                            .textFieldStyle(.roundedBorder)
+                            .foregroundColor((viewModel.writeString.hexData == nil) ? .red : Color(uiColor: .darkText))
+                        HStack(spacing: 16) {
+                            Spacer()
+                            Button("Close") {
+                                viewModel.writePopup = false
+                            }
+                            .buttonStyle(.plain)
+                            Button("Write") {
+                                viewModel.writePopup = false
+                                
+                                if let hexData = viewModel.writeString.hexData {
+                                    Task {
+                                        await viewModel.write(data: hexData)
+                                    }
+                                }
+                            }
+                            .disabled(viewModel.writeString.hexData == nil)
+                            .buttonStyle(.borderedProminent)
+                        }
+                    }
+                    .frame(minWidth: 250)
+                    .padding(16)
+                }
             }
             if viewModel.canNotify {
                 if viewModel.isNotifying {
