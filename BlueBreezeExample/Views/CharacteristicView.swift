@@ -54,8 +54,8 @@ class CharacteristicViewModel: ObservableObject {
     
     // Operations
     
-    func read() async {
-        try? await characteristic.read()
+    func read() async -> Data? {
+        return try? await characteristic.read()
     }
     
     func write(data: Data) async {
