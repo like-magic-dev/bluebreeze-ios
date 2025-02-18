@@ -105,7 +105,7 @@ struct CharacteristicView: View {
                     VStack(spacing: 16) {
                         TextField("Enter data", text: $viewModel.writeString)
                             .textFieldStyle(.roundedBorder)
-                            .foregroundColor((viewModel.writeString.hexData == nil) ? .red : Color(uiColor: .darkText))
+                            .foregroundColor((viewModel.writeString.hexData == nil) ? .red : nil)
                         HStack(spacing: 16) {
                             Spacer()
                             Button("Close") {
