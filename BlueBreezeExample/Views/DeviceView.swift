@@ -101,7 +101,9 @@ struct DeviceView: View {
                 }
             }
         }
+#if os(iOS)
         .listStyle(.grouped)
+#endif
         .navigationTitle(viewModel.name ?? "Unknown device")
         .toolbar {
             if viewModel.executingConnection {
