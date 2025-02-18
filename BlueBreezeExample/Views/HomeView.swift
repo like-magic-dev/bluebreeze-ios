@@ -36,6 +36,10 @@ class HomeViewModel: ObservableObject {
         manager.authorizationRequest()
     }
     
+    func openSettings() {
+        manager.authorizationOpenSettings()
+    }
+    
     // Online
     
     @Published var state: BBState = .unknown
@@ -59,7 +63,11 @@ struct HomeView: View {
                         Text("Show authorization popup")
                     }
                 } else {
-                    Text("Please grant authorization in the settings")
+                    Button {
+                        viewModel.openSettings()
+                    } label: {
+                        Text("Please grant authorization in the settings")
+                    }
                 }
             }
             .navigationTitle("BLE Authorization")

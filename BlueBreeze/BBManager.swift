@@ -7,6 +7,12 @@ import Foundation
 import CoreBluetooth
 import Combine
 
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
+
 public class BBManager: NSObject {
     public override init() {
         super.init()
@@ -36,7 +42,19 @@ public class BBManager: NSObject {
         // Creating the object causes a popup request on iOS 13.1+
         _ = centralManager
     }
-    
+
+    public func authorizationOpenSettings() {
+#if os(iOS)
+        if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+#elseif os(macOS)
+        if let settingsUrl = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Bluetooth") {
+            NSWorkspace.shared.open(settingsUrl)
+        }
+#endif
+    }
+
     // MARK: - Online
     
     public let state = CurrentValueSubject<BBState, Never>(.unknown)
