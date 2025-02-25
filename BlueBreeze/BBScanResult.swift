@@ -11,71 +11,65 @@ public struct BBScanResult {
     public let rssi: Int
     public let advertisementData: [String : Any]
     
-    public var id: UUID {
-        get {
-            return device.id
-        }
-    }
-    
     public var name: String? {
-        get {
-            return device.name ??
-                (advertisementData[CBAdvertisementDataLocalNameKey] as? String)
-        }
+        device.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String)
     }
     
     public var connectable: Bool {
-        get {
-            return (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue ?? false
-        }
+        (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue ?? false
     }
     
     public var txPowerLevel: Int? {
-        get {
-            return (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue
-        }
+        (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue
     }
 
-    
     public var manufacturerData: Data? {
-        get {
-            return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
-        }
+        advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
     }
         
     public var manufacturerId: Int? {
-        get {
-            guard let manufacturerData, manufacturerData.count > 2 else {
-                return nil
-            }
-
-            return (Int(manufacturerData[1]) << 8) | Int(manufacturerData[0])
+        guard let manufacturerData, manufacturerData.count > 2 else {
+            return nil
         }
+
+        return (Int(manufacturerData[1]) << 8) | Int(manufacturerData[0])
     }
     
     public var manufacturerName: String? {
-        get {
-            if let manufacturerId {
-                return BBConstants.manufacturers[manufacturerId]
-            }
-            
-            return nil
+        if let manufacturerId {
+            return BBConstants.manufacturers[manufacturerId]
         }
+        
+        return nil
     }
     
     public var advertisedServices: [BBUUID] {
-        get {
-            return [
-                advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? [],
-                advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] as? [CBUUID] ?? [],
-                advertisementData[CBAdvertisementDataSolicitedServiceUUIDsKey] as? [CBUUID] ?? []
-            ].flatMap { $0 }
-        }
+        [
+            advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? [],
+            advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] as? [CBUUID] ?? [],
+            advertisementData[CBAdvertisementDataSolicitedServiceUUIDsKey] as? [CBUUID] ?? []
+        ].flatMap { $0 }
     }
     
     public var advertisedServiceData: [BBUUID: Data] {
-        get {
-            return advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data] ?? [:]
+        advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data] ?? [:]
+    }
+    
+    private let creationTimestamp = Date()
+    
+    public var timestamp: Date {
+        if let timestamp = (advertisementData["kCBAdvDataTimestamp"] as? NSNumber)?.doubleValue {
+            return Date(timeIntervalSinceReferenceDate: timestamp)
         }
+        
+        return creationTimestamp
+    }
+    
+    public var rxPrimaryPhi: Int? {
+        (advertisementData["kCBAdvDataRxPrimaryPHY"] as? NSNumber)?.intValue
+    }
+    
+    public var rxSecondaryPhi: Int? {
+        (advertisementData["kCBAdvDataRxSecondaryPHY"] as? NSNumber)?.intValue
     }
 }
