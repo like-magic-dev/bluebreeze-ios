@@ -30,6 +30,13 @@ public struct BBScanResult {
         }
     }
     
+    public var txPowerLevel: Int? {
+        get {
+            return (advertisementData[CBAdvertisementDataTxPowerLevelKey] as? NSNumber)?.intValue
+        }
+    }
+
+    
     public var manufacturerData: Data? {
         get {
             return advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
@@ -58,7 +65,17 @@ public struct BBScanResult {
     
     public var advertisedServices: [BBUUID] {
         get {
-            return advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
+            return [
+                advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? [],
+                advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] as? [CBUUID] ?? [],
+                advertisementData[CBAdvertisementDataSolicitedServiceUUIDsKey] as? [CBUUID] ?? []
+            ].flatMap { $0 }
+        }
+    }
+    
+    public var advertisedServiceData: [BBUUID: Data] {
+        get {
+            return advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data] ?? [:]
         }
     }
 }
