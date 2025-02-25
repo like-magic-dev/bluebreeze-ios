@@ -55,10 +55,14 @@ public struct BBScanResult {
         advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data] ?? [:]
     }
     
-    private let creationTimestamp = Date().timeIntervalSinceReferenceDate
+    private let creationTimestamp = Date()
     
-    public var timestamp: TimeInterval {
-        (advertisementData["kCBAdvDataTimestamp"] as? NSNumber)?.doubleValue ?? creationTimestamp
+    public var timestamp: Date {
+        if let timestamp = (advertisementData["kCBAdvDataTimestamp"] as? NSNumber)?.doubleValue {
+            return Date(timeIntervalSinceReferenceDate: timestamp)
+        }
+        
+        return creationTimestamp
     }
     
     public var rxPrimaryPhi: Int? {
