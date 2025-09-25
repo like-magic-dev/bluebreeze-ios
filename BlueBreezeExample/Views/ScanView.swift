@@ -18,7 +18,7 @@ class ScanViewModel: ObservableObject {
         
         manager.scanResults
             .receive(on: DispatchQueue.main)
-            .sink { self.scanResults[$0.id] = $0 }
+            .sink { self.scanResults[$0.device.id] = $0 }
             .store(in: &dispatchBag)
     }
     
