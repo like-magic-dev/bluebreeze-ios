@@ -202,6 +202,22 @@ extension BBDevice: CBPeripheralDelegate {
         operationCurrent?.peripheral?(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
         operationCheck()
     }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+        getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didWriteValueFor: characteristic, error: error)
+        
+        operationCurrent?.peripheral?(peripheral, didWriteValueFor: characteristic, error: error)
+        operationCheck()
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
+        if let characteristic = descriptor.characteristic {
+            getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didWriteValueFor: descriptor, error: error)
+        }
+        
+        operationCurrent?.peripheral?(peripheral, didWriteValueFor: descriptor, error: error)
+        operationCheck()
+    }
 }
 
 extension BBDevice: Identifiable { }

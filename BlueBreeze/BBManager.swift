@@ -104,7 +104,10 @@ extension BBManager: CBCentralManagerDelegate {
         state.value = central.state.bbState
 
         if scanEnabled.value && central.state == .poweredOn {
-            centralManager.scanForPeripherals(withServices: nil)
+            centralManager.scanForPeripherals(withServices: nil,
+                                              options: [
+                                                  CBCentralManagerScanOptionAllowDuplicatesKey: true
+                                              ])
         }
 
         devices.value.values.forEach { device in
@@ -166,6 +169,14 @@ extension BBManager: CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+        devices.value[peripheral.identifier]?.peripheral(peripheral, didWriteValueFor: characteristic, error: error)
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
+        devices.value[peripheral.identifier]?.peripheral(peripheral, didWriteValueFor: descriptor, error: error)
     }
 }
 

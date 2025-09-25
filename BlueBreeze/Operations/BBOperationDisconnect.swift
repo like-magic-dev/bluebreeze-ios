@@ -11,7 +11,7 @@ class BBOperationDisconnect: BBOperationImpl<Void> {
     }
 
     override func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
-        if let error = error {
+        if let error {
             completeError(error)
         } else {
             completeSuccess(())
@@ -19,7 +19,7 @@ class BBOperationDisconnect: BBOperationImpl<Void> {
     }
     
     override func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
-        if let error = error {
+        if let error {
             completeError(error)
             return
         }
