@@ -167,6 +167,14 @@ extension BBManager: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
     }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+        devices.value[peripheral.identifier]?.peripheral(peripheral, didWriteValueFor: characteristic, error: error)
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
+        devices.value[peripheral.identifier]?.peripheral(peripheral, didWriteValueFor: descriptor, error: error)
+    }
 }
 
 extension Array where Element: Any {

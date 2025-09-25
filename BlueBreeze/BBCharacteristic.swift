@@ -95,4 +95,18 @@ extension BBCharacteristic: CBPeripheralDelegate {
         
         self.isNotifying.value = characteristic.isNotifying
     }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+        guard characteristic.uuid == self.id else {
+            assert(false, "Parent class called wrong characteristic's callback")
+            return
+        }
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
+        guard characteristic.uuid == self.id else {
+            assert(false, "Parent class called wrong characteristic's callback")
+            return
+        }
+    }
 }
