@@ -104,7 +104,10 @@ extension BBManager: CBCentralManagerDelegate {
         state.value = central.state.bbState
 
         if scanEnabled.value && central.state == .poweredOn {
-            centralManager.scanForPeripherals(withServices: nil)
+            centralManager.scanForPeripherals(withServices: nil,
+                                              options: [
+                                                  CBCentralManagerScanOptionAllowDuplicatesKey: true
+                                              ])
         }
 
         devices.value.values.forEach { device in
