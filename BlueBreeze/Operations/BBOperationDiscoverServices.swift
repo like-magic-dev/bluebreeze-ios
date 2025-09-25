@@ -11,7 +11,7 @@ class BBOperationDiscoverServices: BBOperationImpl<Void> {
     }
     
     override func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
-        if let error = error {
+        if let error {
             completeError(error)
             return
         }
@@ -22,7 +22,7 @@ class BBOperationDiscoverServices: BBOperationImpl<Void> {
     }
     
     override func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
-        if let error = error {
+        if let error {
             completeError(error)
             return
         }

@@ -23,7 +23,7 @@ class BBOperationRead: BBOperationImpl<Data?> {
     
     override func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if self.characteristic == characteristic {
-            if let error = error {
+            if let error {
                 completeError(error)
                 return
             }

@@ -33,7 +33,7 @@ class BBOperationWrite: BBOperationImpl<Void> {
     
     override func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         if self.characteristic == characteristic {
-            if let error = error {
+            if let error {
                 completeError(error)
                 return
             }
