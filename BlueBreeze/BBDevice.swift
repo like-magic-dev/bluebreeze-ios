@@ -43,13 +43,8 @@ public class BBDevice: NSObject, BBOperationQueue {
     // MARK: - Operations
     
     public func connect() async throws {
-        do {
-            try await operationEnqueue(BBOperationConnect(peripheral: peripheral))
-            self.connectionStatus.value = .connected
-        } catch let error {
-            self.connectionStatus.value = .disconnected
-            throw error
-        }
+        try await operationEnqueue(BBOperationConnect(peripheral: peripheral))
+        self.connectionStatus.value = .connected
     }
     
     public func disconnect() async throws {
@@ -58,13 +53,12 @@ public class BBDevice: NSObject, BBOperationQueue {
     }
     
     public func discoverServices() async throws {
-        try? await operationEnqueue(BBOperationDiscoverServices(peripheral: peripheral))
+        try await operationEnqueue(BBOperationDiscoverServices(peripheral: peripheral))
     }
     
     public func requestMTU(_ mtu: Int) async throws {
-        if let mtu = try? await operationEnqueue(BBOperationRequestMTU(peripheral: peripheral, targetMtu: 512)) {
-            self.mtu.value = mtu
-        }
+        let mtu = try await operationEnqueue(BBOperationRequestMTU(peripheral: peripheral, targetMtu: 512))
+        self.mtu.value = mtu
     }
     
     // MARK: - Operation queue
