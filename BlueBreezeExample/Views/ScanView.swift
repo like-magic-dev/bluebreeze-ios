@@ -53,7 +53,7 @@ struct ScanView: View {
     var body: some View {
         List(viewModel.scanResults.sorted(by: { $0.key.uuidString > $1.key.uuidString }), id: \.key) { key, scanResult in
             NavigationLink {
-                DeviceView(scanResult: scanResult)
+                DeviceView(device: scanResult.device)
             } label: {
                 HStack {
                     VStack(alignment: .leading) {

@@ -9,8 +9,8 @@ import BlueBreeze
 
 @MainActor
 class DeviceViewModel: ObservableObject {
-    init(scanResult: BBScanResult) {
-        self.scanResult = scanResult
+    init(device: BBDevice) {
+        self.device = device
         
         device.connectionStatus
             .receive(on: DispatchQueue.main)
@@ -29,15 +29,12 @@ class DeviceViewModel: ObservableObject {
     
     // BLE device
 
-    let scanResult: BBScanResult
-    var device: BBDevice {
-        scanResult.device
-    }
+    let device: BBDevice
     
     // Properties
     
     var name: String? {
-        scanResult.name
+        device.name
     }
     
     // Connection
@@ -81,8 +78,8 @@ class DeviceViewModel: ObservableObject {
 struct DeviceView: View {
     @StateObject var viewModel: DeviceViewModel
 
-    init(scanResult: BBScanResult) {
-        _viewModel = StateObject(wrappedValue: DeviceViewModel(scanResult: scanResult))
+    init(device: BBDevice) {
+        _viewModel = StateObject(wrappedValue: DeviceViewModel(device: device))
     }
     
     var body: some View {

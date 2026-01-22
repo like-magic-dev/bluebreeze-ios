@@ -24,6 +24,12 @@ public class BBDevice: NSObject, BBOperationQueue {
         }
     }
     
+    public var name: String? {
+        get {
+            return peripheral.name
+        }
+    }
+    
     public let services = CurrentValueSubject<[BBUUID: [BBCharacteristic]], Never>([:])
     
     // MARK: - Connection status

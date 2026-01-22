@@ -12,11 +12,13 @@ public struct BBScanResult {
     public let advertisementData: [String : Any]
     
     public var name: String? {
-        (advertisementData[CBAdvertisementDataLocalNameKey] as? String)
+        (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ??
+        device.name
     }
     
     public var connectable: Bool {
-        (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue ?? false
+        (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue ??
+        false
     }
     
     public var txPowerLevel: Int? {
