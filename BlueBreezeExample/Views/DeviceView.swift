@@ -7,9 +7,10 @@ import Combine
 import SwiftUI
 import BlueBreeze
 
+@MainActor
 class DeviceViewModel: ObservableObject {
-    init(device: BBDevice) {
-        self.device = device
+    init(scanResult: BBScanResult) {
+        self.scanResult = scanResult
         
         device.connectionStatus
             .receive(on: DispatchQueue.main)
@@ -28,12 +29,15 @@ class DeviceViewModel: ObservableObject {
     
     // BLE device
 
-    let device: BBDevice
+    let scanResult: BBScanResult
+    var device: BBDevice {
+        scanResult.device
+    }
     
     // Properties
     
     var name: String? {
-        device.name
+        scanResult.name
     }
     
     // Connection
@@ -42,8 +46,9 @@ class DeviceViewModel: ObservableObject {
     @Published var executingConnection: Bool = false
     
     func connect() async {
-        DispatchQueue.main.async {
-            self.executingConnection = true
+        executingConnection = true
+        defer {
+            executingConnection = false
         }
         
         do {
@@ -53,25 +58,18 @@ class DeviceViewModel: ObservableObject {
         } catch {
             // Ignore error
         }
-        
-        DispatchQueue.main.async {
-            self.executingConnection = false
-        }
     }
     
     func disconnect() async {
-        DispatchQueue.main.async {
-            self.executingConnection = true
+        executingConnection = true
+        defer {
+            executingConnection = false
         }
         
         do {
             try await device.disconnect()
         } catch {
             // Ignore error
-        }
-        
-        DispatchQueue.main.async {
-            self.executingConnection = false
         }
     }
     
@@ -83,8 +81,8 @@ class DeviceViewModel: ObservableObject {
 struct DeviceView: View {
     @StateObject var viewModel: DeviceViewModel
 
-    init(device: BBDevice) {
-        _viewModel = StateObject(wrappedValue: DeviceViewModel(device: device))
+    init(scanResult: BBScanResult) {
+        _viewModel = StateObject(wrappedValue: DeviceViewModel(scanResult: scanResult))
     }
     
     var body: some View {
