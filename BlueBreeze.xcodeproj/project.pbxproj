@@ -26,7 +26,7 @@
 		D26D3DD62D064036002CE78D /* BBOperationWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */; };
 		D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3B32C17A575004C83B5 /* BBDevice.swift */; };
 		D26D3DD82D064036002CE78D /* BBOperationNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1282C76260600BDF3AE /* BBOperationNotifications.swift */; };
-		D26D3DD92D064036002CE78D /* BBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */; };
+		D26D3DD92D064036002CE78D /* BBAssignedNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BBAssignedNumbers.swift */; };
 		D26D3DDA2D064036002CE78D /* BBOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */; };
 		D26D3DDB2D064036002CE78D /* BBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BBError.swift */; };
 		D26D3DDC2D064036002CE78D /* BBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */; };
@@ -92,7 +92,7 @@
 		D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBManager.swift; sourceTree = "<group>"; };
 		D2D9B3B32C17A575004C83B5 /* BBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDevice.swift; sourceTree = "<group>"; };
 		D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationWrite.swift; sourceTree = "<group>"; };
-		D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBConstants.swift; sourceTree = "<group>"; };
+		D2FEF1152C6F50CA00BDF3AE /* BBAssignedNumbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBAssignedNumbers.swift; sourceTree = "<group>"; };
 		D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperation.swift; sourceTree = "<group>"; };
 		D2FEF11D2C70AE1700BDF3AE /* BBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBError.swift; sourceTree = "<group>"; };
 		D2FEF1222C71F81700BDF3AE /* BBOperationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBOperationRead.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 				D22CD8922D19A4D700C58977 /* BBAuthorization.swift */,
 				D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */,
 				D255ACD62C83275C006586B6 /* BBCharacteristic.swift */,
-				D2FEF1152C6F50CA00BDF3AE /* BBConstants.swift */,
+				D2FEF1152C6F50CA00BDF3AE /* BBAssignedNumbers.swift */,
 				D2D9B3B32C17A575004C83B5 /* BBDevice.swift */,
 				D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */,
 				D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */,
@@ -352,7 +352,7 @@
 				D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */,
 				D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */,
 				D26D3DD82D064036002CE78D /* BBOperationNotifications.swift in Sources */,
-				D26D3DD92D064036002CE78D /* BBConstants.swift in Sources */,
+				D26D3DD92D064036002CE78D /* BBAssignedNumbers.swift in Sources */,
 				D26D3DDA2D064036002CE78D /* BBOperationQueue.swift in Sources */,
 				D26D3DDB2D064036002CE78D /* BBError.swift in Sources */,
 				D26D3DDC2D064036002CE78D /* BBManager.swift in Sources */,

@@ -33,7 +33,7 @@ class CharacteristicViewModel: ObservableObject {
     // Properties
     
     var id: String {
-        BBConstants.knownCharacteristics[characteristic.id]?.uppercased() ?? characteristic.id.uuidString }
+        BBAssignedNumbers.characteristicUUIDs[characteristic.id]?.uppercased() ?? characteristic.id.uuidString }
     
     var canRead: Bool { characteristic.properties.contains(.read) }
     

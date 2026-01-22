@@ -88,7 +88,7 @@ struct DeviceView: View {
                 $0.key.uuidString < $1.key.uuidString
             }), id: \.key) { key, value in
                 Section(
-                    header: Text(BBConstants.knownServices[key]?.uppercased() ?? key.uuidString)
+                    header: Text(BBAssignedNumbers.serviceUUIDs[key]?.uppercased() ?? key.uuidString)
                 ) {
                     ForEach(value) {
                         CharacteristicView(characteristic: $0)
