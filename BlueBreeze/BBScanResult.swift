@@ -29,17 +29,17 @@ public struct BBScanResult {
         advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
     }
         
-    public var manufacturerId: Int? {
+    public var manufacturerId: UInt16? {
         guard let manufacturerData, manufacturerData.count > 2 else {
             return nil
         }
 
-        return (Int(manufacturerData[1]) << 8) | Int(manufacturerData[0])
+        return (UInt16(manufacturerData[1]) << 8) | UInt16(manufacturerData[0])
     }
     
     public var manufacturerName: String? {
         if let manufacturerId {
-            return BBConstants.manufacturers[manufacturerId]
+            return BBAssignedNumbers.companyIdentifiers[manufacturerId]
         }
         
         return nil
