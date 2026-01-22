@@ -12,7 +12,7 @@ public struct BBScanResult {
     public let advertisementData: [String : Any]
     
     public var name: String? {
-        device.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String)
+        (advertisementData[CBAdvertisementDataLocalNameKey] as? String)
     }
     
     public var connectable: Bool {
