@@ -2,6 +2,7 @@
 // Copyright (c) Like Magic e.U. and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for details.
 //
+
 // Auto-generated from Bluetooth SIG repository https://bitbucket.org/bluetooth-SIG/public.git
 // Do not edit directly.
 //

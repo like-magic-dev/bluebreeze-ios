@@ -1,7 +1,25 @@
+"""
+Fetch and parse Bluetooth SIG assigned numbers.
+
+This script clones the official Bluetooth SIG repository, extracts company identifiers
+and UUIDs from YAML files, and generates Swift code for use in the BlueBreeze library.
+
+The generated Swift file contains:
+- Company identifiers mapping (UInt16 -> String)
+- Service UUIDs mapping (BBUUID -> String)
+- Characteristic UUIDs mapping (BBUUID -> String)
+
+Dependencies:
+    - PyYAML>=6.0
+
+Usage:
+    python fetch_known_uuids.py
+"""
+
 import subprocess
 import shutil
-import yaml
 import os
+import yaml
 
 REPO_URL = "https://bitbucket.org/bluetooth-SIG/public.git"
 
@@ -17,10 +35,6 @@ print("Generating Swift file...")
 OUTPUT = "BlueBreeze/BBAssignedNumbers.swift"
 
 with open(OUTPUT, "w", encoding="utf-8") as output_file:
-    output_file.write("//\n")
-    output_file.write("// Copyright (c) Like Magic e.U. and contributors. All rights reserved.\n")
-    output_file.write("// Licensed under the MIT license. See LICENSE file in the project root for details.\n")
-    output_file.write("//\n")
     output_file.write(f"// Auto-generated from Bluetooth SIG repository {REPO_URL}\n")
     output_file.write("// Do not edit directly.\n")
     output_file.write("//\n\n")
