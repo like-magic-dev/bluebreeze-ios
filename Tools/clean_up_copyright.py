@@ -9,7 +9,6 @@ Usage:
     python clean_up_copyright.py
 """
 
-import os
 import re
 from pathlib import Path
 
