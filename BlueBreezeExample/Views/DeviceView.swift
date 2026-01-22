@@ -7,6 +7,7 @@ import Combine
 import SwiftUI
 import BlueBreeze
 
+@MainActor
 class DeviceViewModel: ObservableObject {
     init(scanResult: BBScanResult) {
         self.scanResult = scanResult
@@ -45,8 +46,9 @@ class DeviceViewModel: ObservableObject {
     @Published var executingConnection: Bool = false
     
     func connect() async {
-        DispatchQueue.main.async {
-            self.executingConnection = true
+        executingConnection = true
+        defer {
+            executingConnection = false
         }
         
         do {
@@ -56,25 +58,18 @@ class DeviceViewModel: ObservableObject {
         } catch {
             // Ignore error
         }
-        
-        DispatchQueue.main.async {
-            self.executingConnection = false
-        }
     }
     
     func disconnect() async {
-        DispatchQueue.main.async {
-            self.executingConnection = true
+        executingConnection = true
+        defer {
+            executingConnection = false
         }
         
         do {
             try await device.disconnect()
         } catch {
             // Ignore error
-        }
-        
-        DispatchQueue.main.async {
-            self.executingConnection = false
         }
     }
     
