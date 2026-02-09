@@ -107,6 +107,11 @@ public class BBDevice: NSObject, BBOperationQueue {
 
 extension BBDevice: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if (central.state != .poweredOn) {
+            self.services.value = [:]
+            self.connectionStatus.value = .disconnected
+        }
+        
         operationCurrent?.centralManagerDidUpdateState(central)
         operationCheck()
     }
