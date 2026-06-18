@@ -27,7 +27,13 @@ class ScanViewModel: ObservableObject {
     // Dispatch bag for all cancellables
     
     var dispatchBag: Set<AnyCancellable> = []
-    
+
+    // Capabilities
+
+    var supportsExtended: Bool {
+        manager.supportsExtended
+    }
+
     // Scan
     
     @Published var scanEnabled: Bool = false
@@ -49,8 +55,8 @@ struct ScanView: View {
     init(manager: BBManager) {
         _viewModel = StateObject(wrappedValue: ScanViewModel(manager: manager))
     }
-    
-    var body: some View {
+
+    var mainView: some View {
         List(viewModel.scanResults.sorted(by: { $0.key.uuidString > $1.key.uuidString }), id: \.key) { key, scanResult in
             NavigationLink {
                 DeviceView(device: scanResult.device)
@@ -68,7 +74,6 @@ struct ScanView: View {
                 }
             }
         }
-        .navigationTitle("BLE Scan")
         .toolbar {
             if viewModel.scanEnabled {
                 Button {
@@ -89,6 +94,19 @@ struct ScanView: View {
         }
         .onDisappear {
             viewModel.scanStop()
+        }
+    }
+
+    var body: some View {
+        Group {
+            if #available(iOS 26.0, *) {
+                mainView
+                    .navigationTitle("BLE Scan")
+                    .navigationSubtitle(viewModel.supportsExtended ? "Extended scanning" : "Legacy scanning")
+            } else {
+                mainView
+                    .navigationTitle("BLE Scan")
+            }
         }
     }
 }
