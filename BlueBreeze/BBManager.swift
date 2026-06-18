@@ -7,7 +7,7 @@ import Foundation
 import CoreBluetooth
 import Combine
 
-#if os(iOS) || os(watchOS)
+#if os(iOS)
 import UIKit
 #elseif os(macOS)
 import AppKit
@@ -44,7 +44,7 @@ public class BBManager: NSObject {
     }
 
     public func authorizationOpenSettings() {
-#if os(iOS) || os(watchOS)
+#if os(iOS)
         if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
         }
