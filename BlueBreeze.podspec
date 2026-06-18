@@ -11,6 +11,7 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target  = '13.0'
   spec.osx.deployment_target  = '11.5'
+  spec.watchos.deployment_target  = '6.0'
 
   spec.source_files       = 'BlueBreeze/**/*.swift'
 end

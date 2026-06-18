@@ -7,7 +7,7 @@ import Foundation
 import CoreBluetooth
 import Combine
 
-#if os(iOS)
+#if os(iOS) || os(watchOS)
 import UIKit
 #elseif os(macOS)
 import AppKit
@@ -44,7 +44,7 @@ public class BBManager: NSObject {
     }
 
     public func authorizationOpenSettings() {
-#if os(iOS)
+#if os(iOS) || os(watchOS)
         if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
         }
@@ -58,11 +58,14 @@ public class BBManager: NSObject {
     // MARK: - Capabilities
 
     public var supportsExtended: Bool {
-#if os(iOS)
+#if os(iOS) || os(watchOS)
+        // Dynamic check for extended scan capability
         CBCentralManager.supports(.extendedScanAndConnect)
 #elseif os(macOS)
+        // Always supported
         true
 #else
+        // Unknown platform
         false
 #endif
     }
