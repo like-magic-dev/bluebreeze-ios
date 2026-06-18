@@ -96,7 +96,7 @@ struct DeviceView: View {
                 }
             }
         }
-#if os(iOS)
+#if os(iOS) || os(ipadOS)
         .listStyle(.grouped)
 #endif
         .navigationTitle(viewModel.name ?? "Unknown device")
