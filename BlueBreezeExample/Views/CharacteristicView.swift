@@ -92,13 +92,11 @@ struct CharacteristicView: View {
                         await viewModel.read()
                     }
                 }
-                .buttonStyle(.borderedProminent)
             }
             if viewModel.canWrite {
                 Button("Write") {
                     viewModel.writePopup = true
                 }
-                .buttonStyle(.borderedProminent)
                 .popover(
                     isPresented: $viewModel.writePopup
                 ) {
@@ -122,7 +120,6 @@ struct CharacteristicView: View {
                                 }
                             }
                             .disabled(viewModel.writeString.hexData == nil)
-                            .buttonStyle(.borderedProminent)
                         }
                     }
                     .frame(minWidth: 250)
@@ -136,14 +133,12 @@ struct CharacteristicView: View {
                             await viewModel.unsubscribe()
                         }
                     }
-                    .buttonStyle(.bordered)
                 } else {
                     Button("Subscribe") {
                         Task {
                             await viewModel.subscribe()
                         }
                     }
-                    .buttonStyle(.borderedProminent)
                 }
             }
         }

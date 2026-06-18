@@ -105,7 +105,7 @@ struct ScanView: View {
                     .navigationSubtitle(viewModel.supportsExtended ? "Extended scanning" : "Legacy scanning")
             } else {
                 mainView
-                    .navigationTitle("BLE Scan")
+                    .navigationTitle("BLE Scan (\(viewModel.supportsExtended ? "Extended" : "Legacy")")
             }
         }
     }
