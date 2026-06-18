@@ -55,6 +55,12 @@ public class BBManager: NSObject {
 #endif
     }
 
+    // MARK: - Capabilities
+
+    public var supportsExtended: Bool {
+        CBCentralManager.supports(.extendedScanAndConnect)
+    }
+
     // MARK: - Online
     
     public let state = CurrentValueSubject<BBState, Never>(.unknown)
