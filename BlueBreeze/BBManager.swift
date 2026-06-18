@@ -58,7 +58,13 @@ public class BBManager: NSObject {
     // MARK: - Capabilities
 
     public var supportsExtended: Bool {
+#if os(iOS)
         CBCentralManager.supports(.extendedScanAndConnect)
+#elseif os(macOS)
+        true
+#else
+        false
+#endif
     }
 
     // MARK: - Online
