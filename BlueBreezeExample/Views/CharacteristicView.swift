@@ -10,12 +10,12 @@ import BlueBreeze
 class CharacteristicViewModel: ObservableObject {
     init(characteristic: BBCharacteristic) {
         self.characteristic = characteristic
-        
+
         characteristic.data
             .receive(on: DispatchQueue.main)
             .sink { self.data = $0 }
             .store(in: &dispatchBag)
-        
+
         characteristic.isNotifying
             .receive(on: DispatchQueue.main)
             .sink { self.isNotifying = $0 }
@@ -23,50 +23,50 @@ class CharacteristicViewModel: ObservableObject {
     }
 
     // Dispatch bag for all cancellables
-    
+
     var dispatchBag: Set<AnyCancellable> = []
-    
+
     // BLE characteristic
 
     let characteristic: BBCharacteristic
-    
+
     // Properties
-    
+
     var id: String {
         BBAssignedNumbers.characteristicUUIDs[characteristic.id]?.uppercased() ?? characteristic.id.uuidString }
-    
+
     var canRead: Bool { characteristic.properties.contains(.read) }
-    
+
     var canWrite: Bool { characteristic.properties.contains(.writeWithResponse) || characteristic.properties.contains(.writeWithoutResponse) }
 
     var canNotify: Bool { characteristic.properties.contains(.notify) }
-    
+
     @Published var isNotifying: Bool = false
 
     // Data
-    
+
     @Published var data: Data = Data()
-    
+
     // Write data
-    
+
     @Published var writeString: String = ""
     @Published var writePopup = false
-    
+
     // Operations
-    
+
     func read() async -> Data? {
         return try? await characteristic.read()
     }
-    
+
     func write(data: Data) async {
         let withResponse = characteristic.properties.contains(.writeWithResponse)
         try? await characteristic.write(data, withResponse: withResponse)
     }
-    
+
     func subscribe() async {
         try? await characteristic.subscribe()
     }
-    
+
     func unsubscribe() async {
         try? await characteristic.unsubscribe()
     }
@@ -78,7 +78,7 @@ struct CharacteristicView: View {
     init(characteristic: BBCharacteristic) {
         _viewModel = StateObject(wrappedValue: CharacteristicViewModel(characteristic: characteristic))
     }
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -112,7 +112,7 @@ struct CharacteristicView: View {
                             .buttonStyle(.plain)
                             Button("Write") {
                                 viewModel.writePopup = false
-                                
+
                                 if let hexData = viewModel.writeString.hexData {
                                     Task {
                                         await viewModel.write(data: hexData)
@@ -158,23 +158,23 @@ extension String {
         guard self.count % 2 == 0 else {
             return nil
         }
-        
+
         var data = Data()
-        
+
         var index = self.startIndex
         while index < self.endIndex {
             let nextIndex = self.index(index, offsetBy: 2)
             let hexSubstring = self[index..<nextIndex]
-            
+
             if let byte = UInt8(hexSubstring, radix: 16) {
                 data.append(byte)
             } else {
                 return nil
             }
-            
+
             index = nextIndex
         }
-        
+
         return data
     }
 }

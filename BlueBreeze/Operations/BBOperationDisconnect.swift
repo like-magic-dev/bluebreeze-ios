@@ -17,7 +17,7 @@ class BBOperationDisconnect: BBOperationImpl<Void> {
             completeSuccess(())
         }
     }
-    
+
     override func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         if let error {
             completeError(error)

@@ -9,7 +9,7 @@ import BlueBreeze
 @main
 struct BlueBreezeExample: App {
     let manager = BBManager()
-        
+
     var body: some Scene {
         WindowGroup {
             if #available(iOS 16.0, *) {

@@ -12,25 +12,25 @@ public class BBCharacteristic: NSObject, Identifiable {
         self.characteristic = characteristic
         self.operationQueue = operationQueue
     }
-    
+
     let peripheral: CBPeripheral
     let characteristic: CBCharacteristic
-    
+
     weak var operationQueue: BBOperationQueue?
-    
+
     // MARK: - Observable properties
-    
+
     public let data = CurrentValueSubject<Data, Never>(Data())
     public let isNotifying = CurrentValueSubject<Bool, Never>(false)
-    
+
     // MARK: - Computed properties
-    
+
     public var id: BBUUID {
         get {
             return characteristic.uuid
         }
     }
-    
+
     public var properties: Set<BBCharacteristicProperty> {
         get {
             var result = Set<BBCharacteristicProperty>()
@@ -51,22 +51,22 @@ public class BBCharacteristic: NSObject, Identifiable {
     }
 
     // MARK: - Operations
-    
+
     public func read() async throws -> Data? {
         let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
         return try await operationQueue?.operationEnqueue(operation)
     }
-    
+
     public func write(_ data: Data, withResponse: Bool = true) async throws {
         let operation = BBOperationWrite(peripheral: peripheral, characteristic: characteristic, data: data, withResponse: withResponse)
         try await operationQueue?.operationEnqueue(operation)
     }
-    
+
     public func subscribe() async throws {
         let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
         try await operationQueue?.operationEnqueue(operation)
     }
-    
+
     public func unsubscribe() async throws {
         let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
         try await operationQueue?.operationEnqueue(operation)
@@ -81,28 +81,28 @@ extension BBCharacteristic: CBPeripheralDelegate {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
-        
+
         if let value = characteristic.value {
             self.data.value = value
         }
     }
-    
+
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
-        
+
         self.isNotifying.value = characteristic.isNotifying
     }
-    
+
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
     }
-    
+
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")

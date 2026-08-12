@@ -10,22 +10,22 @@ import BlueBreeze
 class ScanViewModel: ObservableObject {
     init(manager: BBManager) {
         self.manager = manager
-        
+
         manager.scanEnabled
             .receive(on: DispatchQueue.main)
             .sink { self.scanEnabled = $0 }
             .store(in: &dispatchBag)
-        
+
         manager.scanResults
             .receive(on: DispatchQueue.main)
             .sink { self.scanResults[$0.device.id] = $0 }
             .store(in: &dispatchBag)
     }
-    
+
     let manager: BBManager
-    
+
     // Dispatch bag for all cancellables
-    
+
     var dispatchBag: Set<AnyCancellable> = []
 
     // Capabilities
@@ -35,15 +35,15 @@ class ScanViewModel: ObservableObject {
     }
 
     // Scan
-    
+
     @Published var scanEnabled: Bool = false
-    
+
     @Published var scanResults: [UUID: BBScanResult] = [:]
 
     func scanStart() {
         manager.scanStart()
     }
-    
+
     func scanStop() {
         manager.scanStop()
     }
