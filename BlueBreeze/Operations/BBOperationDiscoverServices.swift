@@ -6,17 +6,17 @@
 import CoreBluetooth
 
 class BBOperationDiscoverServices: BBOperation<Void> {
-    override func execute(_ centralManager: CBCentralManager) {
+    override func execute(_ centralManager: CBCentralManagerProtocol) {
         peripheral.discoverServices(nil)
     }
 
-    override func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
+    override func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverServices error: (any Error)?) {
         if let error {
             completeError(error)
             return
         }
 
-        guard let services = peripheral.services, !services.isEmpty else {
+        guard let services = peripheral.services_, !services.isEmpty else {
             // Complete immediately if there are no services
             completeSuccess(())
             return
@@ -27,14 +27,14 @@ class BBOperationDiscoverServices: BBOperation<Void> {
         }
     }
 
-    override func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    override func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: (any Error)?) {
         if let error {
             completeError(error)
             return
         }
 
         // A missing service means that discovery is not complete
-        if peripheral.services?.contains(where: { $0.characteristics == nil }) == true {
+        if peripheral.services_?.contains(where: { $0.characteristics_ == nil }) == true {
             return
         }
 
