@@ -191,8 +191,6 @@
 				D2FEF11D2C70AE1700BDF3AE /* BBError.swift */,
 				D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */,
 				D22CD89A2D19D39C00C58977 /* BBState.swift */,
-				D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */,
-				D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */,
 				D22CD8A62D1D650F00C58977 /* BBUUID.swift */,
 			);
 			path = BlueBreeze;
@@ -201,6 +199,7 @@
 		D2FEF1212C71F7FB00BDF3AE /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */,
 				D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */,
 				D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */,
 				D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */,
@@ -209,6 +208,7 @@
 				D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */,
 				D2FEF1282C76260600BDF3AE /* BBOperationNotifications.swift */,
 				D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */,
+				D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";

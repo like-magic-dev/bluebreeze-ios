@@ -9,7 +9,7 @@
 
 import Foundation
 import CoreBluetooth
-//
+
 public class BBAssignedNumbers {
     /// Bluetooth SIG service UUIDs
     public static let serviceUUIDs: [BBUUID: String] = [
