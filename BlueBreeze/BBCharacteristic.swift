@@ -22,8 +22,8 @@ public class BBCharacteristic: NSObject, Identifiable {
     // MARK: - Observable properties
 
     /// The characteristic's current value: the result of the last successful ``read()``, or the
-    /// last notification received while subscribed. Empty (`Data()`) until either has happened.
-    public let data = CurrentValueSubject<Data, Never>(Data())
+    /// last notification received while subscribed. `nil` by default.
+    public let data = CurrentValueSubject<Data?, Never>(nil)
 
     /// Whether notifications are currently enabled for this characteristic. Updates automatically
     /// after ``subscribe()``/``unsubscribe()`` complete.
@@ -122,9 +122,7 @@ extension BBCharacteristic: CBPeripheralDelegate {
             return
         }
 
-        if let value = characteristic.value {
-            self.data.value = value
-        }
+        self.data.value = characteristic.value
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
