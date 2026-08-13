@@ -5,10 +5,10 @@ This script updates the version number in the podspec file, including both
 the spec.version and the git tag in spec.source.
 
 Usage:
-    python update_version.py <version>
-    
+    python bump_version.py <version>
+
 Example:
-    python update_version.py 0.1.2
+    python bump_version.py 0.1.2
 """
 
 import sys
@@ -70,8 +70,8 @@ def update_podspec_version(version: str) -> bool:
 def main():
     """Main function to update version."""
     if len(sys.argv) != 2:
-        print("Usage: python update_version.py <version>")
-        print("Example: python update_version.py 0.1.2")
+        print("Usage: python bump_version.py <version>")
+        print("Example: python bump_version.py 0.1.2")
         sys.exit(1)
     
     version = sys.argv[1]

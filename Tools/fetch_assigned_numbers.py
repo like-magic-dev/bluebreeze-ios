@@ -13,7 +13,7 @@ Dependencies:
     - PyYAML>=6.0
 
 Usage:
-    python fetch_known_uuids.py
+    python fetch_assigned_numbers.py
 """
 
 import subprocess
@@ -39,8 +39,7 @@ with open(OUTPUT, "w", encoding="utf-8") as output_file:
     output_file.write("// Do not edit directly.\n")
     output_file.write("//\n\n")
     output_file.write("import Foundation\n")
-    output_file.write("import CoreBluetooth\n")
-    output_file.write("//\n")
+    output_file.write("import CoreBluetooth\n\n")
     output_file.write("public class BBAssignedNumbers {\n")
     
     # Export all service UUIDs
