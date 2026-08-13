@@ -82,6 +82,9 @@ public class BBManager: NSObject {
 
     public let scanEnabled = CurrentValueSubject<Bool, Never>(false)
 
+    // Remembers the filter passed to scanStart so it is reused on BT power cycles
+    private var scanServiceUuids: [BBUUID]?
+
     public let scanResults = PassthroughSubject<BBScanResult, Never>()
 
     public func scanStart(serviceUuids: [BBUUID]? = nil) {
@@ -95,6 +98,8 @@ public class BBManager: NSObject {
                 CBCentralManagerScanOptionAllowDuplicatesKey: true
             ]
         )
+
+        scanServiceUuids = serviceUuids
         scanEnabled.value = true
     }
 
@@ -104,7 +109,9 @@ public class BBManager: NSObject {
         }
 
         centralManager.stopScan()
+
         scanEnabled.value = false
+        scanServiceUuids = nil
     }
 }
 
@@ -119,10 +126,11 @@ extension BBManager: CBCentralManagerDelegate {
         state.value = central.state.bbState
 
         if scanEnabled.value && central.state == .poweredOn {
-            centralManager.scanForPeripherals(withServices: nil,
-                                              options: [
-                                                  CBCentralManagerScanOptionAllowDuplicatesKey: true
-                                              ])
+            centralManager.scanForPeripherals(
+                withServices: scanServiceUuids,
+                options: [
+                    CBCentralManagerScanOptionAllowDuplicatesKey: true
+                ])
         }
 
         devices.value.values.forEach { device in
