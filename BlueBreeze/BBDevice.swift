@@ -94,9 +94,12 @@ public class BBDevice: NSObject, BBOperationQueue {
         if let operationCurrent = operationCurrent {
             operationCurrent.execute(self.centralManager)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + operationCurrent.timeOut) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + operationCurrent.timeOut) { [weak self] in
                 if !operationCurrent.isCompleted {
                     operationCurrent.cancel()
+                    
+                    // The operation is now completed, so proceed with the next queued operation
+                    self?.operationCheck()
                 }
             }
 
