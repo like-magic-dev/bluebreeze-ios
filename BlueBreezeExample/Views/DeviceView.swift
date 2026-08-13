@@ -51,7 +51,7 @@ class DeviceViewModel: ObservableObject {
         do {
             try await device.connect()
             try await device.discoverServices()
-            try await device.requestMTU(512)
+            try await device.negotiateMTU()
         } catch {
             // Ignore error
         }

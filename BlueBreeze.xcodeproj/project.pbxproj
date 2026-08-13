@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D221B650302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */; };
 		D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BBAuthorization.swift */; };
 		D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* HomeView.swift */; };
 		D22CD8972D19AA4800C58977 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* ScanView.swift */; };
@@ -33,7 +34,6 @@
 		D26D3DDD2D064036002CE78D /* BBOperationDiscoverServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */; };
 		D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */; };
 		D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BBCharacteristic.swift */; };
-		D26D3DE12D064036002CE78D /* BBOperationRequestMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD02C7F59FB006586B6 /* BBOperationRequestMTU.swift */; };
 		D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */; };
 		D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */; };
 		D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */; };
@@ -64,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationNegotiateMTU.swift; sourceTree = "<group>"; };
 		D22CD8922D19A4D700C58977 /* BBAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAuthorization.swift; sourceTree = "<group>"; };
 		D22CD8942D19AA1900C58977 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D22CD8962D19AA4600C58977 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
 		D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationConnect.swift; sourceTree = "<group>"; };
 		D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationDiscoverServices.swift; sourceTree = "<group>"; };
-		D255ACD02C7F59FB006586B6 /* BBOperationRequestMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationRequestMTU.swift; sourceTree = "<group>"; };
 		D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationDisconnect.swift; sourceTree = "<group>"; };
 		D255ACD62C83275C006586B6 /* BBCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristic.swift; sourceTree = "<group>"; };
 		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +206,7 @@
 				D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */,
 				D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */,
 				D2FEF1222C71F81700BDF3AE /* BBOperationRead.swift */,
-				D255ACD02C7F59FB006586B6 /* BBOperationRequestMTU.swift */,
+				D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */,
 				D2FEF1282C76260600BDF3AE /* BBOperationNotifications.swift */,
 				D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */,
 			);
@@ -344,6 +344,7 @@
 			files = (
 				D26D3DD32D064036002CE78D /* BBOperationImpl.swift in Sources */,
 				D26D3DD42D064036002CE78D /* BBOperationRead.swift in Sources */,
+				D221B650302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift in Sources */,
 				D26D3DD52D064036002CE78D /* BBOperationDisconnect.swift in Sources */,
 				D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */,
 				D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */,
@@ -361,7 +362,6 @@
 				D26D3DDD2D064036002CE78D /* BBOperationDiscoverServices.swift in Sources */,
 				D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */,
 				D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */,
-				D26D3DE12D064036002CE78D /* BBOperationRequestMTU.swift in Sources */,
 				D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

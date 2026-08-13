@@ -56,8 +56,10 @@ public class BBDevice: NSObject, BBOperationQueue {
         try await operationEnqueue(BBOperationDiscoverServices(peripheral: peripheral))
     }
 
-    public func requestMTU(_ mtu: Int) async throws {
-        let mtu = try await operationEnqueue(BBOperationRequestMTU(peripheral: peripheral, targetMtu: 512))
+    // iOS negotiates the ATT MTU with the peripheral automatically once connected; there is no
+    // way to request a specific value. This reads back the negotiated MTU into `mtu`.
+    public func negotiateMTU() async throws {
+        let mtu = try await operationEnqueue(BBOperationNegotiateMTU(peripheral: peripheral))
         self.mtu.value = mtu
     }
 

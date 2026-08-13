@@ -5,18 +5,9 @@
 
 import CoreBluetooth
 
-class BBOperationRequestMTU: BBOperationImpl<Int> {
-    let targetMtu: Int
-
-    init(
-        peripheral: CBPeripheral,
-        targetMtu: Int,
-        continuation: BBContinuation<Int>? = nil
-    ) {
-        self.targetMtu = targetMtu
-        super.init(peripheral: peripheral, continuation: continuation)
-    }
-
+// iOS negotiates the ATT MTU with the peripheral automatically
+// There is no API to request a specific MTU value
+class BBOperationNegotiateMTU: BBOperationImpl<Int> {
     override func execute(_ centralManager: CBCentralManager) {
         let mtuWithResponse = peripheral.maximumWriteValueLength(for: .withResponse)
         let mtuWithoutResponse = peripheral.maximumWriteValueLength(for: .withoutResponse)
