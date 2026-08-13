@@ -6,11 +6,11 @@
 import CoreBluetooth
 
 class BBOperationDisconnect: BBOperation<Void> {
-    override func execute(_ centralManager: CBCentralManager) {
+    override func execute(_ centralManager: CBCentralManagerProtocol) {
         centralManager.cancelPeripheralConnection(peripheral)
     }
 
-    override func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+    override func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, error: (any Error)?) {
         if let error {
             completeError(error)
         } else {
@@ -18,7 +18,7 @@ class BBOperationDisconnect: BBOperation<Void> {
         }
     }
 
-    override func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+    override func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         if let error {
             completeError(error)
             return

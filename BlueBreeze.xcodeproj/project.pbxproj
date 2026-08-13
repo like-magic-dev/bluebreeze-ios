@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130C0DFBC7825BBC1B91B991 /* CBPeripheralProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D695D521A571C837028BFB0 /* CBPeripheralProtocol.swift */; };
+		299479F503A441A2264ADB01 /* CBCharacteristicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437F44B9CC5519AFCDE2494 /* CBCharacteristicProtocol.swift */; };
+		62E18CE7E7856CD9C13DECA3 /* CBServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433DB712385A05CC0D41B96F /* CBServiceProtocol.swift */; };
+		69C46EA054725593953D8428 /* CBCentralManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3228D1832ECB81BB6FA2F /* CBCentralManagerProtocol.swift */; };
 		D221B650302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */; };
 		D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BBAuthorization.swift */; };
 		D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* HomeView.swift */; };
@@ -36,6 +40,7 @@
 		D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */; };
 		D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */; };
 		D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */; };
+		FA443997DA456EB23F97FE59 /* CBDescriptorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7E7F577C4EF56D99AF22F /* CBDescriptorProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +68,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D695D521A571C837028BFB0 /* CBPeripheralProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBPeripheralProtocol.swift; sourceTree = "<group>"; };
+		1BC7E7F577C4EF56D99AF22F /* CBDescriptorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBDescriptorProtocol.swift; sourceTree = "<group>"; };
+		433DB712385A05CC0D41B96F /* CBServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBServiceProtocol.swift; sourceTree = "<group>"; };
+		B437F44B9CC5519AFCDE2494 /* CBCharacteristicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBCharacteristicProtocol.swift; sourceTree = "<group>"; };
+		B4A3228D1832ECB81BB6FA2F /* CBCentralManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBCentralManagerProtocol.swift; sourceTree = "<group>"; };
 		D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationNegotiateMTU.swift; sourceTree = "<group>"; };
 		D22CD8922D19A4D700C58977 /* BBAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAuthorization.swift; sourceTree = "<group>"; };
 		D22CD8942D19AA1900C58977 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -116,6 +126,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		782E9BF164BAC2D2954E139E /* CoreBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				B4A3228D1832ECB81BB6FA2F /* CBCentralManagerProtocol.swift */,
+				B437F44B9CC5519AFCDE2494 /* CBCharacteristicProtocol.swift */,
+				1BC7E7F577C4EF56D99AF22F /* CBDescriptorProtocol.swift */,
+				433DB712385A05CC0D41B96F /* CBServiceProtocol.swift */,
+				0D695D521A571C837028BFB0 /* CBPeripheralProtocol.swift */,
+			);
+			path = CoreBluetooth;
+			sourceTree = "<group>";
+		};
 		D22A7B5E2C0D0EA800C4B6CF = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +200,7 @@
 		D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */ = {
 			isa = PBXGroup;
 			children = (
+				782E9BF164BAC2D2954E139E /* CoreBluetooth */,
 				D2FEF1212C71F7FB00BDF3AE /* Operations */,
 				D22CD8922D19A4D700C58977 /* BBAuthorization.swift */,
 				D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */,
@@ -359,6 +382,11 @@
 				D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */,
 				D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */,
 				D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */,
+				69C46EA054725593953D8428 /* CBCentralManagerProtocol.swift in Sources */,
+				130C0DFBC7825BBC1B91B991 /* CBPeripheralProtocol.swift in Sources */,
+				299479F503A441A2264ADB01 /* CBCharacteristicProtocol.swift in Sources */,
+				62E18CE7E7856CD9C13DECA3 /* CBServiceProtocol.swift in Sources */,
+				FA443997DA456EB23F97FE59 /* CBDescriptorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,7 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeExample/Preview Content\"";
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "You need to grant permission to test BlueBreeze";
@@ -537,7 +565,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeExample/Preview Content\"";
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "You need to grant permission to test BlueBreeze";
@@ -574,7 +602,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -620,7 +648,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

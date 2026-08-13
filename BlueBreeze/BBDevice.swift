@@ -32,16 +32,16 @@ import Combine
 /// ```
 public class BBDevice: NSObject {
     init(
-        centralManager: CBCentralManager,
-        peripheral: CBPeripheral
+        centralManager: CBCentralManagerProtocol,
+        peripheral: CBPeripheralProtocol
     ) {
         self.centralManager = centralManager
         self.peripheral = peripheral
         self.operationQueueManager = BBOperationQueue(centralManager: centralManager)
     }
 
-    let centralManager: CBCentralManager
-    let peripheral: CBPeripheral
+    let centralManager: CBCentralManagerProtocol
+    let peripheral: CBPeripheralProtocol
     let operationQueueManager: BBOperationQueue
 
     /// The system-assigned identifier for this peripheral. Stable across app launches, but not
@@ -119,14 +119,16 @@ public class BBDevice: NSObject {
     }
 }
 
-// MARK: - CoreBluetooth delegate plumbing
+// MARK: - CoreBluetooth callback plumbing
 //
-// The methods below are `public` only because CBCentralManagerDelegate/CBPeripheralDelegate
-// require it; they are called by BBManager as it forwards CoreBluetooth callbacks for this
-// device's peripheral, not meant to be called directly.
+// The methods below mirror CBCentralManagerDelegate/CBPeripheralDelegate, but take BlueBreeze's
+// own CB*Protocol types rather than conforming to the real (concrete-typed) ObjC delegate
+// protocols. BBManager -- which does conform to the real delegates -- forwards CoreBluetooth
+// callbacks for this device's peripheral into these methods; they're not meant to be called
+// directly, and not part of BlueBreeze's public API.
 
-extension BBDevice: CBCentralManagerDelegate {
-    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+extension BBDevice {
+    func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
         if (central.state != .poweredOn) {
             self.services.value = [:]
             self.connectionStatus.value = .disconnected
@@ -135,25 +137,25 @@ extension BBDevice: CBCentralManagerDelegate {
         operationQueueManager.centralManagerDidUpdateState(central)
     }
 
-    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManagerProtocol, didConnect peripheral: CBPeripheralProtocol) {
         operationQueueManager.centralManager(central, didConnect: peripheral)
     }
 
-    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didFailToConnect peripheral: CBPeripheralProtocol, error: (any Error)?) {
         self.services.value = [:]
         self.connectionStatus.value = .disconnected
 
         operationQueueManager.centralManager(central, didFailToConnect: peripheral, error: error)
     }
 
-    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, error: (any Error)?) {
         self.services.value = [:]
         self.connectionStatus.value = .disconnected
 
         operationQueueManager.centralManager(central, didDisconnectPeripheral: peripheral, error: error)
     }
 
-    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         self.services.value = [:]
         self.connectionStatus.value = .disconnected
 
@@ -161,9 +163,9 @@ extension BBDevice: CBCentralManagerDelegate {
     }
 }
 
-extension BBDevice: CBPeripheralDelegate {
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
-        peripheral.services?.forEach({ service in
+extension BBDevice {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverServices error: (any Error)?) {
+        peripheral.services_?.forEach({ service in
             if self.services.value[service.uuid] == nil {
                 var services = self.services.value
                 services[service.uuid] = []
@@ -174,10 +176,10 @@ extension BBDevice: CBPeripheralDelegate {
         operationQueueManager.peripheral(peripheral, didDiscoverServices: error)
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: (any Error)?) {
         var characteristics = self.services.value[service.uuid] ?? []
 
-        service.characteristics?.forEach({ characteristic in
+        service.characteristics_?.forEach({ characteristic in
             if !characteristics.contains(where: { $0.id == characteristic.uuid }) {
                 characteristics.append(
                     BBCharacteristic(
@@ -196,30 +198,30 @@ extension BBDevice: CBPeripheralDelegate {
         operationQueueManager.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
 
         operationQueueManager.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor descriptor: CBDescriptorProtocol, error: (any Error)?) {
         operationQueueManager.peripheral(peripheral, didUpdateValueFor: descriptor, error: error)
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
 
         operationQueueManager.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didWriteValueFor: characteristic, error: error)
 
         operationQueueManager.peripheral(peripheral, didWriteValueFor: characteristic, error: error)
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
-        if let characteristic = descriptor.characteristic {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor descriptor: CBDescriptorProtocol, error: (any Error)?) {
+        if let characteristic = descriptor.characteristic_ {
             getCharacteristicWithUUID(characteristic.uuid)?.peripheral(peripheral, didWriteValueFor: descriptor, error: error)
         }
 

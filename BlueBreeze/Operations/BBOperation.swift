@@ -11,12 +11,12 @@ typealias BBContinuation<RESULT> = CheckedContinuation<RESULT, Error>
 
 /// Operation protocol
 
-protocol BBOperationProtocol: CBCentralManagerDelegate, CBPeripheralDelegate {
+protocol BBOperationProtocol: AnyObject {
     associatedtype RESULT
 
     // MARK: - Peripheral associated with this operation
 
-    var peripheral: CBPeripheral { get }
+    var peripheral: CBPeripheralProtocol { get }
 
     // MARK: - Object that handles the async result
 
@@ -24,7 +24,7 @@ protocol BBOperationProtocol: CBCentralManagerDelegate, CBPeripheralDelegate {
 
     // MARK: - Execute the operation
 
-    func execute(_ centralManager: CBCentralManager)
+    func execute(_ centralManager: CBCentralManagerProtocol)
 
     // MARK: - Cancel the operation
 
@@ -33,6 +33,22 @@ protocol BBOperationProtocol: CBCentralManagerDelegate, CBPeripheralDelegate {
     // MARK: - Time out
 
     var timeOut: TimeInterval { get }
+
+    // MARK: - Central manager and peripheral callbacks, mirroring CBCentralManagerDelegate/CBPeripheralDelegate
+
+    func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol)
+    func centralManager(_ central: CBCentralManagerProtocol, didConnect peripheral: CBPeripheralProtocol)
+    func centralManager(_ central: CBCentralManagerProtocol, didFailToConnect peripheral: CBPeripheralProtocol, error: (any Error)?)
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, error: (any Error)?)
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?)
+
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverServices error: (any Error)?)
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: (any Error)?)
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?)
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor descriptor: CBDescriptorProtocol, error: (any Error)?)
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: (any Error)?)
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?)
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor descriptor: CBDescriptorProtocol, error: (any Error)?)
 }
 
 /// Operation protocol extension that manages completion callbacks
@@ -65,23 +81,23 @@ extension BBOperationProtocol {
 /// in all other specialised operations, in particular some compulsory CoreBluetooth callbacks
 /// and the initialisation of peripheral and continuation
 
-class BBOperation<T>: NSObject, BBOperationProtocol {
+class BBOperation<T>: BBOperationProtocol {
     typealias RESULT = T
 
     init(
-        peripheral: CBPeripheral,
+        peripheral: CBPeripheralProtocol,
         continuation: BBContinuation<T>? = nil
     ) {
         self.peripheral = peripheral
         self.continuation = continuation
     }
 
-    let peripheral: CBPeripheral
+    let peripheral: CBPeripheralProtocol
     var continuation: BBContinuation<T>?
 
     // MARK: - Execute the operation
 
-    func execute(_ centralManager: CBCentralManager) {
+    func execute(_ centralManager: CBCentralManagerProtocol) {
         fatalError("Unimplemented error")
     }
 
@@ -99,27 +115,29 @@ class BBOperation<T>: NSObject, BBOperationProtocol {
 
     // MARK: Central manager and peripheral callbacks
 
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
         if central.state != .poweredOn {
             completeError(nil)
         }
     }
 
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) { }
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) { }
+    func centralManager(_ central: CBCentralManagerProtocol, didConnect peripheral: CBPeripheralProtocol) { }
+    func centralManager(_ central: CBCentralManagerProtocol, didFailToConnect peripheral: CBPeripheralProtocol, error: Error?) { }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, error: Error?) {
         completeError(error)
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         completeError(error)
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) { }
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverServices error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: Error?) { }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) { }
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) { }
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor characteristic: CBCharacteristicProtocol, error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor descriptor: CBDescriptorProtocol, error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: Error?) { }
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor descriptor: CBDescriptorProtocol, error: Error?) { }
 }

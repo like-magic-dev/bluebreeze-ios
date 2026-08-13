@@ -19,11 +19,11 @@ protocol BBOperationQueueProtocol: AnyObject {
 /// them to the current operation and then check whether the next queued operation can start.
 
 class BBOperationQueue: BBOperationQueueProtocol {
-    init(centralManager: CBCentralManager) {
+    init(centralManager: CBCentralManagerProtocol) {
         self.centralManager = centralManager
     }
 
-    let centralManager: CBCentralManager
+    let centralManager: CBCentralManagerProtocol
 
     private var operationCurrent: (any BBOperationProtocol)?
     private var operationQueue: [any BBOperationProtocol] = []
@@ -92,7 +92,7 @@ class BBOperationQueue: BBOperationQueueProtocol {
 
     // MARK: - Forward CoreBluetooth delegate callbacks to the current operation
 
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
         withOperationLock {
             operationCurrent?.centralManagerDidUpdateState(central)
         }
@@ -100,89 +100,89 @@ class BBOperationQueue: BBOperationQueueProtocol {
         operationCheck()
     }
 
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManagerProtocol, didConnect peripheral: CBPeripheralProtocol) {
         withOperationLock {
-            operationCurrent?.centralManager?(central, didConnect: peripheral)
+            operationCurrent?.centralManager(central, didConnect: peripheral)
         }
 
         operationCheck()
     }
 
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didFailToConnect peripheral: CBPeripheralProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.centralManager?(central, didFailToConnect: peripheral, error: error)
+            operationCurrent?.centralManager(central, didFailToConnect: peripheral, error: error)
         }
 
         operationCheck()
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.centralManager?(central, didDisconnectPeripheral: peripheral, error: error)
+            operationCurrent?.centralManager(central, didDisconnectPeripheral: peripheral, error: error)
         }
 
         operationCheck()
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
+    func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.centralManager?(central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
+            operationCurrent?.centralManager(central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverServices error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didDiscoverServices: error)
+            operationCurrent?.peripheral(peripheral, didDiscoverServices: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didDiscoverCharacteristicsFor: service, error: error)
+            operationCurrent?.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didUpdateValueFor: characteristic, error: error)
+            operationCurrent?.peripheral(peripheral, didUpdateValueFor: characteristic, error: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor descriptor: CBDescriptorProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didUpdateValueFor: descriptor, error: error)
+            operationCurrent?.peripheral(peripheral, didUpdateValueFor: descriptor, error: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
+            operationCurrent?.peripheral(peripheral, didUpdateNotificationStateFor: characteristic, error: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didWriteValueFor: characteristic, error: error)
+            operationCurrent?.peripheral(peripheral, didWriteValueFor: characteristic, error: error)
         }
 
         operationCheck()
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor descriptor: CBDescriptorProtocol, error: (any Error)?) {
         withOperationLock {
-            operationCurrent?.peripheral?(peripheral, didWriteValueFor: descriptor, error: error)
+            operationCurrent?.peripheral(peripheral, didWriteValueFor: descriptor, error: error)
         }
 
         operationCheck()
