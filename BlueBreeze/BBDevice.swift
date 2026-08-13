@@ -6,6 +6,30 @@
 import CoreBluetooth
 import Combine
 
+/// A single BLE peripheral discovered by a ``BBManager`` scan.
+///
+/// `BBDevice` instances are created and owned by `BBManager` -- you never construct one
+/// yourself, you get one from ``BBManager/devices`` or ``BBScanResult/device``. Each instance is
+/// stable for the lifetime of the app: the same `BBDevice` is reused across repeated
+/// discoveries, connects, and disconnects of the same physical peripheral.
+///
+/// All BLE operations (``connect()``, ``disconnect()``, ``discoverServices()``,
+/// ``negotiateMTU()``, and the read/write/subscribe methods on ``BBCharacteristic``) are queued
+/// and executed one at a time per device, in call order, each with a 5 second timeout. You don't
+/// need to serialize calls yourself -- just `await` them.
+///
+/// Typical flow: connect, discover services, then read/write/subscribe to the characteristics
+/// that appear in ``services``.
+/// ```swift
+/// try await device.connect()
+/// try await device.discoverServices()
+///
+/// for (_, characteristics) in device.services.value {
+///     for characteristic in characteristics where characteristic.properties.contains(.read) {
+///         let data = try await characteristic.read()
+///     }
+/// }
+/// ```
 public class BBDevice: NSObject, BBOperationQueue {
     init(
         centralManager: CBCentralManager,
@@ -18,46 +42,75 @@ public class BBDevice: NSObject, BBOperationQueue {
     let centralManager: CBCentralManager
     let peripheral: CBPeripheral
 
+    /// The system-assigned identifier for this peripheral. Stable across app launches, but not
+    /// guaranteed to be the same across different devices/installations for the same peripheral.
     public var id: UUID {
         get {
             return peripheral.identifier
         }
     }
 
+    /// The peripheral's name, if it has advertised or reported one. May be `nil`, and may change
+    /// (e.g. once connected, some peripherals report a more specific name than they advertised).
     public var name: String? {
         get {
             return peripheral.name
         }
     }
 
+    /// Services and characteristics discovered so far, keyed by service UUID.
+    ///
+    /// A service key appears here as soon as it's discovered (with an empty characteristics
+    /// array), and its characteristics populate once ``discoverServices()`` completes. Empty
+    /// until ``discoverServices()`` has been called and awaited.
     public let services = CurrentValueSubject<[BBUUID: [BBCharacteristic]], Never>([:])
 
     // MARK: - Connection status
 
+    /// The device's current connection state. Updates automatically on connect, disconnect, and
+    /// unexpected link loss -- you don't need to poll it after calling ``connect()``/``disconnect()``.
     public let connectionStatus = CurrentValueSubject<BBDeviceConnectionStatus, Never>(.disconnected)
 
     // MARK: - MTU
 
+    /// The negotiated ATT MTU (Maximum Transmission Unit) in bytes, i.e. the largest amount of
+    /// data that can be sent in a single read/write. Defaults to the BLE minimum of 23 until
+    /// ``negotiateMTU()`` is called and awaited.
     public let mtu = CurrentValueSubject<Int, Never>(Int.defaultMtu)
 
     // MARK: - Operations
 
+    /// Connects to the peripheral. Updates ``connectionStatus`` to `.connected` on success.
+    ///
+    /// - Throws: An error if the connection attempt fails or times out.
     public func connect() async throws {
         try await operationEnqueue(BBOperationConnect(peripheral: peripheral))
         self.connectionStatus.value = .connected
     }
 
+    /// Disconnects from the peripheral. Updates ``connectionStatus`` to `.disconnected` on success.
+    ///
+    /// - Throws: An error if the disconnect attempt fails or times out.
     public func disconnect() async throws {
         try await operationEnqueue(BBOperationDisconnect(peripheral: peripheral))
         self.connectionStatus.value = .disconnected
     }
 
+    /// Discovers all of the peripheral's services and their characteristics, populating
+    /// ``services``. Requires an active connection.
+    ///
+    /// - Throws: An error if discovery fails or times out.
     public func discoverServices() async throws {
         try await operationEnqueue(BBOperationDiscoverServices(peripheral: peripheral))
     }
 
-    // iOS negotiates the ATT MTU with the peripheral automatically once connected; there is no
-    // way to request a specific value. This reads back the negotiated MTU into `mtu`.
+    /// Reads back the ATT MTU that CoreBluetooth negotiated with the peripheral, updating ``mtu``.
+    ///
+    /// iOS negotiates the MTU automatically as part of connecting; there is no API to request a
+    /// specific value, so this only reads back the result -- it does not (and cannot) influence
+    /// what gets negotiated.
+    ///
+    /// - Throws: An error if the underlying read fails.
     public func negotiateMTU() async throws {
         let mtu = try await operationEnqueue(BBOperationNegotiateMTU(peripheral: peripheral))
         self.mtu.value = mtu
@@ -130,6 +183,12 @@ public class BBDevice: NSObject, BBOperationQueue {
         }
     }
 }
+
+// MARK: - CoreBluetooth delegate plumbing
+//
+// The methods below are `public` only because CBCentralManagerDelegate/CBPeripheralDelegate
+// require it; they are called by BBManager as it forwards CoreBluetooth callbacks for this
+// device's peripheral, not meant to be called directly.
 
 extension BBDevice: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {

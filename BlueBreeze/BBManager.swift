@@ -13,6 +13,32 @@ import UIKit
 import AppKit
 #endif
 
+/// The entry point for BlueBreeze: owns the underlying `CBCentralManager`, tracks Bluetooth
+/// authorization and power state, and discovers peripherals as ``BBDevice`` instances.
+///
+/// Create and retain a single `BBManager` for the lifetime of your app (or feature). All of its
+/// state is exposed as Combine publishers so your UI can observe it reactively:
+/// ```swift
+/// let manager = BBManager()
+///
+/// manager.state
+///     .sink { state in
+///         if state == .poweredOn {
+///             manager.scanStart()
+///         }
+///     }
+///     .store(in: &cancellables)
+///
+/// manager.scanResults
+///     .sink { result in
+///         print(result.name ?? "Unknown device", result.rssi)
+///     }
+///     .store(in: &cancellables)
+/// ```
+///
+/// - Important: All `CBCentralManagerDelegate`/`CBPeripheralDelegate` callbacks (and therefore all
+///   publisher updates driven by them) are delivered on a private background queue, not the main
+///   thread. Use `.receive(on: DispatchQueue.main)` before updating UI.
 public class BBManager: NSObject {
     public override init() {
         super.init()
@@ -36,13 +62,21 @@ public class BBManager: NSObject {
 
     // MARK: - Permissions
 
+    /// The app's current Bluetooth authorization status. Publishes an update whenever the user
+    /// grants, denies, or changes Bluetooth permission for the app.
     public let authorizationStatus = CurrentValueSubject<BBAuthorization, Never>(.unknown)
 
+    /// Triggers the system Bluetooth permission prompt if authorization is still ``BBAuthorization/unknown``.
+    ///
+    /// Call this before scanning if you want to prompt the user explicitly rather than have the
+    /// prompt appear implicitly on the first ``scanStart(serviceUuids:)`` call.
     public func authorizationRequest() {
         // Creating the object causes a popup request on iOS 13.1+
         _ = centralManager
     }
 
+    /// Opens the system Settings screen where the user can grant Bluetooth permission after
+    /// having previously denied it (the in-app prompt cannot be shown again once denied).
     public func authorizationOpenSettings() {
 #if os(iOS) || os(ipadOS)
         if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
@@ -57,6 +91,8 @@ public class BBManager: NSObject {
 
     // MARK: - Capabilities
 
+    /// Whether this device supports Bluetooth 5 extended scanning and connecting (longer range,
+    /// higher throughput, and more advertisement data than legacy Bluetooth 4.x).
     public var supportsExtended: Bool {
 #if os(iOS) || os(watchOS) || os(ipadOS)
         // Dynamic check for extended scan capability
@@ -72,21 +108,40 @@ public class BBManager: NSObject {
 
     // MARK: - Online
 
+    /// The current power/availability state of the device's Bluetooth adapter.
     public let state = CurrentValueSubject<BBState, Never>(.unknown)
 
     // MARK: - Devices
 
+    /// All peripherals discovered so far (during this scan or a previous one), keyed by their
+    /// system-assigned identifier. Entries are added as they're discovered and are never removed
+    /// automatically, so a device that goes out of range remains here with its last known state.
     public let devices = CurrentValueSubject<[UUID: BBDevice], Never>([:])
 
     // MARK: - Scan
 
+    /// Whether a scan is currently in progress. Reflects the state requested via
+    /// ``scanStart(serviceUuids:)``/``scanStop()``, not just whether the adapter is powered on --
+    /// if the adapter powers back on while this is `true`, scanning resumes automatically.
     public let scanEnabled = CurrentValueSubject<Bool, Never>(false)
 
     // Remembers the filter passed to scanStart so it is reused on BT power cycles
     private var scanServiceUuids: [BBUUID]?
 
+    /// Fires once for every advertisement packet received while scanning, including repeated
+    /// packets from the same device -- this is not a "new device discovered" event. Use
+    /// ``BBScanResult/device`` to access the corresponding stable ``BBDevice``, and ``devices``
+    /// if you only need the deduplicated set of discovered peripherals.
     public let scanResults = PassthroughSubject<BBScanResult, Never>()
 
+    /// Starts scanning for nearby peripherals. Does nothing if a scan is already in progress.
+    ///
+    /// If the adapter isn't powered on yet, the request is remembered and the scan starts
+    /// automatically once it is.
+    ///
+    /// - Parameter serviceUuids: Restricts results to peripherals advertising at least one of
+    ///   these service UUIDs. Pass `nil` (the default) to discover all nearby peripherals --
+    ///   note that iOS requires an explicit list while the app is backgrounded.
     public func scanStart(serviceUuids: [BBUUID]? = nil) {
         guard !scanEnabled.value else {
             return
@@ -103,6 +158,7 @@ public class BBManager: NSObject {
         scanEnabled.value = true
     }
 
+    /// Stops an in-progress scan. Does nothing if no scan is in progress.
     public func scanStop() {
         guard scanEnabled.value else {
             return
@@ -114,6 +170,12 @@ public class BBManager: NSObject {
         scanServiceUuids = nil
     }
 }
+
+// MARK: - CoreBluetooth delegate plumbing
+//
+// The methods below are `public` only because CBCentralManagerDelegate/CBPeripheralDelegate
+// require it; they are called by CoreBluetooth, not meant to be called directly, and simply
+// route each callback to the BBDevice it concerns.
 
 extension BBManager: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {

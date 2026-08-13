@@ -5,4 +5,6 @@
 
 import CoreBluetooth
 
+/// A Bluetooth UUID, identifying a service, characteristic, or descriptor. An alias for
+/// `CBUUID`, so any CoreBluetooth API that produces or accepts a `CBUUID` interoperates directly.
 public typealias BBUUID = CBUUID
