@@ -5,12 +5,16 @@
 
 import Foundation
 
-struct BBError: Error {
-    let message: String
+public struct BBError: Error {
+    public let message: String
+
+    public init(message: String) {
+        self.message = message
+    }
 }
 
 extension BBError {
-    static var unknown: BBError {
+    public static var unknown: BBError {
         get {
             return BBError(message: "Unknown error")
         }
