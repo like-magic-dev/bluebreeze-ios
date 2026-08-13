@@ -16,8 +16,6 @@ public class BBCharacteristic: NSObject, Identifiable {
     let peripheral: CBPeripheral
     let characteristic: CBCharacteristic
 
-    weak var operationQueue: BBOperationQueue?
-
     // MARK: - Observable properties
 
     public let data = CurrentValueSubject<Data, Never>(Data())
@@ -50,26 +48,39 @@ public class BBCharacteristic: NSObject, Identifiable {
         }
     }
 
+    // MARK: - Operation queue
+
+    weak var operationQueue: BBOperationQueue?
+
+    // Fail with an exception if the weak operation queue is not available anymore
+    private func requireOperationQueue() throws -> BBOperationQueue {
+        guard let operationQueue else {
+            throw BBError(message: "Device is no longer available")
+        }
+
+        return operationQueue
+    }
+
     // MARK: - Operations
 
     public func read() async throws -> Data? {
         let operation = BBOperationRead(peripheral: peripheral, characteristic: characteristic)
-        return try await operationQueue?.operationEnqueue(operation)
+        return try await requireOperationQueue().operationEnqueue(operation)
     }
 
     public func write(_ data: Data, withResponse: Bool = true) async throws {
         let operation = BBOperationWrite(peripheral: peripheral, characteristic: characteristic, data: data, withResponse: withResponse)
-        try await operationQueue?.operationEnqueue(operation)
+        try await requireOperationQueue().operationEnqueue(operation)
     }
 
     public func subscribe() async throws {
         let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: true)
-        try await operationQueue?.operationEnqueue(operation)
+        try await requireOperationQueue().operationEnqueue(operation)
     }
 
     public func unsubscribe() async throws {
         let operation = BBOperationNotifications(peripheral: peripheral, characteristic: characteristic, enabled: false)
-        try await operationQueue?.operationEnqueue(operation)
+        try await requireOperationQueue().operationEnqueue(operation)
     }
 }
 
