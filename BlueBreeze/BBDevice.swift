@@ -104,6 +104,13 @@ public class BBDevice: NSObject, BBOperationQueue {
 
         nextOperation.execute(self.centralManager)
 
+        // The operation completed synchronously
+        guard !nextOperation.isCompleted else {
+            operationCheck()
+            return
+        }
+
+        // The operation is still running, set a timeout
         DispatchQueue.main.asyncAfter(deadline: .now() + nextOperation.timeOut) { [weak self] in
             guard let self else { return }
 
@@ -121,8 +128,6 @@ public class BBDevice: NSObject, BBOperationQueue {
                 self.operationCheck()
             }
         }
-
-        self.operationCheck()
     }
 }
 
