@@ -45,7 +45,7 @@ class CharacteristicViewModel: ObservableObject {
 
     // Data
 
-    @Published var data: Data = Data()
+    @Published var data: Data? = nil
 
     // Write data
 
@@ -83,7 +83,7 @@ struct CharacteristicView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(viewModel.id).font(.caption)
-                Text(viewModel.data.isEmpty ? "-" : viewModel.data.hexString)
+                Text(viewModel.data?.hexString ?? "-")
             }
             Spacer()
             if viewModel.canRead {
