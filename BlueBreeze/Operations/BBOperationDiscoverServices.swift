@@ -16,7 +16,13 @@ class BBOperationDiscoverServices: BBOperationImpl<Void> {
             return
         }
 
-        peripheral.services?.forEach { service in
+        guard let services = peripheral.services, !services.isEmpty else {
+            // Complete immediately if there are no services
+            completeSuccess(())
+            return
+        }
+
+        services.forEach { service in
             peripheral.discoverCharacteristics(nil, for: service)
         }
     }
