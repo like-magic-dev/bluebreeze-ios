@@ -5,7 +5,7 @@
 
 import CoreBluetooth
 
-class BBOperationDisconnect: BBOperationImpl<Void> {
+class BBOperationDisconnect: BBOperation<Void> {
     override func execute(_ centralManager: CBCentralManager) {
         centralManager.cancelPeripheralConnection(peripheral)
     }

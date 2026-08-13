@@ -5,7 +5,7 @@
 
 import CoreBluetooth
 
-class BBOperationConnect: BBOperationImpl<Void> {
+class BBOperationConnect: BBOperation<Void> {
     override func execute(_ centralManager: CBCentralManager) {
         centralManager.connect(peripheral)
     }

@@ -10,7 +10,7 @@ import Combine
 /// once ``BBDevice/discoverServices()`` completes. Check ``properties`` before calling an operation.
 /// Calling an unsupported operation fails with an error from CoreBluetooth.
 public class BBCharacteristic: NSObject, Identifiable {
-    init(peripheral: CBPeripheral, characteristic: CBCharacteristic, operationQueue: BBOperationQueue?) {
+    init(peripheral: CBPeripheral, characteristic: CBCharacteristic, operationQueue: BBOperationQueueProtocol?) {
         self.peripheral = peripheral
         self.characteristic = characteristic
         self.operationQueue = operationQueue
@@ -60,10 +60,10 @@ public class BBCharacteristic: NSObject, Identifiable {
 
     // MARK: - Operation queue
 
-    weak var operationQueue: BBOperationQueue?
+    weak var operationQueue: BBOperationQueueProtocol?
 
     // Fail with an exception if the weak operation queue is not available anymore
-    private func requireOperationQueue() throws -> BBOperationQueue {
+    private func requireOperationQueue() throws -> BBOperationQueueProtocol {
         guard let operationQueue else {
             throw BBError(message: "Device is no longer available")
         }
