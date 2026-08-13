@@ -5,7 +5,7 @@
 
 import CoreBluetooth
 
-class BBOperationWrite: BBOperationImpl<Void> {
+class BBOperationWrite: BBOperation<Void> {
     let characteristic: CBCharacteristic
     let data: Data
     let withResponse: Bool

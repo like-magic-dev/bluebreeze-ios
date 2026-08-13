@@ -21,7 +21,6 @@
 		D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C62D11D6200055B1A9 /* Assets.xcassets */; };
 		D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); };
 		D26353DB2D11D7790055B1A9 /* BlueBreeze.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D26D3DD32D064036002CE78D /* BBOperationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */; };
 		D26D3DD42D064036002CE78D /* BBOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BBOperationRead.swift */; };
 		D26D3DD52D064036002CE78D /* BBOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */; };
 		D26D3DD62D064036002CE78D /* BBOperationWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */; };
@@ -85,7 +84,6 @@
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristicProperty.swift; sourceTree = "<group>"; };
 		D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationQueue.swift; sourceTree = "<group>"; };
-		D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationImpl.swift; sourceTree = "<group>"; };
 		D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBScanResult.swift; sourceTree = "<group>"; };
 		D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlueBreeze.podspec; sourceTree = "<group>"; };
 		D2B990712F22821500916606 /* BlueBreeze.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlueBreeze.h; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */,
-				D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */,
 				D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */,
 				D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */,
 				D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */,
@@ -342,7 +339,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26D3DD32D064036002CE78D /* BBOperationImpl.swift in Sources */,
 				D26D3DD42D064036002CE78D /* BBOperationRead.swift in Sources */,
 				D221B650302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift in Sources */,
 				D26D3DD52D064036002CE78D /* BBOperationDisconnect.swift in Sources */,

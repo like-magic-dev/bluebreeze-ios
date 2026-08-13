@@ -5,7 +5,7 @@
 
 import CoreBluetooth
 
-class BBOperationNotifications: BBOperationImpl<Void> {
+class BBOperationNotifications: BBOperation<Void> {
     let characteristic: CBCharacteristic
     let enabled: Bool
 

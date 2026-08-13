@@ -5,7 +5,7 @@
 
 import CoreBluetooth
 
-class BBOperationRead: BBOperationImpl<Data?> {
+class BBOperationRead: BBOperation<Data?> {
     let characteristic: CBCharacteristic
 
     init(
