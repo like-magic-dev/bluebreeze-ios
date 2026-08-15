@@ -3,43 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D221B650302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */; };
-		D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8922D19A4D700C58977 /* BBAuthorization.swift */; };
-		D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8942D19AA1900C58977 /* HomeView.swift */; };
-		D22CD8972D19AA4800C58977 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8962D19AA4600C58977 /* ScanView.swift */; };
-		D22CD89B2D19D46700C58977 /* BBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD89A2D19D39C00C58977 /* BBState.swift */; };
-		D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */; };
-		D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A62D1D650F00C58977 /* BBUUID.swift */; };
-		D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */; };
-		D22CD8BF2D1E9B3B00C58977 /* CharacteristicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */; };
-		D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */; };
-		D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */; };
-		D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D26353C62D11D6200055B1A9 /* Assets.xcassets */; };
+		D221B706303060AC009A6CC5 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); };
 		D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); };
 		D26353DB2D11D7790055B1A9 /* BlueBreeze.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D26D3DD32D064036002CE78D /* BBOperationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */; };
-		D26D3DD42D064036002CE78D /* BBOperationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1222C71F81700BDF3AE /* BBOperationRead.swift */; };
-		D26D3DD52D064036002CE78D /* BBOperationDisconnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */; };
-		D26D3DD62D064036002CE78D /* BBOperationWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */; };
-		D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3B32C17A575004C83B5 /* BBDevice.swift */; };
-		D26D3DD82D064036002CE78D /* BBOperationNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1282C76260600BDF3AE /* BBOperationNotifications.swift */; };
-		D26D3DD92D064036002CE78D /* BBAssignedNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF1152C6F50CA00BDF3AE /* BBAssignedNumbers.swift */; };
-		D26D3DDA2D064036002CE78D /* BBOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */; };
-		D26D3DDB2D064036002CE78D /* BBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11D2C70AE1700BDF3AE /* BBError.swift */; };
-		D26D3DDC2D064036002CE78D /* BBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */; };
-		D26D3DDD2D064036002CE78D /* BBOperationDiscoverServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */; };
-		D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */; };
-		D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACD62C83275C006586B6 /* BBCharacteristic.swift */; };
-		D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */; };
-		D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */; };
-		D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D221B707303060AC009A6CC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22A7B5F2C0D0EA800C4B6CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D26D3DBA2D06402F002CE78D;
+			remoteInfo = BlueBreeze;
+		};
 		D26353DC2D11D7790055B1A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D22A7B5F2C0D0EA800C4B6CF /* Project object */;
@@ -64,42 +44,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationNegotiateMTU.swift; sourceTree = "<group>"; };
-		D22CD8922D19A4D700C58977 /* BBAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAuthorization.swift; sourceTree = "<group>"; };
-		D22CD8942D19AA1900C58977 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		D22CD8962D19AA4600C58977 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
-		D22CD89A2D19D39C00C58977 /* BBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBState.swift; sourceTree = "<group>"; };
-		D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
-		D22CD8A62D1D650F00C58977 /* BBUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBUUID.swift; sourceTree = "<group>"; };
-		D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDeviceConnectionStatus.swift; sourceTree = "<group>"; };
-		D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
-		D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationConnect.swift; sourceTree = "<group>"; };
-		D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationDiscoverServices.swift; sourceTree = "<group>"; };
-		D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationDisconnect.swift; sourceTree = "<group>"; };
-		D255ACD62C83275C006586B6 /* BBCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristic.swift; sourceTree = "<group>"; };
+		D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBreezeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D26353C62D11D6200055B1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBreezeExample.swift; sourceTree = "<group>"; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCharacteristicProperty.swift; sourceTree = "<group>"; };
-		D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationQueue.swift; sourceTree = "<group>"; };
-		D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationImpl.swift; sourceTree = "<group>"; };
-		D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBScanResult.swift; sourceTree = "<group>"; };
 		D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlueBreeze.podspec; sourceTree = "<group>"; };
 		D2B990712F22821500916606 /* BlueBreeze.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlueBreeze.h; sourceTree = "<group>"; };
-		D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBManager.swift; sourceTree = "<group>"; };
-		D2D9B3B32C17A575004C83B5 /* BBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDevice.swift; sourceTree = "<group>"; };
-		D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperationWrite.swift; sourceTree = "<group>"; };
-		D2FEF1152C6F50CA00BDF3AE /* BBAssignedNumbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBAssignedNumbers.swift; sourceTree = "<group>"; };
-		D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOperation.swift; sourceTree = "<group>"; };
-		D2FEF11D2C70AE1700BDF3AE /* BBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBError.swift; sourceTree = "<group>"; };
-		D2FEF1222C71F81700BDF3AE /* BBOperationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBOperationRead.swift; sourceTree = "<group>"; };
-		D2FEF1282C76260600BDF3AE /* BBOperationNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBOperationNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D221B67E302E0EB7009A6CC5 /* BlueBreeze */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreeze; sourceTree = "<group>"; };
+		D221B6E7302E2469009A6CC5 /* BlueBreezeExample */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeExample; sourceTree = "<group>"; };
+		D221B703303060AB009A6CC5 /* BlueBreezeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		D221B6FF303060AB009A6CC5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D221B706303060AC009A6CC5 /* BlueBreeze.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D26353972D11D5AE0055B1A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -121,8 +88,9 @@
 		D22A7B5E2C0D0EA800C4B6CF = {
 			isa = PBXGroup;
 			children = (
-				D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */,
-				D26353C92D11D6200055B1A9 /* BlueBreezeExample */,
+				D221B67E302E0EB7009A6CC5 /* BlueBreeze */,
+				D221B6E7302E2469009A6CC5 /* BlueBreezeExample */,
+				D221B703303060AB009A6CC5 /* BlueBreezeTests */,
 				D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */,
 				D2B990712F22821500916606 /* BlueBreeze.h */,
 				D26D3DB12D063EA6002CE78D /* Package.swift */,
@@ -136,38 +104,9 @@
 			children = (
 				D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */,
 				D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */,
+				D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D22CD89C2D1A99E200C58977 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D22CD8BE2D1E9B3B00C58977 /* CharacteristicView.swift */,
-				D22CD8A02D1A9A2C00C58977 /* DeviceView.swift */,
-				D22CD8942D19AA1900C58977 /* HomeView.swift */,
-				D22CD8962D19AA4600C58977 /* ScanView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		D26353C52D11D6200055B1A9 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				D26353C42D11D6200055B1A9 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		D26353C92D11D6200055B1A9 /* BlueBreezeExample */ = {
-			isa = PBXGroup;
-			children = (
-				D26353C52D11D6200055B1A9 /* Preview Content */,
-				D22CD89C2D1A99E200C58977 /* Views */,
-				D26353C72D11D6200055B1A9 /* BlueBreezeExample.swift */,
-				D26353C62D11D6200055B1A9 /* Assets.xcassets */,
-			);
-			path = BlueBreezeExample;
 			sourceTree = "<group>";
 		};
 		D26353D12D11D7140055B1A9 /* Frameworks */ = {
@@ -175,42 +114,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D29F39C42D05A0AF00E7B2D8 /* BlueBreeze */ = {
-			isa = PBXGroup;
-			children = (
-				D2FEF1212C71F7FB00BDF3AE /* Operations */,
-				D22CD8922D19A4D700C58977 /* BBAuthorization.swift */,
-				D28830382D2AC504009584AB /* BBCharacteristicProperty.swift */,
-				D255ACD62C83275C006586B6 /* BBCharacteristic.swift */,
-				D2FEF1152C6F50CA00BDF3AE /* BBAssignedNumbers.swift */,
-				D2D9B3B32C17A575004C83B5 /* BBDevice.swift */,
-				D2B5C13D2D428C6E0061A7F9 /* BBScanResult.swift */,
-				D22CD8A82D1D67BE00C58977 /* BBDeviceConnectionStatus.swift */,
-				D2FEF11D2C70AE1700BDF3AE /* BBError.swift */,
-				D2D9B3AF2C17A4DF004C83B5 /* BBManager.swift */,
-				D22CD89A2D19D39C00C58977 /* BBState.swift */,
-				D22CD8A62D1D650F00C58977 /* BBUUID.swift */,
-			);
-			path = BlueBreeze;
-			sourceTree = "<group>";
-		};
-		D2FEF1212C71F7FB00BDF3AE /* Operations */ = {
-			isa = PBXGroup;
-			children = (
-				D2FEF11B2C70ADEB00BDF3AE /* BBOperation.swift */,
-				D29F39C22D059D3500E7B2D8 /* BBOperationImpl.swift */,
-				D255ACCC2C7F587B006586B6 /* BBOperationConnect.swift */,
-				D255ACD22C7F5DC7006586B6 /* BBOperationDisconnect.swift */,
-				D255ACCE2C7F5921006586B6 /* BBOperationDiscoverServices.swift */,
-				D2FEF1222C71F81700BDF3AE /* BBOperationRead.swift */,
-				D221B64F302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift */,
-				D2FEF1282C76260600BDF3AE /* BBOperationNotifications.swift */,
-				D2E501682CA34F5D00602BB5 /* BBOperationWrite.swift */,
-				D29F39C02D059CBF00E7B2D8 /* BBOperationQueue.swift */,
-			);
-			path = Operations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +129,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D221B701303060AB009A6CC5 /* BlueBreezeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D221B709303060AC009A6CC5 /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */;
+			buildPhases = (
+				D221B6FE303060AB009A6CC5 /* Sources */,
+				D221B6FF303060AB009A6CC5 /* Frameworks */,
+				D221B700303060AB009A6CC5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D221B708303060AC009A6CC5 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D221B703303060AB009A6CC5 /* BlueBreezeTests */,
+			);
+			name = BlueBreezeTests;
+			packageProductDependencies = (
+			);
+			productName = BlueBreezeTests;
+			productReference = D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D26353992D11D5AE0055B1A9 /* BlueBreezeExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D26353C12D11D5B00055B1A9 /* Build configuration list for PBXNativeTarget "BlueBreezeExample" */;
@@ -239,6 +165,9 @@
 			);
 			dependencies = (
 				D26353DD2D11D7790055B1A9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D221B6E7302E2469009A6CC5 /* BlueBreezeExample */,
 			);
 			name = BlueBreezeExample;
 			packageProductDependencies = (
@@ -260,6 +189,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				D221B67E302E0EB7009A6CC5 /* BlueBreeze */,
+			);
 			name = BlueBreeze;
 			packageProductDependencies = (
 			);
@@ -274,9 +206,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					D221B701303060AB009A6CC5 = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					D26353992D11D5AE0055B1A9 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -302,17 +237,23 @@
 			targets = (
 				D26D3DBA2D06402F002CE78D /* BlueBreeze */,
 				D26353992D11D5AE0055B1A9 /* BlueBreezeExample */,
+				D221B701303060AB009A6CC5 /* BlueBreezeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D221B700303060AB009A6CC5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D26353982D11D5AE0055B1A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26353CC2D11D6200055B1A9 /* Preview Assets.xcassets in Resources */,
-				D26353CD2D11D6200055B1A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,15 +267,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D221B6FE303060AB009A6CC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D26353962D11D5AE0055B1A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26353CA2D11D6200055B1A9 /* BlueBreezeExample.swift in Sources */,
-				D22CD8BF2D1E9B3B00C58977 /* CharacteristicView.swift in Sources */,
-				D22CD8972D19AA4800C58977 /* ScanView.swift in Sources */,
-				D22CD8A12D1A9A2E00C58977 /* DeviceView.swift in Sources */,
-				D22CD8952D19AA1C00C58977 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,33 +285,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26D3DD32D064036002CE78D /* BBOperationImpl.swift in Sources */,
-				D26D3DD42D064036002CE78D /* BBOperationRead.swift in Sources */,
-				D221B650302DBBB7009A6CC5 /* BBOperationNegotiateMTU.swift in Sources */,
-				D26D3DD52D064036002CE78D /* BBOperationDisconnect.swift in Sources */,
-				D22CD8932D19A4D700C58977 /* BBAuthorization.swift in Sources */,
-				D2B5C13E2D428C6E0061A7F9 /* BBScanResult.swift in Sources */,
-				D26D3DD62D064036002CE78D /* BBOperationWrite.swift in Sources */,
-				D26D3DD72D064036002CE78D /* BBDevice.swift in Sources */,
-				D28830392D2AC619009584AB /* BBCharacteristicProperty.swift in Sources */,
-				D22CD8A92D1D67C000C58977 /* BBDeviceConnectionStatus.swift in Sources */,
-				D26D3DD82D064036002CE78D /* BBOperationNotifications.swift in Sources */,
-				D26D3DD92D064036002CE78D /* BBAssignedNumbers.swift in Sources */,
-				D26D3DDA2D064036002CE78D /* BBOperationQueue.swift in Sources */,
-				D26D3DDB2D064036002CE78D /* BBError.swift in Sources */,
-				D26D3DDC2D064036002CE78D /* BBManager.swift in Sources */,
-				D22CD8A72D1D651000C58977 /* BBUUID.swift in Sources */,
-				D22CD89B2D19D46700C58977 /* BBState.swift in Sources */,
-				D26D3DDD2D064036002CE78D /* BBOperationDiscoverServices.swift in Sources */,
-				D26D3DDF2D064036002CE78D /* BBOperation.swift in Sources */,
-				D26D3DE02D064036002CE78D /* BBCharacteristic.swift in Sources */,
-				D26D3DE22D064036002CE78D /* BBOperationConnect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D221B708303060AC009A6CC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				macos,
+			);
+			target = D26D3DBA2D06402F002CE78D /* BlueBreeze */;
+			targetProxy = D221B707303060AC009A6CC5 /* PBXContainerItemProxy */;
+		};
 		D26353DD2D11D7790055B1A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilters = (
@@ -381,6 +312,52 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D221B70A303060AC009A6CC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		D221B70B303060AC009A6CC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 		D22A7B8A2C0D0EA900C4B6CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -505,7 +482,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeExample/Preview Content\"";
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "You need to grant permission to test BlueBreeze";
@@ -521,7 +498,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreezeTest;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
 				SDKROOT = iphoneos;
@@ -541,7 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBreezeExample/Preview Content\"";
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "You need to grant permission to test BlueBreeze";
@@ -557,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreezeTest;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
 				SDKROOT = iphoneos;
@@ -578,7 +555,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -599,7 +576,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreeze;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
@@ -624,7 +601,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S5L8VVQQZ2;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -645,7 +622,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreeze;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
@@ -665,6 +642,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D221B709303060AC009A6CC5 /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D221B70A303060AC009A6CC5 /* Debug */,
+				D221B70B303060AC009A6CC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D22A7B622C0D0EA800C4B6CF /* Build configuration list for PBXProject "BlueBreeze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

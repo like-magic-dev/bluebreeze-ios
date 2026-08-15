@@ -3,6 +3,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for details.
 //
 
+import Foundation
 import CoreBluetooth
 import Combine
 
@@ -10,14 +11,14 @@ import Combine
 /// once ``BBDevice/discoverServices()`` completes. Check ``properties`` before calling an operation.
 /// Calling an unsupported operation fails with an error from CoreBluetooth.
 public class BBCharacteristic: NSObject, Identifiable {
-    init(peripheral: CBPeripheral, characteristic: CBCharacteristic, operationQueue: BBOperationQueue?) {
+    init(peripheral: CBPeripheralProtocol, characteristic: CBCharacteristicProtocol, operationQueue: BBOperationQueueProtocol?) {
         self.peripheral = peripheral
         self.characteristic = characteristic
         self.operationQueue = operationQueue
     }
 
-    let peripheral: CBPeripheral
-    let characteristic: CBCharacteristic
+    let peripheral: CBPeripheralProtocol
+    let characteristic: CBCharacteristicProtocol
 
     // MARK: - Observable properties
 
@@ -60,10 +61,10 @@ public class BBCharacteristic: NSObject, Identifiable {
 
     // MARK: - Operation queue
 
-    weak var operationQueue: BBOperationQueue?
+    weak var operationQueue: BBOperationQueueProtocol?
 
     // Fail with an exception if the weak operation queue is not available anymore
-    private func requireOperationQueue() throws -> BBOperationQueue {
+    private func requireOperationQueue() throws -> BBOperationQueueProtocol {
         guard let operationQueue else {
             throw BBError(message: "Device is no longer available")
         }
@@ -113,10 +114,14 @@ public class BBCharacteristic: NSObject, Identifiable {
     }
 }
 
-// MARK: - Core Bluetooth protocols
+// MARK: - CoreBluetooth callback plumbing
+//
+// The methods below mirror CBPeripheralDelegate, but take BlueBreeze's own CB*Protocol types.
+// BBDevice routes CoreBluetooth callbacks for this characteristic into these methods; they're not
+// meant to be called directly, and not part of BlueBreeze's public API.
 
-extension BBCharacteristic: CBPeripheralDelegate {
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+extension BBCharacteristic {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
@@ -125,7 +130,7 @@ extension BBCharacteristic: CBPeripheralDelegate {
         self.data.value = characteristic.value
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
@@ -134,14 +139,14 @@ extension BBCharacteristic: CBPeripheralDelegate {
         self.isNotifying.value = characteristic.isNotifying
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
     }
 
-    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: (any Error)?) {
+    func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor descriptor: CBDescriptorProtocol, error: (any Error)?) {
         guard characteristic.uuid == self.id else {
             assert(false, "Parent class called wrong characteristic's callback")
             return

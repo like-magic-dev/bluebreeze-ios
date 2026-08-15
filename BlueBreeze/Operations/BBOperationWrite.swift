@@ -5,14 +5,14 @@
 
 import CoreBluetooth
 
-class BBOperationWrite: BBOperationImpl<Void> {
-    let characteristic: CBCharacteristic
+class BBOperationWrite: BBOperation<Void> {
+    let characteristic: CBCharacteristicProtocol
     let data: Data
     let withResponse: Bool
 
     init(
-        peripheral: CBPeripheral,
-        characteristic: CBCharacteristic,
+        peripheral: CBPeripheralProtocol,
+        characteristic: CBCharacteristicProtocol,
         data: Data,
         withResponse: Bool,
         continuation: BBContinuation<Void>? = nil
@@ -23,7 +23,7 @@ class BBOperationWrite: BBOperationImpl<Void> {
         super.init(peripheral: peripheral, continuation: continuation)
     }
 
-    override func execute(_ centralManager: CBCentralManager) {
+    override func execute(_ centralManager: CBCentralManagerProtocol) {
         peripheral.writeValue(data, for: characteristic, type: withResponse ? .withResponse : .withoutResponse)
 
         if !withResponse {
@@ -31,8 +31,8 @@ class BBOperationWrite: BBOperationImpl<Void> {
         }
     }
 
-    override func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: (any Error)?) {
-        if self.characteristic == characteristic {
+    override func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
+        if self.characteristic.uuid == characteristic.uuid {
             if let error {
                 completeError(error)
                 return

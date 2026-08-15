@@ -5,13 +5,13 @@
 
 import CoreBluetooth
 
-class BBOperationNotifications: BBOperationImpl<Void> {
-    let characteristic: CBCharacteristic
+class BBOperationNotifications: BBOperation<Void> {
+    let characteristic: CBCharacteristicProtocol
     let enabled: Bool
 
     init(
-        peripheral: CBPeripheral,
-        characteristic: CBCharacteristic,
+        peripheral: CBPeripheralProtocol,
+        characteristic: CBCharacteristicProtocol,
         enabled: Bool,
         continuation: BBContinuation<Void>? = nil
     ) {
@@ -20,12 +20,12 @@ class BBOperationNotifications: BBOperationImpl<Void> {
         super.init(peripheral: peripheral, continuation: continuation)
     }
 
-    override func execute(_ centralManager: CBCentralManager) {
+    override func execute(_ centralManager: CBCentralManagerProtocol) {
         peripheral.setNotifyValue(enabled, for: characteristic)
     }
 
-    override func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
-        if self.characteristic == characteristic {
+    override func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
+        if self.characteristic.uuid == characteristic.uuid {
             if let error {
                 completeError(error)
                 return
