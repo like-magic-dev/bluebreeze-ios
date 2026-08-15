@@ -96,6 +96,7 @@ struct DeviceView: View {
                 }
             }
         }
+        .buttonStyle(.borderless)
 #if os(iOS) || os(ipadOS)
         .listStyle(.grouped)
 #endif

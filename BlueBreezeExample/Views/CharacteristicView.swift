@@ -122,8 +122,8 @@ struct CharacteristicView: View {
                             .disabled(viewModel.writeString.hexData == nil)
                         }
                     }
-                    .frame(minWidth: 250)
                     .padding(16)
+                    .modifier(BottomSheetModifier())
                 }
             }
             if viewModel.canNotify {
@@ -141,6 +141,18 @@ struct CharacteristicView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+struct BottomSheetModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 16.4, macOS 13.3, *) {
+            content
+                .presentationDetents([.height(140)])
+                .presentationCompactAdaptation(.sheet)
+        } else {
+            content
         }
     }
 }
