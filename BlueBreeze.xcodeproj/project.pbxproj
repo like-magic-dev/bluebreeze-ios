@@ -7,11 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D221B706303060AC009A6CC5 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); };
 		D26353DA2D11D7790055B1A9 /* BlueBreeze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); };
 		D26353DB2D11D7790055B1A9 /* BlueBreeze.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D221B707303060AC009A6CC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22A7B5F2C0D0EA800C4B6CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D26D3DBA2D06402F002CE78D;
+			remoteInfo = BlueBreeze;
+		};
 		D26353DC2D11D7790055B1A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D22A7B5F2C0D0EA800C4B6CF /* Project object */;
@@ -36,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBreezeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlueBreeze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,11 +54,19 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D221B67E302E0EB7009A6CC5 /* BlueBreeze */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreeze; sourceTree = "<group>"; };
-		D221B6DA302E122A009A6CC5 /* BlueBreezeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeTests; sourceTree = "<group>"; };
 		D221B6E7302E2469009A6CC5 /* BlueBreezeExample */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeExample; sourceTree = "<group>"; };
+		D221B703303060AB009A6CC5 /* BlueBreezeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlueBreezeTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D221B6FF303060AB009A6CC5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D221B706303060AC009A6CC5 /* BlueBreeze.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D26353972D11D5AE0055B1A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,7 +90,7 @@
 			children = (
 				D221B67E302E0EB7009A6CC5 /* BlueBreeze */,
 				D221B6E7302E2469009A6CC5 /* BlueBreezeExample */,
-				D221B6DA302E122A009A6CC5 /* BlueBreezeTests */,
+				D221B703303060AB009A6CC5 /* BlueBreezeTests */,
 				D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */,
 				D2B990712F22821500916606 /* BlueBreeze.h */,
 				D26D3DB12D063EA6002CE78D /* Package.swift */,
@@ -87,6 +104,7 @@
 			children = (
 				D26D3DBB2D06402F002CE78D /* BlueBreeze.framework */,
 				D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */,
+				D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +129,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D221B701303060AB009A6CC5 /* BlueBreezeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D221B709303060AC009A6CC5 /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */;
+			buildPhases = (
+				D221B6FE303060AB009A6CC5 /* Sources */,
+				D221B6FF303060AB009A6CC5 /* Frameworks */,
+				D221B700303060AB009A6CC5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D221B708303060AC009A6CC5 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D221B703303060AB009A6CC5 /* BlueBreezeTests */,
+			);
+			name = BlueBreezeTests;
+			packageProductDependencies = (
+			);
+			productName = BlueBreezeTests;
+			productReference = D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D26353992D11D5AE0055B1A9 /* BlueBreezeExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D26353C12D11D5B00055B1A9 /* Build configuration list for PBXNativeTarget "BlueBreezeExample" */;
@@ -165,9 +206,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					D221B701303060AB009A6CC5 = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					D26353992D11D5AE0055B1A9 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -193,11 +237,19 @@
 			targets = (
 				D26D3DBA2D06402F002CE78D /* BlueBreeze */,
 				D26353992D11D5AE0055B1A9 /* BlueBreezeExample */,
+				D221B701303060AB009A6CC5 /* BlueBreezeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D221B700303060AB009A6CC5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D26353982D11D5AE0055B1A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,6 +267,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D221B6FE303060AB009A6CC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D26353962D11D5AE0055B1A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,6 +291,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D221B708303060AC009A6CC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				macos,
+			);
+			target = D26D3DBA2D06402F002CE78D /* BlueBreeze */;
+			targetProxy = D221B707303060AC009A6CC5 /* PBXContainerItemProxy */;
+		};
 		D26353DD2D11D7790055B1A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilters = (
@@ -244,6 +312,52 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D221B70A303060AC009A6CC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		D221B70B303060AC009A6CC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 		D22A7B8A2C0D0EA900C4B6CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -384,7 +498,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreezeTest;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
 				SDKROOT = iphoneos;
@@ -420,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreezeTest;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = NO;
 				SDKROOT = iphoneos;
@@ -462,7 +576,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreeze;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
@@ -508,7 +622,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.test.BlueBreeze;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.likemagic.bluebreeze;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
@@ -528,6 +642,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D221B709303060AC009A6CC5 /* Build configuration list for PBXNativeTarget "BlueBreezeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D221B70A303060AC009A6CC5 /* Debug */,
+				D221B70B303060AC009A6CC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D22A7B622C0D0EA800C4B6CF /* Build configuration list for PBXProject "BlueBreeze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

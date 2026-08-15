@@ -26,5 +26,10 @@ let package = Package(
             name: "BlueBreeze",
             path: "BlueBreeze"
         ),
+        .testTarget(
+            name: "BlueBreezeTests",
+            dependencies: ["BlueBreeze"],
+            path: "BlueBreezeTests"
+        ),
     ]
 )
