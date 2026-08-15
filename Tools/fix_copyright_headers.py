@@ -6,7 +6,7 @@ have the proper copyright header. If a file already has a copyright header,
 it will be replaced with the standardized one.
 
 Usage:
-    python clean_up_copyright.py
+    python fix_copyright_headers.py
 """
 
 import re

@@ -10,38 +10,38 @@ import SwiftUI
 class HomeViewModel: ObservableObject {
     init(manager: BBManager) {
         self.manager = manager
-        
+
         manager.authorizationStatus
             .receive(on: DispatchQueue.main)
             .sink { self.authorizationStatus = $0 }
             .store(in: &dispatchBag)
-        
+
         manager.state
             .receive(on: DispatchQueue.main)
             .sink { self.state = $0 }
             .store(in: &dispatchBag)
     }
-    
+
     let manager: BBManager
-    
+
     // Dispatch bag for all cancellables
-    
+
     var dispatchBag: Set<AnyCancellable> = []
-    
+
     // Authorization
-    
+
     @Published var authorizationStatus: BBAuthorization = .unknown
-    
+
     func authorize() {
         manager.authorizationRequest()
     }
-    
+
     func openSettings() {
         manager.authorizationOpenSettings()
     }
-    
+
     // Online
-    
+
     @Published var state: BBState = .unknown
 }
 
@@ -51,7 +51,7 @@ struct HomeView: View {
     init(manager: BBManager) {
         _viewModel = StateObject(wrappedValue: HomeViewModel(manager: manager))
     }
-    
+
     var body: some View {
         if viewModel.authorizationStatus != .authorized {
             VStack {

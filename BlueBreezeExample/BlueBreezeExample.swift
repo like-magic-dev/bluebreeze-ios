@@ -9,11 +9,17 @@ import BlueBreeze
 @main
 struct BlueBreezeExample: App {
     let manager = BBManager()
-        
+
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                HomeView(manager: manager)
+            if #available(iOS 16.0, *) {
+                NavigationStack {
+                    HomeView(manager: manager)
+                }
+            } else {
+                NavigationView {
+                    HomeView(manager: manager)
+                }
             }
         }
     }

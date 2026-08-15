@@ -11,12 +11,12 @@ import BlueBreeze
 class DeviceViewModel: ObservableObject {
     init(device: BBDevice) {
         self.device = device
-        
+
         device.connectionStatus
             .receive(on: DispatchQueue.main)
             .sink { self.connectionStatus = $0 }
             .store(in: &dispatchBag)
-        
+
         device.services
             .receive(on: DispatchQueue.main)
             .sink { self.services = $0 }
@@ -24,54 +24,54 @@ class DeviceViewModel: ObservableObject {
     }
 
     // Dispatch bag for all cancellables
-    
+
     var dispatchBag: Set<AnyCancellable> = []
-    
+
     // BLE device
 
     let device: BBDevice
-    
+
     // Properties
-    
+
     var name: String? {
         device.name
     }
-    
+
     // Connection
-    
+
     @Published var connectionStatus: BBDeviceConnectionStatus = .disconnected
     @Published var executingConnection: Bool = false
-    
+
     func connect() async {
         executingConnection = true
         defer {
             executingConnection = false
         }
-        
+
         do {
             try await device.connect()
             try await device.discoverServices()
-            try await device.requestMTU(512)
+            try await device.negotiateMTU()
         } catch {
             // Ignore error
         }
     }
-    
+
     func disconnect() async {
         executingConnection = true
         defer {
             executingConnection = false
         }
-        
+
         do {
             try await device.disconnect()
         } catch {
             // Ignore error
         }
     }
-    
+
     // Characteristics
-    
+
     @Published var services: [BBUUID: [BBCharacteristic]] = [:]
 }
 
@@ -81,7 +81,7 @@ struct DeviceView: View {
     init(device: BBDevice) {
         _viewModel = StateObject(wrappedValue: DeviceViewModel(device: device))
     }
-    
+
     var body: some View {
         List {
             ForEach(viewModel.services.sorted(by: {
@@ -96,6 +96,7 @@ struct DeviceView: View {
                 }
             }
         }
+        .buttonStyle(.borderless)
 #if os(iOS) || os(ipadOS)
         .listStyle(.grouped)
 #endif

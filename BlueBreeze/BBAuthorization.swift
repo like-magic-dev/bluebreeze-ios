@@ -5,9 +5,17 @@
 
 import CoreBluetooth
 
+/// The app's authorization to use Bluetooth, mirroring `CBManagerAuthorization`.
 public enum BBAuthorization {
+    /// The user hasn't been asked yet. Call ``BBManager/authorizationRequest()`` (or start a
+    /// scan) to trigger the system permission prompt.
     case unknown
+
+    /// The user denied permission, or it's restricted by policy (e.g. parental controls). Direct
+    /// the user to ``BBManager/authorizationOpenSettings()`` to change it.
     case denied
+
+    /// The app is authorized to use Bluetooth.
     case authorized
 }
 
