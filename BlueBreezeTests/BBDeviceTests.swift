@@ -145,6 +145,20 @@ struct BBDeviceTests {
         #expect(device.mtu.value == 53)
     }
 
+    @Test func osInitiatedReconnectUpdatesConnectionStatus() {
+        let central = MockCBCentralManager()
+        let peripheral = MockCBPeripheral()
+        let device = BBDevice(centralManager: central, peripheral: peripheral)
+
+        // Link loss, then CoreBluetooth reconnects on its own -- no `connect()` call, so no
+        // operation is in flight to observe the `didConnect`.
+        device.centralManager(central, didDisconnectPeripheral: peripheral, error: nil)
+        #expect(device.connectionStatus.value == .disconnected)
+
+        device.centralManager(central, didConnect: peripheral)
+        #expect(device.connectionStatus.value == .connected)
+    }
+
     @Test func poweringOffResetsServicesAndConnectionStatus() {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()

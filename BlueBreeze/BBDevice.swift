@@ -138,6 +138,8 @@ extension BBDevice {
     }
 
     func centralManager(_ central: CBCentralManagerProtocol, didConnect peripheral: CBPeripheralProtocol) {
+        self.connectionStatus.value = .connected
+
         operationQueueManager.centralManager(central, didConnect: peripheral)
     }
 
