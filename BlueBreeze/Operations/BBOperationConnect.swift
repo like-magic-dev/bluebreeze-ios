@@ -10,6 +10,12 @@ class BBOperationConnect: BBOperation<Void> {
         centralManager.connect(peripheral)
     }
 
+    override func cancel(_ centralManager: CBCentralManagerProtocol) {
+        // Cancel the pending connection before failing
+        centralManager.cancelPeripheralConnection(peripheral)
+        super.cancel(centralManager)
+    }
+
     override func centralManager(_ central: CBCentralManagerProtocol, didConnect peripheral: CBPeripheralProtocol) {
         completeSuccess(())
     }

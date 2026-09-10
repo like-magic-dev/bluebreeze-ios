@@ -28,7 +28,7 @@ protocol BBOperationProtocol: AnyObject {
 
     // MARK: - Cancel the operation
 
-    func cancel()
+    func cancel(_ centralManager: CBCentralManagerProtocol)
 
     // MARK: - Time out
 
@@ -103,7 +103,7 @@ class BBOperation<T>: BBOperationProtocol {
 
     // MARK: - Cancel the operation
 
-    func cancel() {
+    func cancel(_ centralManager: CBCentralManagerProtocol) {
         completeError(BBError(message: "Operation cancelled"))
     }
 

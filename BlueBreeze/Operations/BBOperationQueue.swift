@@ -78,7 +78,7 @@ class BBOperationQueue: BBOperationQueueProtocol {
             let wasAlreadyCompleted = self.withOperationLock { () -> Bool in
                 let alreadyCompleted = nextOperation.isCompleted
                 if !alreadyCompleted {
-                    nextOperation.cancel()
+                    nextOperation.cancel(self.centralManager)
                 }
                 return alreadyCompleted
             }
