@@ -11,6 +11,7 @@ import CoreBluetooth
 protocol CBPeripheralProtocol: AnyObject {
     var identifier: UUID { get }
     var name: String? { get }
+    var state: CBPeripheralState { get }
     var services_: [CBServiceProtocol]? { get }
 
     func discoverServices(_ serviceUUIDs: [CBUUID]?)

@@ -20,6 +20,7 @@ final class MockCBPeripheral: CBPeripheralProtocol, @unchecked Sendable {
 
     let identifier: UUID
     var name: String?
+    var state: CBPeripheralState = .disconnected
     var services_: [CBServiceProtocol]?
 
     private(set) var discoverServicesCalls: [[CBUUID]?] = []

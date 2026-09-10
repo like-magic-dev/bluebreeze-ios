@@ -7,6 +7,12 @@ import CoreBluetooth
 
 class BBOperationDisconnect: BBOperation<Void> {
     override func execute(_ centralManager: CBCentralManagerProtocol) {
+        // Short circuit operation for already connected peripherals
+        guard peripheral.state != .disconnected else {
+            completeSuccess(())
+            return
+        }
+
         centralManager.cancelPeripheralConnection(peripheral)
     }
 

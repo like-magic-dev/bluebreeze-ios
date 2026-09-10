@@ -7,6 +7,12 @@ import CoreBluetooth
 
 class BBOperationConnect: BBOperation<Void> {
     override func execute(_ centralManager: CBCentralManagerProtocol) {
+        // Short circuit operation for already connected peripherals
+        guard peripheral.state != .connected else {
+            completeSuccess(())
+            return
+        }
+
         centralManager.connect(peripheral)
     }
 

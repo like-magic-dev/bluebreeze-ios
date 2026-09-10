@@ -46,6 +46,7 @@ struct BBDeviceTests {
     @Test func disconnectSucceeds() async throws {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
+        peripheral.state = .connected
         let device = BBDevice(centralManager: central, peripheral: peripheral)
 
         central.onCancelPeripheralConnection = { disconnectedPeripheral in
@@ -56,6 +57,31 @@ struct BBDeviceTests {
 
         #expect(device.connectionStatus.value == .disconnected)
         #expect(central.cancelledPeripherals.count == 1)
+    }
+
+    @Test func connectShortCircuitsWhenAlreadyConnected() async throws {
+        let central = MockCBCentralManager()
+        let peripheral = MockCBPeripheral()
+        peripheral.state = .connected
+        let device = BBDevice(centralManager: central, peripheral: peripheral)
+
+        // No `onConnect` hook: if `connect()` enqueued the operation it would time out after 5s.
+        try await device.connect()
+
+        #expect(device.connectionStatus.value == .connected)
+        #expect(central.connectedPeripherals.isEmpty)
+    }
+
+    @Test func disconnectShortCircuitsWhenAlreadyDisconnected() async throws {
+        let central = MockCBCentralManager()
+        let peripheral = MockCBPeripheral()
+        peripheral.state = .disconnected
+        let device = BBDevice(centralManager: central, peripheral: peripheral)
+
+        try await device.disconnect()
+
+        #expect(device.connectionStatus.value == .disconnected)
+        #expect(central.cancelledPeripherals.isEmpty)
     }
 
     @Test func discoverServicesPopulatesServicesAndCharacteristics() async throws {
