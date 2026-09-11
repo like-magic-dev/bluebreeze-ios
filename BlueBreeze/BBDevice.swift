@@ -182,7 +182,7 @@ extension BBDevice {
         var characteristics = self.services.value[service.uuid]?.characteristics ?? []
 
         service.characteristics_?.forEach({ characteristic in
-            if !characteristics.contains(where: { $0.id == characteristic.uuid }) {
+            if !characteristics.contains(where: { $0.uuid == characteristic.uuid }) {
                 characteristics.append(
                     BBCharacteristic(
                         peripheral: peripheral,
@@ -237,7 +237,7 @@ extension BBDevice {
     func getCharacteristicWithUUID(_ uuid: CBUUID) -> BBCharacteristic? {
         for service in services.value.values {
             for characteristic in service.characteristics {
-                if characteristic.id == uuid {
+                if characteristic.uuid == uuid {
                     return characteristic
                 }
             }

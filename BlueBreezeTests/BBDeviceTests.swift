@@ -110,7 +110,7 @@ struct BBDeviceTests {
 
         let discoveredService = try #require(device.services.value[service.uuid])
         #expect(discoveredService.characteristics.count == 1)
-        #expect(discoveredService.characteristics.first?.id == characteristic.uuid)
+        #expect(discoveredService.characteristics.first?.uuid == characteristic.uuid)
         #expect(peripheral.discoverCharacteristicsCalls.count == 1)
     }
 

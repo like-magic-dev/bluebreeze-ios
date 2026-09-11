@@ -90,7 +90,7 @@ struct DeviceView: View {
                 Section(
                     header: Text(service.name?.uppercased() ?? key.uuidString)
                 ) {
-                    ForEach(service.characteristics) {
+                    ForEach(service.characteristics, id: \.uuid) {
                         CharacteristicView(characteristic: $0)
                     }
                 }

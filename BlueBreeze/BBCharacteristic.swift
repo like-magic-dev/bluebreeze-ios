@@ -10,7 +10,7 @@ import Combine
 /// A single characteristic of a ``BBDevice``'s discovered service.  Instances appear in ``BBDevice/services``
 /// once ``BBDevice/discoverServices()`` completes. Check ``properties`` before calling an operation.
 /// Calling an unsupported operation fails with an error from CoreBluetooth.
-public class BBCharacteristic: NSObject, Identifiable {
+public class BBCharacteristic: NSObject {
     init(peripheral: CBPeripheralProtocol, characteristic: CBCharacteristicProtocol, operationQueue: BBOperationQueueProtocol?) {
         self.peripheral = peripheral
         self.characteristic = characteristic
@@ -33,7 +33,7 @@ public class BBCharacteristic: NSObject, Identifiable {
     // MARK: - Computed properties
 
     /// This characteristic's Bluetooth UUID.
-    public var id: BBUUID {
+    public var uuid: BBUUID {
         get {
             return characteristic.uuid
         }
@@ -122,7 +122,7 @@ public class BBCharacteristic: NSObject, Identifiable {
 
 extension BBCharacteristic {
     func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
-        guard characteristic.uuid == self.id else {
+        guard characteristic.uuid == self.uuid else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
@@ -131,7 +131,7 @@ extension BBCharacteristic {
     }
 
     func peripheral(_ peripheral: CBPeripheralProtocol, didUpdateNotificationStateFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
-        guard characteristic.uuid == self.id else {
+        guard characteristic.uuid == self.uuid else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
@@ -140,14 +140,14 @@ extension BBCharacteristic {
     }
 
     func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor characteristic: CBCharacteristicProtocol, error: (any Error)?) {
-        guard characteristic.uuid == self.id else {
+        guard characteristic.uuid == self.uuid else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
     }
 
     func peripheral(_ peripheral: CBPeripheralProtocol, didWriteValueFor descriptor: CBDescriptorProtocol, error: (any Error)?) {
-        guard characteristic.uuid == self.id else {
+        guard characteristic.uuid == self.uuid else {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
