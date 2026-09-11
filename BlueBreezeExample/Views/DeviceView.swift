@@ -72,7 +72,7 @@ class DeviceViewModel: ObservableObject {
 
     // Characteristics
 
-    @Published var services: [BBUUID: BBService] = [:]
+    @Published var services: [BBService] = []
 }
 
 struct DeviceView: View {
@@ -84,11 +84,15 @@ struct DeviceView: View {
 
     var body: some View {
         List {
+            // Keyed by `uuid` (the service's stable GATT identity), not `\.self`: BBService is a
+            // struct, so `\.self` would bake in its current `characteristics` snapshot, forcing
+            // the whole section to be torn down and rebuilt on every incremental characteristic
+            // discovered, rather than just updating in place.
             ForEach(viewModel.services.sorted(by: {
-                $0.key.uuidString < $1.key.uuidString
-            }), id: \.key) { key, service in
+                $0.uuid.uuidString < $1.uuid.uuidString
+            }), id: \.uuid) { service in
                 Section(
-                    header: Text(service.name?.uppercased() ?? key.uuidString)
+                    header: Text(service.name?.uppercased() ?? service.uuid.uuidString)
                 ) {
                     ForEach(service.characteristics, id: \.uuid) {
                         CharacteristicView(characteristic: $0)

@@ -24,7 +24,7 @@ import Combine
 /// try await device.connect()
 /// try await device.discoverServices()
 ///
-/// for (_, service) in device.services.value {
+/// for service in device.services.value {
 ///     for characteristic in service.characteristics where characteristic.properties.contains(.read) {
 ///         let data = try await characteristic.read()
 ///     }
@@ -60,12 +60,12 @@ public class BBDevice: NSObject {
         }
     }
 
-    /// Services discovered so far, keyed by service UUID.
+    /// Services discovered so far.
     ///
-    /// A service key appears here as soon as it's discovered (with an empty characteristics
-    /// array), and its characteristics populate once ``discoverServices()`` completes. Empty
-    /// until ``discoverServices()`` has been called and awaited.
-    public let services = CurrentValueSubject<[BBUUID: BBService], Never>([:])
+    /// A service appears here as soon as it's discovered (with an empty characteristics array),
+    /// and its characteristics populate once ``discoverServices()`` completes. Empty until
+    /// ``discoverServices()`` has been called and awaited.
+    public let services = CurrentValueSubject<[BBService], Never>([])
 
     // MARK: - Connection status
 
@@ -130,8 +130,7 @@ public class BBDevice: NSObject {
 extension BBDevice {
     func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
         if (central.state != .poweredOn) {
-            self.services.value = [:]
-            self.connectionStatus.value = .disconnected
+            self.connectionLost()
         }
 
         operationQueueManager.centralManagerDidUpdateState(central)
@@ -144,33 +143,32 @@ extension BBDevice {
     }
 
     func centralManager(_ central: CBCentralManagerProtocol, didFailToConnect peripheral: CBPeripheralProtocol, error: (any Error)?) {
-        self.services.value = [:]
-        self.connectionStatus.value = .disconnected
-
+        self.connectionLost()
         operationQueueManager.centralManager(central, didFailToConnect: peripheral, error: error)
     }
 
     func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, error: (any Error)?) {
-        self.services.value = [:]
-        self.connectionStatus.value = .disconnected
-
+        self.connectionLost()
         operationQueueManager.centralManager(central, didDisconnectPeripheral: peripheral, error: error)
     }
 
     func centralManager(_ central: CBCentralManagerProtocol, didDisconnectPeripheral peripheral: CBPeripheralProtocol, timestamp: CFAbsoluteTime, isReconnecting: Bool, error: (any Error)?) {
-        self.services.value = [:]
-        self.connectionStatus.value = .disconnected
-
+        self.connectionLost()
         operationQueueManager.centralManager(central, didDisconnectPeripheral: peripheral, timestamp: timestamp, isReconnecting: isReconnecting, error: error)
+    }
+
+    func connectionLost() {
+        self.services.value = []
+        self.connectionStatus.value = .disconnected
     }
 }
 
 extension BBDevice {
     func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverServices error: (any Error)?) {
         peripheral.services_?.forEach({ service in
-            if self.services.value[service.uuid] == nil {
+            if !self.services.value.contains(where: { $0.uuid == service.uuid }) {
                 var services = self.services.value
-                services[service.uuid] = BBService(uuid: service.uuid, characteristics: [])
+                services.append(BBService(uuid: service.uuid, characteristics: []))
                 self.services.value = services
             }
         })
@@ -179,7 +177,7 @@ extension BBDevice {
     }
 
     func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: (any Error)?) {
-        var characteristics = self.services.value[service.uuid]?.characteristics ?? []
+        var characteristics = self.services.value.first(where: { $0.uuid == service.uuid })?.characteristics ?? []
 
         service.characteristics_?.forEach({ characteristic in
             if !characteristics.contains(where: { $0.uuid == characteristic.uuid }) {
@@ -194,7 +192,11 @@ extension BBDevice {
         })
 
         var services = self.services.value
-        services[service.uuid] = BBService(uuid: service.uuid, characteristics: characteristics)
+        if let index = services.firstIndex(where: { $0.uuid == service.uuid }) {
+            services[index] = BBService(uuid: service.uuid, characteristics: characteristics)
+        } else {
+            services.append(BBService(uuid: service.uuid, characteristics: characteristics))
+        }
         self.services.value = services
 
         operationQueueManager.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
@@ -235,7 +237,7 @@ extension BBDevice: Identifiable { }
 
 extension BBDevice {
     func getCharacteristicWithUUID(_ uuid: CBUUID) -> BBCharacteristic? {
-        for service in services.value.values {
+        for service in services.value {
             for characteristic in service.characteristics {
                 if characteristic.uuid == uuid {
                     return characteristic

@@ -81,7 +81,7 @@ Task {
     try await device.connect()
     try await device.discoverServices()
 
-    for (_, service) in device.services.value {
+    for service in device.services.value {
         for characteristic in service.characteristics where characteristic.properties.contains(.read) {
             let data = try await characteristic.read()
             print(characteristic.uuid, data ?? Data())

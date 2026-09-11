@@ -108,7 +108,7 @@ struct BBDeviceTests {
 
         try await device.discoverServices()
 
-        let discoveredService = try #require(device.services.value[service.uuid])
+        let discoveredService = try #require(device.services.value.first(where: { $0.uuid == service.uuid }))
         #expect(discoveredService.characteristics.count == 1)
         #expect(discoveredService.characteristics.first?.uuid == characteristic.uuid)
         #expect(peripheral.discoverCharacteristicsCalls.count == 1)
