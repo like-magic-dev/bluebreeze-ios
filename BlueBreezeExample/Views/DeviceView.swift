@@ -72,7 +72,7 @@ class DeviceViewModel: ObservableObject {
 
     // Characteristics
 
-    @Published var services: [BBUUID: [BBCharacteristic]] = [:]
+    @Published var services: [BBUUID: BBService] = [:]
 }
 
 struct DeviceView: View {
@@ -86,11 +86,11 @@ struct DeviceView: View {
         List {
             ForEach(viewModel.services.sorted(by: {
                 $0.key.uuidString < $1.key.uuidString
-            }), id: \.key) { key, value in
+            }), id: \.key) { key, service in
                 Section(
-                    header: Text(BBAssignedNumbers.serviceUUIDs[key]?.uppercased() ?? key.uuidString)
+                    header: Text(service.name?.uppercased() ?? key.uuidString)
                 ) {
-                    ForEach(value) {
+                    ForEach(service.characteristics) {
                         CharacteristicView(characteristic: $0)
                     }
                 }

@@ -24,8 +24,8 @@ import Combine
 /// try await device.connect()
 /// try await device.discoverServices()
 ///
-/// for (_, characteristics) in device.services.value {
-///     for characteristic in characteristics where characteristic.properties.contains(.read) {
+/// for (_, service) in device.services.value {
+///     for characteristic in service.characteristics where characteristic.properties.contains(.read) {
 ///         let data = try await characteristic.read()
 ///     }
 /// }
@@ -60,12 +60,12 @@ public class BBDevice: NSObject {
         }
     }
 
-    /// Services and characteristics discovered so far, keyed by service UUID.
+    /// Services discovered so far, keyed by service UUID.
     ///
     /// A service key appears here as soon as it's discovered (with an empty characteristics
     /// array), and its characteristics populate once ``discoverServices()`` completes. Empty
     /// until ``discoverServices()`` has been called and awaited.
-    public let services = CurrentValueSubject<[BBUUID: [BBCharacteristic]], Never>([:])
+    public let services = CurrentValueSubject<[BBUUID: BBService], Never>([:])
 
     // MARK: - Connection status
 
@@ -170,7 +170,7 @@ extension BBDevice {
         peripheral.services_?.forEach({ service in
             if self.services.value[service.uuid] == nil {
                 var services = self.services.value
-                services[service.uuid] = []
+                services[service.uuid] = BBService(uuid: service.uuid, characteristics: [])
                 self.services.value = services
             }
         })
@@ -179,7 +179,7 @@ extension BBDevice {
     }
 
     func peripheral(_ peripheral: CBPeripheralProtocol, didDiscoverCharacteristicsFor service: CBServiceProtocol, error: (any Error)?) {
-        var characteristics = self.services.value[service.uuid] ?? []
+        var characteristics = self.services.value[service.uuid]?.characteristics ?? []
 
         service.characteristics_?.forEach({ characteristic in
             if !characteristics.contains(where: { $0.id == characteristic.uuid }) {
@@ -194,7 +194,7 @@ extension BBDevice {
         })
 
         var services = self.services.value
-        services[service.uuid] = characteristics
+        services[service.uuid] = BBService(uuid: service.uuid, characteristics: characteristics)
         self.services.value = services
 
         operationQueueManager.peripheral(peripheral, didDiscoverCharacteristicsFor: service, error: error)
@@ -235,8 +235,8 @@ extension BBDevice: Identifiable { }
 
 extension BBDevice {
     func getCharacteristicWithUUID(_ uuid: CBUUID) -> BBCharacteristic? {
-        for characteristics in services.value.values {
-            for characteristic in characteristics {
+        for service in services.value.values {
+            for characteristic in service.characteristics {
                 if characteristic.id == uuid {
                     return characteristic
                 }
