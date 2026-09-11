@@ -94,7 +94,8 @@ struct DeviceView: View {
                 Section(
                     header: Text(service.name?.uppercased() ?? service.uuid.uuidString)
                 ) {
-                    ForEach(service.characteristics, id: \.uuid) {
+                    // NOTE: Do not key by BBCharacteristic UUID or you will get stale instances on reconnect
+                    ForEach(service.characteristics, id: \.self) {
                         CharacteristicView(characteristic: $0)
                     }
                 }
