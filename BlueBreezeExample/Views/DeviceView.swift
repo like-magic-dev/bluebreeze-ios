@@ -102,7 +102,7 @@ struct DeviceView: View {
             }
         }
         .buttonStyle(.borderless)
-#if os(iOS) || os(ipadOS)
+#if os(iOS)
         .listStyle(.grouped)
 #endif
         .navigationTitle(viewModel.name ?? "Unknown device")

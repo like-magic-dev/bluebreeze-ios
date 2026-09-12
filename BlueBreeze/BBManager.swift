@@ -7,7 +7,7 @@ import Foundation
 import CoreBluetooth
 import Combine
 
-#if os(iOS) || os(ipadOS)
+#if os(iOS)
 import UIKit
 #elseif os(macOS)
 import AppKit
@@ -78,7 +78,7 @@ public class BBManager: NSObject {
     /// Opens the system Settings screen where the user can grant Bluetooth permission after
     /// having previously denied it (the in-app prompt cannot be shown again once denied).
     public func authorizationOpenSettings() {
-#if os(iOS) || os(ipadOS)
+#if os(iOS)
         if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
         }
@@ -94,7 +94,7 @@ public class BBManager: NSObject {
     /// Whether this device supports Bluetooth 5 extended scanning and connecting (longer range,
     /// higher throughput, and more advertisement data than legacy Bluetooth 4.x).
     public var supportsExtended: Bool {
-#if os(iOS) || os(watchOS) || os(ipadOS)
+#if os(iOS) || os(watchOS)
         // Dynamic check for extended scan capability
         CBCentralManager.supports(.extendedScanAndConnect)
 #elseif os(macOS)
