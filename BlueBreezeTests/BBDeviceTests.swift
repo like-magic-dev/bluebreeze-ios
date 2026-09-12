@@ -13,7 +13,7 @@ struct BBDeviceTests {
     @Test func connectSucceeds() async throws {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         // Simulate CoreBluetooth completing the connection synchronously, as if it had already
         // happened by the time `connect(_:)` returns.
@@ -30,7 +30,7 @@ struct BBDeviceTests {
     @Test func connectFailsWhenCoreBluetoothReportsFailure() async throws {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         central.onConnect = { connectedPeripheral in
             device.centralManager(central, didFailToConnect: connectedPeripheral, error: BBError(message: "nope"))
@@ -47,7 +47,7 @@ struct BBDeviceTests {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
         peripheral.state = .connected
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         central.onCancelPeripheralConnection = { disconnectedPeripheral in
             device.centralManager(central, didDisconnectPeripheral: disconnectedPeripheral, error: nil)
@@ -63,7 +63,7 @@ struct BBDeviceTests {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
         peripheral.state = .connected
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         // No `onConnect` hook: if `connect()` enqueued the operation it would time out after 5s.
         try await device.connect()
@@ -76,7 +76,7 @@ struct BBDeviceTests {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
         peripheral.state = .disconnected
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         try await device.disconnect()
 
@@ -92,7 +92,7 @@ struct BBDeviceTests {
         let peripheral = MockCBPeripheral()
         peripheral.services_ = [service]
 
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         peripheral.onDiscoverServices = {
             device.peripheral(peripheral, didDiscoverServices: nil)
@@ -119,7 +119,7 @@ struct BBDeviceTests {
         let peripheral = MockCBPeripheral()
         peripheral.services_ = []
 
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         peripheral.onDiscoverServices = {
             device.peripheral(peripheral, didDiscoverServices: nil)
@@ -137,7 +137,7 @@ struct BBDeviceTests {
         peripheral.maximumWriteValueLengthWithResponse = 100
         peripheral.maximumWriteValueLengthWithoutResponse = 50
 
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         try await device.negotiateMTU()
 
@@ -148,7 +148,7 @@ struct BBDeviceTests {
     @Test func osInitiatedReconnectUpdatesConnectionStatus() {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         // Link loss, then CoreBluetooth reconnects on its own -- no `connect()` call, so no
         // operation is in flight to observe the `didConnect`.
@@ -162,7 +162,7 @@ struct BBDeviceTests {
     @Test func poweringOffResetsServicesAndConnectionStatus() {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()
-        let device = BBDevice(centralManager: central, peripheral: peripheral)
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
 
         device.connectionStatus.value = .connected
 

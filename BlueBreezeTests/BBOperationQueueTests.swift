@@ -33,7 +33,7 @@ private final class TestOperation: BBOperation<Void> {
 
 struct BBOperationQueueTests {
     @Test func operationsRunOneAtATimeInOrder() async throws {
-        let queue = BBOperationQueue(centralManager: MockCBCentralManager())
+        let queue = BBOperationQueue(centralManager: MockCBCentralManager(), queue: .main)
 
         let first = TestOperation(peripheral: MockCBPeripheral())
         let second = TestOperation(peripheral: MockCBPeripheral())
@@ -61,7 +61,7 @@ struct BBOperationQueueTests {
     }
 
     @Test func anOperationThatNeverCompletesTimesOutAndAdvancesTheQueue() async throws {
-        let queue = BBOperationQueue(centralManager: MockCBCentralManager())
+        let queue = BBOperationQueue(centralManager: MockCBCentralManager(), queue: .main)
 
         let first = TestOperation(peripheral: MockCBPeripheral())
         first.customTimeOut = 0.05
@@ -84,7 +84,7 @@ struct BBOperationQueueTests {
     }
 
     @Test func operationCompletingSynchronouslyLetsTheNextOneStartImmediately() async throws {
-        let queue = BBOperationQueue(centralManager: MockCBCentralManager())
+        let queue = BBOperationQueue(centralManager: MockCBCentralManager(), queue: .main)
 
         let first = TestOperation(peripheral: MockCBPeripheral())
         first.onExecute = { first.completeSuccess(()) }

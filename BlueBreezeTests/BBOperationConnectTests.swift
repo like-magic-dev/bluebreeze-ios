@@ -35,7 +35,7 @@ struct BBOperationConnectTests {
 
     @Test func timedOutConnectCancelsThePendingConnectionThroughTheQueue() async throws {
         let central = MockCBCentralManager()
-        let queue = BBOperationQueue(centralManager: central)
+        let queue = BBOperationQueue(centralManager: central, queue: .main)
         let peripheral = MockCBPeripheral()
 
         // No `onConnect` hook, so CoreBluetooth never reports the connection -- the operation

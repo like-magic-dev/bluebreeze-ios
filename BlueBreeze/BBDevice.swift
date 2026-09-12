@@ -33,11 +33,12 @@ import Combine
 public class BBDevice: NSObject {
     init(
         centralManager: CBCentralManagerProtocol,
-        peripheral: CBPeripheralProtocol
+        peripheral: CBPeripheralProtocol,
+        queue: DispatchQueue
     ) {
         self.centralManager = centralManager
         self.peripheral = peripheral
-        self.operationQueueManager = BBOperationQueue(centralManager: centralManager)
+        self.operationQueueManager = BBOperationQueue(centralManager: centralManager, queue: queue)
     }
 
     let centralManager: CBCentralManagerProtocol

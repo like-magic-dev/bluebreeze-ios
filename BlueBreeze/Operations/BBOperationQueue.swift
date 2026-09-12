@@ -19,11 +19,13 @@ protocol BBOperationQueueProtocol: AnyObject {
 /// them to the current operation and then check whether the next queued operation can start.
 
 class BBOperationQueue: BBOperationQueueProtocol {
-    init(centralManager: CBCentralManagerProtocol) {
+    init(centralManager: CBCentralManagerProtocol, queue: DispatchQueue) {
         self.centralManager = centralManager
+        self.queue = queue
     }
 
-    let centralManager: CBCentralManagerProtocol
+    private let centralManager: CBCentralManagerProtocol
+    private let queue: DispatchQueue
 
     private var operationCurrent: (any BBOperationProtocol)?
     private var operationQueue: [any BBOperationProtocol] = []
@@ -72,7 +74,7 @@ class BBOperationQueue: BBOperationQueueProtocol {
         }
 
         // The operation is still running, set a timeout
-        DispatchQueue.main.asyncAfter(deadline: .now() + nextOperation.timeOut) { [weak self] in
+        self.queue.asyncAfter(deadline: .now() + nextOperation.timeOut) { [weak self] in
             guard let self else { return }
 
             // If not already completed, cancel the operation

@@ -205,7 +205,8 @@ extension BBManager: CBCentralManagerDelegate {
 
         let device = devices.value[peripheral.identifier] ?? BBDevice(
             centralManager: centralManager,
-            peripheral: peripheral
+            peripheral: peripheral,
+            queue: centralManagerQueue
         )
 
         if devices.value[peripheral.identifier] == nil {
