@@ -265,18 +265,3 @@ extension BBManager: CBPeripheralDelegate {
         devices.value[peripheral.identifier]?.peripheral(peripheral, didWriteValueFor: descriptor, error: error)
     }
 }
-
-extension Array where Element: Any {
-    mutating func push(_ element: Self.Element) {
-        append(element)
-    }
-
-    mutating func popFirst() -> Self.Element? {
-        guard let first = first else {
-            return nil
-        }
-
-        remove(at: 0)
-        return first
-    }
-}
