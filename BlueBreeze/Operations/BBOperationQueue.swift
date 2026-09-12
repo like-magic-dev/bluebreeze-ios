@@ -65,7 +65,8 @@ class BBOperationQueue: BBOperationQueueProtocol {
         nextOperation.execute(self.centralManager)
 
         // The operation completed synchronously
-        guard !nextOperation.isCompleted else {
+        let isCompleted = withOperationLock { nextOperation.isCompleted }
+        guard !isCompleted else {
             operationCheck()
             return
         }
