@@ -22,8 +22,26 @@ public struct BBError: Error {
 extension BBError {
     /// A generic fallback used where CoreBluetooth reports failure without a more specific error.
     public static var unknown: BBError {
-        get {
-            return BBError(message: "Unknown error")
-        }
+        BBError(message: "Unknown error")
+    }
+
+    /// Thrown to any operation still queued or in flight when it's cancelled
+    public static var operationCancelled: BBError {
+        BBError(message: "Operation cancelled")
+    }
+
+    /// Thrown by an operation when its owning ``BBDevice`` is not available
+    public static var deviceUnavailable: BBError {
+        BBError(message: "Device is no longer available")
+    }
+
+    /// Thrown to any operation executing when Bluetooth stops being powered on mid-operation.
+    public static func notPoweredOn(_ state: BBState) -> BBError {
+        BBError(message: "Bluetooth is no longer powered on (state: \(state))")
+    }
+
+    /// Thrown when CoreBluetooth reports that the connection attempt failed
+    public static func connectFailed(_ error: Error?) -> BBError {
+        BBError(message: error?.localizedDescription ?? "Connection failed")
     }
 }

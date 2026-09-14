@@ -27,6 +27,6 @@ class BBOperationConnect: BBOperation<Void> {
     }
 
     override func centralManager(_ central: CBCentralManagerProtocol, didFailToConnect peripheral: CBPeripheralProtocol, error: (any Error)?) {
-        completeError(BBError(message: error?.localizedDescription ?? ""))
+        completeError(BBError.connectFailed(error))
     }
 }

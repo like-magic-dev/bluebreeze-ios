@@ -104,7 +104,7 @@ class BBOperation<T>: BBOperationProtocol {
     // MARK: - Cancel the operation
 
     func cancel(_ centralManager: CBCentralManagerProtocol) {
-        completeError(BBError(message: "Operation cancelled"))
+        completeError(BBError.operationCancelled)
     }
 
     // MARK: - Default time out
@@ -117,7 +117,7 @@ class BBOperation<T>: BBOperationProtocol {
 
     func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
         if central.state != .poweredOn {
-            completeError(BBError(message: "Bluetooth is no longer powered on (state: \(central.state.bbState))"))
+            completeError(BBError.notPoweredOn(central.state.bbState))
         }
     }
 

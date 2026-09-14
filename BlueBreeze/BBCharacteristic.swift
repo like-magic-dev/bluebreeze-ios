@@ -66,7 +66,7 @@ public class BBCharacteristic: NSObject {
     // Fail with an exception if the weak operation queue is not available anymore
     private func requireOperationQueue() throws -> BBOperationQueueProtocol {
         guard let operationQueue else {
-            throw BBError(message: "Device is no longer available")
+            throw BBError.deviceUnavailable
         }
 
         return operationQueue
