@@ -44,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D21D16463058041800185F30 /* CHANGES.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGES.md; sourceTree = "<group>"; };
+		D21D16473058041800185F30 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D221B702303060AB009A6CC5 /* BlueBreezeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBreezeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D263539A2D11D5AE0055B1A9 /* BlueBreezeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBreezeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26D3DB12D063EA6002CE78D /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -94,6 +96,8 @@
 				D2B5C13F2D428F0C0061A7F9 /* BlueBreeze.podspec */,
 				D2B990712F22821500916606 /* BlueBreeze.h */,
 				D26D3DB12D063EA6002CE78D /* Package.swift */,
+				D21D16463058041800185F30 /* CHANGES.md */,
+				D21D16473058041800185F30 /* README.md */,
 				D26353D12D11D7140055B1A9 /* Frameworks */,
 				D22A7B682C0D0EA800C4B6CF /* Products */,
 			);
