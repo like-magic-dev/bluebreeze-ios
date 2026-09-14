@@ -27,23 +27,38 @@ extension CBPeripheral: CBPeripheralProtocol {
         services
     }
 
+    // In real usage every CBServiceProtocol/CBCharacteristicProtocol passed here is backed by the
+    // concrete CoreBluetooth type. A mismatch is a programming error.
+
     func discoverCharacteristics(_ characteristicUUIDs: [CBUUID]?, for service: CBServiceProtocol) {
-        guard let service = service as? CBService else { return }
+        guard let service = service as? CBService else {
+            assertionFailure("Expected a CBService, got \(type(of: service))")
+            return
+        }
         discoverCharacteristics(characteristicUUIDs, for: service)
     }
 
     func readValue(for characteristic: CBCharacteristicProtocol) {
-        guard let characteristic = characteristic as? CBCharacteristic else { return }
+        guard let characteristic = characteristic as? CBCharacteristic else {
+            assertionFailure("Expected a CBCharacteristic, got \(type(of: characteristic))")
+            return
+        }
         readValue(for: characteristic)
     }
 
     func writeValue(_ data: Data, for characteristic: CBCharacteristicProtocol, type: CBCharacteristicWriteType) {
-        guard let characteristic = characteristic as? CBCharacteristic else { return }
+        guard let characteristic = characteristic as? CBCharacteristic else {
+            assertionFailure("Expected a CBCharacteristic, got \(Swift.type(of: characteristic))")
+            return
+        }
         writeValue(data, for: characteristic, type: type)
     }
 
     func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristicProtocol) {
-        guard let characteristic = characteristic as? CBCharacteristic else { return }
+        guard let characteristic = characteristic as? CBCharacteristic else {
+            assertionFailure("Expected a CBCharacteristic, got \(type(of: characteristic))")
+            return
+        }
         setNotifyValue(enabled, for: characteristic)
     }
 }
