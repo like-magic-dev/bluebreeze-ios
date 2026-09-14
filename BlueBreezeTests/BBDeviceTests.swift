@@ -59,6 +59,67 @@ struct BBDeviceTests {
         #expect(central.cancelledPeripherals.count == 1)
     }
 
+    @Test func disconnectCancelsAnInFlightOperationInsteadOfQueueingBehindIt() async throws {
+        let central = MockCBCentralManager()
+        let peripheral = MockCBPeripheral()
+        peripheral.state = .connected
+        // No `onDiscoverServices` hook -- discovery never completes on its own, simulating a
+        // peripheral that's stopped responding mid-operation.
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
+
+        central.onCancelPeripheralConnection = { disconnectedPeripheral in
+            device.centralManager(central, didDisconnectPeripheral: disconnectedPeripheral, error: nil)
+        }
+
+        async let discoverResult: Void = device.discoverServices()
+        try await Task.sleep(nanoseconds: 20_000_000)
+
+        // Without the fast-cancel path, this would queue behind the wedged discoverServices()
+        // call and only resolve after its 5-second timeout.
+        try await device.disconnect()
+
+        #expect(device.connectionStatus.value == .disconnected)
+
+        do {
+            try await discoverResult
+            Issue.record("Expected the cancelled discoverServices() to throw")
+        } catch is BBError {
+            // Expected: cancelled by disconnect() jumping the queue.
+        }
+    }
+
+    @Test func linkDropCancelsQueuedOperationsInsteadOfLeavingThemToTimeOut() async throws {
+        let central = MockCBCentralManager()
+        let peripheral = MockCBPeripheral()
+        peripheral.state = .connected
+        // No `onDiscoverServices` hook, so the first call never completes and the second sits
+        // queued behind it.
+        let device = BBDevice(centralManager: central, peripheral: peripheral, queue: .main)
+
+        async let firstResult: Void = device.discoverServices()
+        try await Task.sleep(nanoseconds: 20_000_000)
+
+        async let secondResult: Void = device.discoverServices()
+        try await Task.sleep(nanoseconds: 20_000_000)
+
+        central.state = .poweredOff
+        device.centralManagerDidUpdateState(central)
+
+        do {
+            try await firstResult
+            Issue.record("Expected the in-flight discoverServices() to throw")
+        } catch is BBError {
+            // Expected: resolved via the normal delegate-callback forwarding after the link drop.
+        }
+
+        do {
+            try await secondResult
+            Issue.record("Expected the queued discoverServices() to throw")
+        } catch is BBError {
+            // Expected: discarded by connectionLost()'s cancelQueued().
+        }
+    }
+
     @Test func connectShortCircuitsWhenAlreadyConnected() async throws {
         let central = MockCBCentralManager()
         let peripheral = MockCBPeripheral()

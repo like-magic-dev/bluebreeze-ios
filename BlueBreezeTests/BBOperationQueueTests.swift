@@ -83,6 +83,41 @@ struct BBOperationQueueTests {
         #expect(second.executeCallCount == 1)
     }
 
+    @Test func cancelAllCancelsTheCurrentOperationAndDrainsTheQueue() async throws {
+        let queue = BBOperationQueue(centralManager: MockCBCentralManager(), queue: .main)
+
+        // Neither operation completes on its own -- cancelAll() must be what unblocks them,
+        // instead of them being left to their own 5-second timeouts.
+        let first = TestOperation(peripheral: MockCBPeripheral())
+        let second = TestOperation(peripheral: MockCBPeripheral())
+
+        async let firstResult: Void = queue.operationEnqueue(first)
+        try await Task.sleep(nanoseconds: 20_000_000)
+        #expect(first.executeCallCount == 1)
+
+        async let secondResult: Void = queue.operationEnqueue(second)
+        try await Task.sleep(nanoseconds: 20_000_000)
+
+        queue.cancelAll()
+
+        do {
+            try await firstResult
+            Issue.record("Expected the cancelled current operation to throw")
+        } catch is BBError {
+            // Expected
+        }
+
+        do {
+            try await secondResult
+            Issue.record("Expected the discarded queued operation to throw")
+        } catch is BBError {
+            // Expected
+        }
+
+        // The queued operation was discarded outright -- it never got a chance to run.
+        #expect(second.executeCallCount == 0)
+    }
+
     @Test func operationCompletingSynchronouslyLetsTheNextOneStartImmediately() async throws {
         let queue = BBOperationQueue(centralManager: MockCBCentralManager(), queue: .main)
 

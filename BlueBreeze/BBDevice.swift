@@ -92,9 +92,11 @@ public class BBDevice: NSObject {
     }
 
     /// Disconnects from the peripheral. Updates ``connectionStatus`` to `.disconnected` on success.
+    /// Jumps ahead of any other operation currently queued or in executing.
     ///
     /// - Throws: An error if the disconnect attempt fails or times out.
     public func disconnect() async throws {
+        operationQueueManager.cancelAll()
         try await operationQueueManager.operationEnqueue(BBOperationDisconnect(peripheral: peripheral))
         self.connectionStatus.value = .disconnected
     }
@@ -159,6 +161,9 @@ extension BBDevice {
     }
 
     func connectionLost() {
+        // Only the queued operations are abandoned here
+        operationQueueManager.cancelQueued()
+
         self.services.value = []
         self.connectionStatus.value = .disconnected
     }

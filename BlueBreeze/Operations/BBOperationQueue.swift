@@ -93,6 +93,40 @@ class BBOperationQueue: BBOperationQueueProtocol {
         }
     }
 
+    // MARK: - Fast-cancel paths, for when waiting out a stuck operation isn't acceptable
+
+    /// Cancels the executing operation and discards every queued operation
+    func cancelAll() {
+        let (current, queued) = withOperationLock { () -> ((any BBOperationProtocol)?, [any BBOperationProtocol]) in
+            let current = operationCurrent
+            let queued = operationQueue
+            operationCurrent = nil
+            operationQueue = []
+            return (current, queued)
+        }
+
+        if let current, !current.isCompleted {
+            current.cancel(centralManager)
+        }
+
+        for operation in queued where !operation.isCompleted {
+            operation.cancel(centralManager)
+        }
+    }
+
+    /// Discards every operation still waiting in the queue
+    func cancelQueued() {
+        let queued = withOperationLock { () -> [any BBOperationProtocol] in
+            let queued = operationQueue
+            operationQueue = []
+            return queued
+        }
+
+        for operation in queued where !operation.isCompleted {
+            operation.cancel(centralManager)
+        }
+    }
+
     // MARK: - Forward CoreBluetooth delegate callbacks to the current operation
 
     func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
