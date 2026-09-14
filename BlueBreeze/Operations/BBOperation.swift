@@ -117,7 +117,7 @@ class BBOperation<T>: BBOperationProtocol {
 
     func centralManagerDidUpdateState(_ central: CBCentralManagerProtocol) {
         if central.state != .poweredOn {
-            completeError(nil)
+            completeError(BBError(message: "Bluetooth is no longer powered on (state: \(central.state.bbState))"))
         }
     }
 

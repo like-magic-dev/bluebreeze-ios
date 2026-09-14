@@ -32,6 +32,23 @@ private final class TestOperation: BBOperation<Void> {
 }
 
 struct BBOperationQueueTests {
+    @Test func centralManagerDidUpdateStateFailsWithADescriptiveMessageWhenNotPoweredOn() async throws {
+        let central = MockCBCentralManager()
+        central.state = .poweredOff
+        let operation = TestOperation(peripheral: MockCBPeripheral())
+
+        do {
+            try await withCheckedThrowingContinuation { (continuation: BBContinuation<Void>) in
+                operation.continuation = continuation
+                operation.centralManagerDidUpdateState(central)
+            }
+            Issue.record("Expected an error")
+        } catch let error as BBError {
+            // Previously this was always "Unknown error", giving no hint what actually happened.
+            #expect(error.message.contains("poweredOff"))
+        }
+    }
+
     @Test func operationsRunOneAtATimeInOrder() async throws {
         let queue = BBOperationQueue(centralManager: MockCBCentralManager(), queue: .main)
 
