@@ -127,6 +127,10 @@ extension BBCharacteristic {
             return
         }
 
+        // On a failed read, characteristic.value is CoreBluetooth's stale cached value from
+        // before this attempt -- republishing it would look like a fresh update to subscribers.
+        guard error == nil else { return }
+
         self.data.value = characteristic.value
     }
 
@@ -135,6 +139,8 @@ extension BBCharacteristic {
             assert(false, "Parent class called wrong characteristic's callback")
             return
         }
+
+        guard error == nil else { return }
 
         self.isNotifying.value = characteristic.isNotifying
     }

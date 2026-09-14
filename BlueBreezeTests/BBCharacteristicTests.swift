@@ -146,4 +146,33 @@ struct BBCharacteristicTests {
 
         #expect(characteristic.isNotifying.value == true)
     }
+
+    @Test func didUpdateValueForDoesNotUpdateDataOnError() {
+        let mockCharacteristic = MockCBCharacteristic()
+        let characteristic = BBCharacteristic(
+            peripheral: MockCBPeripheral(),
+            characteristic: mockCharacteristic,
+            operationQueue: nil
+        )
+
+        // Simulate CoreBluetooth reporting a failed read while still carrying its last-known
+        // (now stale) value -- data must not be republished from it.
+        mockCharacteristic.value = Data([9, 9, 9])
+        characteristic.peripheral(MockCBPeripheral(), didUpdateValueFor: mockCharacteristic, error: BBError(message: "read failed"))
+
+        #expect(characteristic.data.value == nil)
+    }
+
+    @Test func didUpdateNotificationStateForDoesNotUpdateIsNotifyingOnError() {
+        let mockCharacteristic = MockCBCharacteristic(isNotifying: true)
+        let characteristic = BBCharacteristic(
+            peripheral: MockCBPeripheral(),
+            characteristic: mockCharacteristic,
+            operationQueue: nil
+        )
+
+        characteristic.peripheral(MockCBPeripheral(), didUpdateNotificationStateFor: mockCharacteristic, error: BBError(message: "subscribe failed"))
+
+        #expect(characteristic.isNotifying.value == false)
+    }
 }
