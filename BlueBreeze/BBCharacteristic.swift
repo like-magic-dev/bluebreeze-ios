@@ -20,15 +20,20 @@ public class BBCharacteristic: NSObject {
     let peripheral: CBPeripheralProtocol
     let characteristic: CBCharacteristicProtocol
 
-    // MARK: - Observable properties
+    // MARK: - Data properties
 
-    /// The characteristic's current value: the result of the last successful ``read()``, or the
-    /// last notification received while subscribed. `nil` by default.
+    /// The characteristic's current value and data stream. Always replays the current value
+    /// on subscription. `nil` by default.
     public let data = CurrentValueSubject<Data?, Never>(nil)
+
+    // MARK: - Notification properties
 
     /// Whether notifications are currently enabled for this characteristic. Updates automatically
     /// after ``subscribe()``/``unsubscribe()`` complete.
     public let isNotifying = CurrentValueSubject<Bool, Never>(false)
+
+    /// The characteristic's data stream, does not replay any previous value.
+    public let notifications = PassthroughSubject<Data, Never>()
 
     // MARK: - Computed properties
 
@@ -130,6 +135,10 @@ extension BBCharacteristic {
         // On a failed read, characteristic.value is CoreBluetooth's stale cached value from
         // before this attempt -- republishing it would look like a fresh update to subscribers.
         guard error == nil else { return }
+
+        if let data = characteristic.value, self.isNotifying.value {
+            self.notifications.send(data)
+        }
 
         self.data.value = characteristic.value
     }
