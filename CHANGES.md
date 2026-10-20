@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Add `notifications` property to `BBCharacteristic` as a pure data stream without replay.
+
 # 1.0.1
 
 Bug fixes and robustness changes to the operation queue:
