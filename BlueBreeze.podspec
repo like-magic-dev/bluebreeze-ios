@@ -9,9 +9,9 @@ Pod::Spec.new do |spec|
   spec.module_name   = 'BlueBreeze'
   spec.swift_version = '5.0'
 
-  spec.ios.deployment_target  = '13.0'
-  spec.osx.deployment_target  = '10.15'
-  spec.watchos.deployment_target  = '6.0'
+  spec.ios.deployment_target     = '15.0'
+  spec.osx.deployment_target     = '12.0'
+  spec.watchos.deployment_target = '9.0'
 
   spec.source_files       = 'BlueBreeze/**/*.swift'
 end
