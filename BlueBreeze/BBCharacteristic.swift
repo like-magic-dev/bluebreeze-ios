@@ -32,9 +32,6 @@ public class BBCharacteristic: NSObject {
     /// after ``subscribe()``/``unsubscribe()`` complete.
     public let isNotifying = CurrentValueSubject<Bool, Never>(false)
 
-    /// The characteristic's data stream, does not replay any previous value.
-    public let notifications = PassthroughSubject<Data, Never>()
-
     // MARK: - Computed properties
 
     /// This characteristic's Bluetooth UUID.
