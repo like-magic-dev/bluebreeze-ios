@@ -11,8 +11,9 @@ serial per-device request queuing, so you don't have to hand-write connection st
 worry about overlapping BLE requests.
 
 - **Combine-first** -- every piece of state (adapter power, authorization, discovered devices,
-  connection status, characteristic data, ...) is a `CurrentValueSubject` or `PassthroughSubject`
-  you can observe reactively.
+  connection status, characteristic data, ...) is a `BBObservable`: read its current `value`,
+  subscribe to its `values` publisher (the current value, then new ones), or only to its
+  `updates`.
 - **`async`/`await` operations** -- connect, discover services, read, write, and
   subscribe/unsubscribe are all `async throws` calls with a built-in 5 second timeout, instead of
   delegate callbacks you have to correlate yourself.
@@ -59,7 +60,7 @@ let manager = BBManager()
 var cancellables = Set<AnyCancellable>()
 
 // Observe adapter state and start scanning once it's ready
-manager.state
+manager.state.values
     .sink { state in
         if state == .poweredOn {
             manager.scanStart()
@@ -90,6 +91,27 @@ Task {
 
     try await device.disconnect()
 }
+```
+
+### Observing state
+
+Every piece of state is a `BBObservable`, which you can query in three ways:
+
+```swift
+characteristic.data.value                      // the current value
+characteristic.data.values.sink { data in }    // the current value, then new values
+characteristic.data.updates.sink { data in }   // only values that arrive from now on
+```
+
+For example, to receive notifications:
+
+```swift
+characteristic.data.updates
+    .sink { data in
+        print(characteristic.uuid, data ?? Data())
+    }
+    .store(in: &cancellables)
+try await characteristic.subscribe()
 ```
 
 See [`BlueBreezeExample`](BlueBreezeExample) for a full SwiftUI app built on top of BlueBreeze, and
