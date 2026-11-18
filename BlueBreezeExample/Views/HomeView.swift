@@ -11,12 +11,12 @@ class HomeViewModel: ObservableObject {
     init(manager: BBManager) {
         self.manager = manager
 
-        manager.authorizationStatus
+        manager.authorizationStatus.values
             .receive(on: DispatchQueue.main)
             .sink { self.authorizationStatus = $0 }
             .store(in: &dispatchBag)
 
-        manager.state
+        manager.state.values
             .receive(on: DispatchQueue.main)
             .sink { self.state = $0 }
             .store(in: &dispatchBag)

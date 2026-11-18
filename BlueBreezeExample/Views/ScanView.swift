@@ -11,7 +11,7 @@ class ScanViewModel: ObservableObject {
     init(manager: BBManager) {
         self.manager = manager
 
-        manager.scanEnabled
+        manager.scanEnabled.values
             .receive(on: DispatchQueue.main)
             .sink { self.scanEnabled = $0 }
             .store(in: &dispatchBag)

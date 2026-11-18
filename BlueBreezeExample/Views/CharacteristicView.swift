@@ -11,12 +11,12 @@ class CharacteristicViewModel: ObservableObject {
     init(characteristic: BBCharacteristic) {
         self.characteristic = characteristic
 
-        characteristic.data
+        characteristic.data.values
             .receive(on: DispatchQueue.main)
             .sink { self.data = $0 }
             .store(in: &dispatchBag)
 
-        characteristic.isNotifying
+        characteristic.isNotifying.values
             .receive(on: DispatchQueue.main)
             .sink { self.isNotifying = $0 }
             .store(in: &dispatchBag)

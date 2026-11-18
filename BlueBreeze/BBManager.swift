@@ -17,11 +17,12 @@ import AppKit
 /// authorization and power state, and discovers peripherals as ``BBDevice`` instances.
 ///
 /// Create and retain a single `BBManager` for the lifetime of your app (or feature). All of its
-/// state is exposed as Combine publishers so your UI can observe it reactively:
+/// state is exposed as ``BBObservable`` values whose streams are Combine publishers, so your UI can
+/// observe it reactively:
 /// ```swift
 /// let manager = BBManager()
 ///
-/// manager.state
+/// manager.state.values
 ///     .sink { state in
 ///         if state == .poweredOn {
 ///             manager.scanStart()
@@ -64,7 +65,7 @@ public class BBManager: NSObject {
 
     /// The app's current Bluetooth authorization status. Publishes an update whenever the user
     /// grants, denies, or changes Bluetooth permission for the app.
-    public let authorizationStatus = CurrentValueSubject<BBAuthorization, Never>(.unknown)
+    public let authorizationStatus = BBObservable<BBAuthorization>(.unknown)
 
     /// Triggers the system Bluetooth permission prompt if authorization is still ``BBAuthorization/unknown``.
     ///
@@ -109,21 +110,21 @@ public class BBManager: NSObject {
     // MARK: - Online
 
     /// The current power/availability state of the device's Bluetooth adapter.
-    public let state = CurrentValueSubject<BBState, Never>(.unknown)
+    public let state = BBObservable<BBState>(.unknown)
 
     // MARK: - Devices
 
     /// All peripherals discovered so far (during this scan or a previous one), keyed by their
     /// system-assigned identifier. Entries are added as they're discovered and are never removed
     /// automatically, so a device that goes out of range remains here with its last known state.
-    public let devices = CurrentValueSubject<[UUID: BBDevice], Never>([:])
+    public let devices = BBObservable<[UUID: BBDevice]>([:])
 
     // MARK: - Scan
 
     /// Whether a scan is currently in progress. Reflects the state requested via
     /// ``scanStart(serviceUuids:)``/``scanStop()``, not just whether the adapter is powered on --
     /// if the adapter powers back on while this is `true`, scanning resumes automatically.
-    public let scanEnabled = CurrentValueSubject<Bool, Never>(false)
+    public let scanEnabled = BBObservable<Bool>(false)
 
     // Remembers the filter passed to scanStart so it is reused on BT power cycles
     private var scanServiceUuids: [BBUUID]?

@@ -12,12 +12,12 @@ class DeviceViewModel: ObservableObject {
     init(device: BBDevice) {
         self.device = device
 
-        device.connectionStatus
+        device.connectionStatus.values
             .receive(on: DispatchQueue.main)
             .sink { self.connectionStatus = $0 }
             .store(in: &dispatchBag)
 
-        device.services
+        device.services.values
             .receive(on: DispatchQueue.main)
             .sink { self.services = $0 }
             .store(in: &dispatchBag)

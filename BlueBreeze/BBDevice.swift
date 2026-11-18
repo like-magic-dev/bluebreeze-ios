@@ -66,20 +66,20 @@ public class BBDevice: NSObject {
     /// A service appears here as soon as it's discovered (with an empty characteristics array),
     /// and its characteristics populate once ``discoverServices()`` completes. Empty until
     /// ``discoverServices()`` has been called and awaited.
-    public let services = CurrentValueSubject<[BBService], Never>([])
+    public let services = BBObservable<[BBService]>([])
 
     // MARK: - Connection status
 
     /// The device's current connection state. Updates automatically on connect, disconnect, and
     /// unexpected link loss -- you don't need to poll it after calling ``connect()``/``disconnect()``.
-    public let connectionStatus = CurrentValueSubject<BBDeviceConnectionStatus, Never>(.disconnected)
+    public let connectionStatus = BBObservable<BBDeviceConnectionStatus>(.disconnected)
 
     // MARK: - MTU
 
     /// The negotiated ATT MTU (Maximum Transmission Unit) in bytes, i.e. the largest amount of
     /// data that can be sent in a single read/write. Defaults to the BLE minimum of 23 until
     /// ``negotiateMTU()`` is called and awaited.
-    public let mtu = CurrentValueSubject<Int, Never>(Int.defaultMtu)
+    public let mtu = BBObservable<Int>(Int.defaultMtu)
 
     // MARK: - Operations
 
