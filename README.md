@@ -31,7 +31,7 @@ Add BlueBreeze as a dependency in your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/like-magic-dev/bluebreeze-ios.git", from: "1.0.0"),
+    .package(url: "https://github.com/like-magic-dev/bluebreeze-ios.git", from: "1.1.0"),
 ]
 ```
 
@@ -117,6 +117,38 @@ try await characteristic.subscribe()
 See [`BlueBreezeExample`](BlueBreezeExample) for a full SwiftUI app built on top of BlueBreeze, and
 [`ARCHITECTURE.md`](ARCHITECTURE.md) for how scanning, connecting, and the operation queue fit
 together.
+
+## Background updates
+
+iOS suspends your app shortly after it leaves the foreground. To keep receiving data in the background, 
+add the `bluetooth-central` background mode to your app's `Info.plist`, or enable **Uses Bluetooth LE
+accessories** under **Signing & Capabilities → Background Modes** in Xcode:
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+    <string>bluetooth-central</string>
+</array>
+```
+
+With it, iOS notifies your app whenever a connected peripheral sends a notification, connects or
+disconnects, so BlueBreeze's publishers and `async` operations keep working. 
+
+Even so, there are limits:
+- **Keep background work short.** Each wake-up only gives your app a few seconds of execution
+  time before it's suspended again. For longer work, wrap it in
+  `UIApplication.beginBackgroundTask(withName:expirationHandler:)`.
+- **Scanning in the background needs service UUIDs.** Pass `serviceUuids` to `scanStart`: a scan
+  with `nil` finds nothing while the app is in the background. iOS also skips duplicate advertisements 
+  and scans less often, so expect fewer `scanResults` and slower discovery.
+- **Reconnecting can time out.** `connect()` times out after 5 seconds like every other
+  operation, so it can't wait indefinitely for a device to come back in range. Watch
+  `connectionStatus` and retry `connect()` when you expect the device to be reachable again.
+- **No relaunch after termination.** BlueBreeze doesn't support CoreBluetooth state preservation
+  and restoration. If iOS terminates your app in the background (e.g. under memory pressure),
+  connections are dropped and the app isn't relaunched for Bluetooth events. Apps the user
+  force-quits from the app switcher are never relaunched for Bluetooth, with or without
+  restoration.
 
 ## Documentation
 

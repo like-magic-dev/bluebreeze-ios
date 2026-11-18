@@ -1,3 +1,14 @@
+# 1.1.0
+
+**Breaking changes**
+- Every observable property is now a `BBObservable` instead of a `CurrentValueSubject`:
+  - `value` returns the current value, as before.
+  - `values` emits the current value and then new values. Use it if you need replay of the current
+    value on subscription.
+  - `updates` emits only new values. Use it if you only want to subscribe to future updates.
+- Removed `BBCharacteristic.notifications`, use `data.updates` instead.
+- Removed the `CurrentValueSubject.updates` extension.
+
 # 1.0.2
 
 - Add `notifications` property to `BBCharacteristic` as a pure data stream without replay.
